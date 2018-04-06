@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::group(['prefix' => 'admin'],function(){
+
+  Route::resource('condominio','CondomesController');
+
+});

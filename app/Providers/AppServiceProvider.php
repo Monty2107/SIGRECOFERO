@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace SIGRECOFERO\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
