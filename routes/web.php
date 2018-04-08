@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/index', function () {
@@ -21,6 +21,7 @@ Route::get('/index', function () {
 
 Route::group(['prefix' => 'admin'],function(){
 
-  Route::resource('condominio','CondomesController');
+  Route::resource('condominio','CondomineController');
+  Route::resource('buscar','CondomineController@buscar');
 
 });

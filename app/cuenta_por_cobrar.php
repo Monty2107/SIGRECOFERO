@@ -11,11 +11,11 @@ class cuenta_por_cobrar extends Model
   protected $fillable =[
     'mes','ano','id_Fecha','id_Factura'
   ];
-  public function fechas(){
-    return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
+  public function fecha(){
+    return $this->hasMany('\SIGRECOFERO\fecha', 'id_Fecha');
   }
 
-  public function facturacions(){
-    return $this->hasMany('\SIGRECOFERO\facturacions', 'id_Factura');
+  public function facturacion(){
+    return $this->hasMany('\SIGRECOFERO\facturacion', 'id_Factura');
   }
 }

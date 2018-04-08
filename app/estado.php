@@ -13,13 +13,13 @@ class estado extends Model
   ];
 
   public function condominios(){
-    return $this->hasMany('\SIGRECOFERO\condominios', 'id_Condominio');
+    return $this->hasMany('\SIGRECOFERO\condominio', 'id_Condominio');
   }
 
   public function facturacions(){
-    return $this->belongsTo('\SIGRECOFERO\facturacions', 'id_Factura');
+    return $this->belongsTo('\SIGRECOFERO\facturacion', 'id_Factura');
   }
   public function ingreso_diarios(){
-    return $this->belongsTo('\SIGRECOFERO\ingreso_diarios', 'id_Ingreso');
+    return $this->belongsTo('\SIGRECOFERO\ingreso_diario', 'id_Ingreso');
   }
 }

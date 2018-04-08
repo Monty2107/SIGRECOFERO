@@ -8,12 +8,11 @@
  </h1>
  <ol class="breadcrumb">
    <li><a href="{!! asset('index') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-   <li class="active">Registro de Condominios</li>
+   <li class="active">Editar Condominio</li>
  </ol>
 @endsection
 @section('content')
-
-  {!! Form::open(['route' => 'condominio.store', 'method' => 'POST','id'=>'form']) !!}
+  {!! Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
 
   <div class="row">
     <!-- left column -->
@@ -24,20 +23,24 @@
           <h3 class="box-title">Registro General</h3>
         </div>
         <!-- /.box-header -->
+        <?php
+        $emp = SIGRECOFERO\condominio::where('id_Empresa', $condomine->id)->get()->first();
+        // $cont = SIGRECOFERO\empresa::where('id',$condomine->id)->get()->first();
+         ?>
 
           <div class="box-body">
             <div class="form-group">
               <label>Nombre del Encargado: </label>
-              {!! Form::text('nombre',null,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
             <div class="form-group">
               <label >Correo: </label>
-              {!! Form::email('correo',null,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com']) !!}
+              {!! Form::email('correo',$emp->empresa->correo,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com']) !!}
             </div>
             <!-- phone mask -->
             <div class="form-group">
               <label >Telefono Fijo: </label>
-                {!! Form::text('telefonoFijo',null,['name'=>'telefonoFijo','class'=>'form-control','id'=>'telefonoFijo', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
+                {!! Form::text('telefonoFijo',$emp->empresa->telefonoFijo,['name'=>'telefonoFijo','class'=>'form-control','id'=>'telefonoFijo', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
                 </div>
               <!-- /.input group -->
 
@@ -45,7 +48,7 @@
             <!-- phone mask -->
             <div class="form-group">
               <label >Telefono Movil: </label>
-                {!! Form::text('telefonoMovil',null,['id'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
+                {!! Form::text('telefonoMovil',$emp->empresa->telefonoMovil,['name'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
                 </div>
               <!-- /.input group -->
             </div>
@@ -79,14 +82,14 @@
           <div class="box-header with-border">
             <h3 class="box-title">Acciones</h3>
           </div>
-        <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="submit" class="btn btn-primary">Modificar</button>
         <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscar') !!}">Cancelar</a>
         <br>
 
       </div>
     </center>
   </div>
-</div>
+  </div>
 
   {!!Form::close()!!}
-@endsection
+  @endsection

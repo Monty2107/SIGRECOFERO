@@ -12,11 +12,11 @@ class ingreso_diario extends Model
     'concepto','formaPago','NCheque','cantidad','descripcion','id_Fecha','id_Estado'
   ];
 
-  public function fechas(){
-    return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
+  public function fecha(){
+    return $this->hasMany('\SIGRECOFERO\fecha', 'id_Fecha');
   }
 
-  public function estados(){
-    return $this->belongsTo('\SIGRECOFERO\estados', 'id_Estado');
+  public function estado(){
+    return $this->belongsTo('\SIGRECOFERO\estado', 'id_Estado');
   }
 }

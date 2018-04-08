@@ -12,14 +12,14 @@ class facturacion extends Model
     'NFactura','concepto','cantidad','id_Fecha','id_Estado'
   ];
 
-  public function fechas(){
+  public function fecha(){
     return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
   }
 
-  public function estados(){
+  public function estado(){
     return $this->hasMany('\SIGRECOFERO\estados', 'id_Estado');
   }
-  public function factura_anuladas(){
+  public function factura_anulada(){
     return $this->belongsTo('\SIGRECOFERO\factura_anuladas', 'id_Anular');
   }
 }

@@ -12,14 +12,14 @@ class fecha extends Model
     'dia','mes','ano'
   ];
 
-  public function facturacions(){
-    return $this->belongsTo('\SIGRECOFERO\facturacions', 'id_Factura');
+  public function facturacion(){
+    return $this->belongsTo('\SIGRECOFERO\facturacion', 'id_Factura');
   }
-  public function ingreso_diarios(){
-    return $this->belongsTo('\SIGRECOFERO\ingreso_diarios', 'id_Ingreso');
+  public function ingreso_diario(){
+    return $this->belongsTo('\SIGRECOFERO\ingreso_diario', 'id_Ingreso');
   }
 
-  public function caja_chicas(){
-    return $this->belongsTo('\SIGRECOFERO\caja_chicas', 'id_Caja');
+  public function caja_chica(){
+    return $this->belongsTo('\SIGRECOFERO\caja_chica', 'id_Caja');
   }
 }

@@ -12,11 +12,11 @@ class condominio extends Model
     'codigo','NLocal','id_Empresa'
   ];
 
-  public function empresas(){
-    return $this->hasMany('\SIGRECOFERO\empresas', 'id_Empresa');
+  public function empresa(){
+    return $this->belongsTo('\SIGRECOFERO\empresa', 'id');
   }
 
-  public function estados(){
-    return $this->belongsTo('\SIGRECOFERO\estados', 'id_Estado');
+  public function estado(){
+    return $this->belongsTo('\SIGRECOFERO\estado', 'id_Estado');
   }
 }

@@ -16,9 +16,11 @@ class CreateEmpresasTable extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->integer('id_Contacto')->unsigned();
-            $table->foreign('id_Contacto')->references('id')->on('contactos');
+            $table->string('correo');
+            $table->string('telefonoFijo');
+            $table->string('telefonoMovil');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

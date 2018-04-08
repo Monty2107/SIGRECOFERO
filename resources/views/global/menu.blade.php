@@ -31,7 +31,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="{!! asset('admin/condominio/create') !!}"><i class="fa fa-circle-o"></i>Registrar</a></li>
-        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Buscar</a></li>
+        <li><a href="{!! asset('admin/buscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
         <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i>Alquilar</a></li>
         <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i>Reportes</a></li>
       </ul>

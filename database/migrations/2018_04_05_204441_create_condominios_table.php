@@ -16,10 +16,11 @@ class CreateCondominiosTable extends Migration
         Schema::create('condominios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo');
-            $table->integer('NLocal');
+            $table->string('NLocal');
             $table->integer('id_Empresa')->unsigned();
-            $table->foreign('id_Empresa')->references('id')->on('empresas');
+            $table->foreign('id_Empresa')->references('id')->on('empresas')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -9,13 +9,10 @@ class empresa extends Model
   protected $table = 'empresas';
 
   protected $fillable =[
-    'nombre','id_Contacto'
+    'nombre','id_Contacto','correo','telefonoFijo','telefonoMovil'
   ];
 
-  public function contactos(){
-    return $this->hasMany('\SIGRECOFERO\contactos', 'id_Contacto');
-  }
-  public function condominios(){
-    return $this->belongsTo('\SIGRECOFERO\condominios', 'id_Condominio');
+  public function condominio(){
+    return $this->hasMany('\SIGRECOFERO\condominio', 'id_Condominio');
   }
 }

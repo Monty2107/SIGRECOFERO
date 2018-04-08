@@ -12,6 +12,6 @@ class factura_anulada extends Model
     'desripcion','id_Factura'
   ];
 
-  public function facturacions(){
-    return $this->hasMany('\SIGRECOFERO\facturacions', 'id_Factura');
+  public function facturacion(){
+    return $this->hasMany('\SIGRECOFERO\facturacion', 'id_Factura');
 }

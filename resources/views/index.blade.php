@@ -4,13 +4,30 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SIGRECOFERO</title>
+  <style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
 
+    .example-modal .modal {
+      background: transparent !important;
+    }
+  </style>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  {{-- diseños personales --}}
+  {!! Html::script('js/personal/jquery.js') !!}
+  {!! Html::script('js/personal/personal.js') !!}
+  {!!Html::style('css/personal/paginacion/jquery.dataTables.min.css')!!}
+  {!! Html::script('js/personal/paginacion/jquery.dataTables.min.js') !!}
   <!-- Bootstrap 3.3.7 -->
   {!!Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css')!!}
-  {{-- Laracasts/Flash --}}
-  {!!Html::style('css/bootstrap.min.css')!!}
   <!-- Font Awesome -->
   {!!Html::style('bower_components/font-awesome/css/font-awesome.min.css')!!}
   <!-- Ionicons -->
@@ -20,31 +37,29 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
        {!!Html::style('css/skins/_all-skins.min.css')!!}
-  <!-- Morris chart -->
-  {!!Html::style('bower_components/morris.js/morris.css')!!}
-  <!-- jvectormap -->
-  {!!Html::style('bower_components/jvectormap/jquery-jvectormap.css')!!}
-  <!-- Date Picker -->
-  {!!Html::style('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')!!}
-  <!-- Daterange picker -->
-  {!!Html::style('bower_components/bootstrap-daterangepicker/daterangepicker.css')!!}
-  <!-- bootstrap wysihtml5 - text editor -->
-  {!!Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')!!}
-  <!-- Bootstrap time Picker -->
-  {!! Html::style('plugins/timepicker/bootstrap-timepicker.min.css') !!}
-  <!-- Select2 -->
-  {!! Html::style('bower_components/select2/dist/css/select2.min.css') !!}
 
+       <script>
+	$(document).ready(function(){
+		$('#mitabla').DataTable({
+			"order": [[1, "asc"]],
+			"language":{
+				"lengthMenu": "Mostrar _MENU_ registros por pagina",
+				"info": "Mostrando pagina _PAGE_ de _PAGES_",
+				"infoEmpty": "No hay registros disponibles",
+				"infoFiltered": "(filtrada de _MAX_ registros)",
+				"loadingRecords": "Cargando...",
+				"processing":     "Procesando...",
+				"search": "Buscar:",
+				"zeroRecords":    "No se encontraron registros coincidentes",
+				"paginate": {
+					"next":       "Siguiente",
+					"previous":   "Anterior"
+				},
+			}
+		});
+	});
+</script>
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  {!!Html::style('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')!!}
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -131,7 +146,7 @@
     <!-- Main content -->
     <section class="content">
       @if(Session::has('message'))
-      <div class="alert alert-success">
+      <div class="alert alert-info" id="alert" name="alert">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
          Mensaje: {{Session::get('message')}}
       </div>
@@ -150,62 +165,11 @@
   <!-- /.content-wrapper -->
   @include('global.piePagina')
 
-  <!-- Control Sidebar -->
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-{{-- Jquery personales --}}
-{!! Html::script('js/personal/data-mask.js') !!}
-{!! Html::script('js/personal/jquery.js') !!}
-{!! Html::script('js/personal/bootstrap.min.js') !!}
-<script>
-    $('div.alert').not('.alert-important').delay(300).slipUp(30);
-</script>
-<!-- jQuery 3 -->
-{!!Html::script('bower_components/jquery/dist/jquery.min.js')!!}
-<!-- jQuery UI 1.11.4 -->
-{!!Html::script('bower_components/jquery-ui/jquery-ui.min.js')!!}
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
-<!-- InputMask -->
-{!! Html::script('plugins/input-mask/jquery.inputmask.js') !!}
-{!! Html::script('plugins/input-mask/jquery.inputmask.date.extensions.js') !!}
-{!! Html::script('plugins/input-mask/jquery.inputmask.extensions.js') !!}
 <!-- Bootstrap 3.3.7 -->
 {!!Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js')!!}
-<!-- Morris.js charts -->
-{!!Html::script('bower_components/raphael/raphael.min.js')!!}
-{!!Html::script('bower_components/morris.js/morris.min.js')!!}
-<!-- Sparkline -->
-{!!Html::script('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')!!}
-<!-- jvectormap -->
-{!!Html::script('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')!!}
-{!!Html::script('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')!!}
-<!-- jQuery Knob Chart -->
-{!!Html::script('bower_components/jquery-knob/dist/jquery.knob.min.js')!!}
-<!-- daterangepicker -->
-{!!Html::script('bower_components/moment/min/moment.min.js')!!}
-{!!Html::script('bower_components/bootstrap-daterangepicker/daterangepicker.js')!!}
-<!-- datepicker -->
-{!!Html::script('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')!!}
-<!-- Bootstrap WYSIHTML5 -->
-{!!Html::script('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')!!}
-<!-- Slimscroll -->
-{!!Html::script('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')!!}
-<!-- FastClick -->
-{!!Html::script('bower_components/fastclick/lib/fastclick.js')!!}
 <!-- AdminLTE App -->
 {!!Html::script('js/adminlte.min.js')!!}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-{!!Html::script('js/pages/dashboard.js')!!}
-<!-- AdminLTE for demo purposes -->
-{!!Html::script('js/demo.js')!!}
 {{-- script Propio --}}
 <script type="text/javascript">
 function validate_int(myEvento) {
@@ -219,7 +183,7 @@ function validate_int(myEvento) {
 
 function phone_number_mask() {
   var myMask = "(___) ____-____";
-  var myCaja = document.getElementById("phonefijo");
+  var myCaja = document.getElementById("telefonoFijo");
   var myText = "";
   var myNumbers = [];
   var myOutPut = ""
@@ -244,12 +208,12 @@ function phone_number_mask() {
       myOutPut = myOutPut + myMask.charAt(j);
     }
   }
-  document.getElementById("phonefijo").value = myOutPut;
-  document.getElementById("phonefijo").setSelectionRange(theLastPos, theLastPos);
+  document.getElementById("telefonoFijo").value = myOutPut;
+  document.getElementById("telefonoFijo").setSelectionRange(theLastPos, theLastPos);
 }
 
-document.getElementById("phonefijo").onkeypress = validate_int;
-document.getElementById("phonefijo").onkeyup = phone_number_mask;
+document.getElementById("telefonoFijo").onkeypress = validate_int;
+document.getElementById("telefonoFijo").onkeyup = phone_number_mask;
 
 </script>
 
@@ -267,7 +231,7 @@ function validate_int(myEvento) {
 
 function phone_number_mask() {
   var myMask = "(___) ____-____";
-  var myCaja = document.getElementById("phonemovil");
+  var myCaja = document.getElementById("telefonoMovil");
   var myText = "";
   var myNumbers = [];
   var myOutPut = ""
@@ -292,83 +256,19 @@ function phone_number_mask() {
       myOutPut = myOutPut + myMask.charAt(j);
     }
   }
-  document.getElementById("phonemovil").value = myOutPut;
-  document.getElementById("phonemovil").setSelectionRange(theLastPos, theLastPos);
+  document.getElementById("telefonoMovil").value = myOutPut;
+  document.getElementById("telefonoMovil").setSelectionRange(theLastPos, theLastPos);
 }
 
-document.getElementById("phonemovil").onkeypress = validate_int;
-document.getElementById("phonemovil").onkeyup = phone_number_mask;
+document.getElementById("telefonoMovil").onkeypress = validate_int;
+document.getElementById("telefonoMovil").onkeyup = phone_number_mask;
+
+
 
 </script>
 
 {{-- Cierre script propio --}}
-<script>
 
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    })
-
-    //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
-    //Red color scheme for iCheck
-    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass   : 'iradio_minimal-red'
-    })
-    //Flat red color scheme for iCheck
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass   : 'iradio_flat-green'
-    })
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    //Timepicker
-    $('.timepicker').timepicker({
-      showInputs: false
-    })
-  })
-</script>
+{{-- Cierre script propio --}}
 </body>
 </html>

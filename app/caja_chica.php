@@ -12,7 +12,7 @@ class caja_chica extends Model
     'estado','cantidad','concepto','id_Fecha'
   ];
 
-  public function fechas(){
-    return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
+  public function fecha(){
+    return $this->hasMany('\SIGRECOFERO\fecha', 'id_Fecha');
   }
 }
