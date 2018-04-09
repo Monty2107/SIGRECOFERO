@@ -15,13 +15,19 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/index', function () {
-    return view('index');
+Route::get('/tabla', function () {
+    return view('tabla');
 });
 
 Route::group(['prefix' => 'admin'],function(){
 
+  // Rutas condomine
   Route::resource('condominio','CondomineController');
   Route::resource('buscar','CondomineController@buscar');
+
+  //Rutas Pagos
+  Route::resource('pago','PagosController');
+  Route::resource('buscarCondomine','PagosController@buscar');
+
 
 });

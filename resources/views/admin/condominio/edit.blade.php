@@ -35,12 +35,12 @@
             </div>
             <div class="form-group">
               <label >Correo: </label>
-              {!! Form::email('correo',$emp->empresa->correo,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com']) !!}
+              {!! Form::email('correo',$emp->empresa->correo,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
             </div>
             <!-- phone mask -->
             <div class="form-group">
               <label >Telefono Fijo: </label>
-                {!! Form::text('telefonoFijo',$emp->empresa->telefonoFijo,['name'=>'telefonoFijo','class'=>'form-control','id'=>'telefonoFijo', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
+                {!! Form::text('telefonoFijo',$emp->empresa->telefonoFijo,['name'=>'telefonoFijo','class'=>'form-control','id'=>'telefonoFijo', 'placeholder'=>'(999) 9999-9999'])!!}
                 </div>
               <!-- /.input group -->
 
@@ -48,7 +48,7 @@
             <!-- phone mask -->
             <div class="form-group">
               <label >Telefono Movil: </label>
-                {!! Form::text('telefonoMovil',$emp->empresa->telefonoMovil,['name'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
+                {!! Form::text('telefonoMovil',$emp->empresa->telefonoMovil,['name'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999'])!!}
                 </div>
               <!-- /.input group -->
             </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="form-group">
               <label >N° de Local: </label>
-              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}']) !!}
+              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
             </div>
               <!-- /.input group -->
               <!-- /.input group -->

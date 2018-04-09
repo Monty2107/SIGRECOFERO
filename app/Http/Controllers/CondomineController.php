@@ -8,6 +8,9 @@ use Redirect;
 use SIGRECOFERO\contacto;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\empresa;
+use SIGRECOFERO\ingreso_diario;
+use SIGRECOFERO\estado;
+use Carbon\Carbon;
 
 class CondomineController extends Controller
 {
@@ -45,6 +48,8 @@ class CondomineController extends Controller
     public function store(Request $request)
     {
       // dd($request->all());
+      $carbon = new \Carbon\Carbon();
+      $date = $carbon->now();
       $empresa = empresa::create([
         'nombre'=>$request->nombre,
         'correo' => $request->correo,
@@ -57,6 +62,25 @@ class CondomineController extends Controller
         'NLocal'=>$request->NLocal,
         'id_Empresa'=>$empresa->id,
       ]);
+
+      $ano  = $request->facturacion;
+      $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+      '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+      '11'=>'Noviembre','12'=>'Diciembre' );
+      $cantMes=count($arrayMes);
+
+      for ($i=$ano; $i <= $date->year ; $i++) {
+        for ($j=1; $j <=$cantMes ; $j++) {
+          estado::create([
+            'mes'=>$arrayMes[$j],
+            'ano'=>$ano,
+            'estado'=>false,
+            'id_Condominio'=>$empresa->id,
+          ]);
+        }
+        $ano=$ano+1;
+      }
+
 
       // dd('guardado exitosamente');
       Session::flash('message','Comdomine: '.$empresa->nombre.' ha sido registrado Correctamente!!');
@@ -128,6 +152,8 @@ class CondomineController extends Controller
         $empresa->delete();
         $condominio = condominio::findOrFail($id);
         $condominio->delete();
+        $estado = estado::where('id_Condominio',$empresa->id);
+        $estado->delete();
         Session::flash('message','El Condominio: '.$empresa->nombre
         .' Con Numero de Local: '.$condominio->NLocal.' Fue Eliminado Exitosamente!!');
         return redirect('/admin/buscar');
