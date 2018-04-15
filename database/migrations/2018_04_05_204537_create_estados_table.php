@@ -18,6 +18,7 @@ class CreateEstadosTable extends Migration
             $table->string('mes');
             $table->integer('ano');
             $table->boolean('estado'); // 0- Debe , 1- Pago
+            $table->enum('concepto',['Administrativo','Parqueo', 'Otros']);
             $table->integer('id_Condominio')->unsigned();
             $table->foreign('id_Condominio')->references('id')->on('condominios');
             $table->timestamps();

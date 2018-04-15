@@ -6,125 +6,99 @@
  </h1>
  <ol class="breadcrumb">
    <li><a href="{!! asset('index') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-   <li class="active">Pagos Mensuales</li>
+   <li class="active">Historial De Pagos Mensuales y Anuales</li>
  </ol>
 @endsection
 
 @section('content')
-
-{!! Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
-
-<div class="row">
-  <!-- left column -->
-  <div class="col-md-6">
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Registro Administrativo</h3>
-      </div>
-      <!-- /.box-header -->
-        <div class="box-body">
-          <div class="form-group" id="opciones">
-            <label>Selecione el Concepto: </label>
-            <br>
-            {{ Form::radio('radioConcepto','Administracion',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Cuota de Adminitracion </label> &nbsp;&nbsp;&nbsp;
-            {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Cuota de Parqueo </label>&nbsp;&nbsp;&nbsp;
-            {{ Form::radio('radioConcepto','Otro',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Otro </label>
-          </div>
-          <div class="form-group" id="descripcion" style="display:none;">
-            <label >Descripcion: </label>
-            {!! Form::textarea('descripcion',null,['rows'=>'3','name'=>'descripcion','id'=>'descripcion','class'=>'form-control','placeholder'=>'Escriba la razon del Pago....']) !!}
-          </div>
-          <div class="form-group" id="opciones">
-            <label>Selecione la Forma de Pago: </label>
-            <br>
-            {{ Form::radio('radioPago','Efectivo',false,['onchange'=>'mostrarC(this.value);'])}}
-            <label>Efectivo </label> &nbsp;&nbsp;&nbsp;
-            {{ Form::radio('radioPago','Cheque',false,['onchange'=>'mostrarC(this.value);'])}}
-            <label>Cheque</label>
-          </div>
-          <div class="form-group" id="NCheque" style="display:none;">
-            <label >Ingrese el N° de Cheque: </label>
-            {!! Form::text('NCheque',null,['name'=>'NCheque','id'=>'NCheque','class'=>'form-control','placeholder'=>'### ###','pattern'=>'[0-9]','title'=>'Ingrese solo numeros']) !!}
-          </div>
-          <div class="form-group" id="Cantidad" style="display:none;">
-            <label >Cantidad: </label>
-            {!! Form::text('cantidad',null,['name'=>'cantidad','id'=>'cantidad','class'=>'form-control','placeholder'=>'$$','pattern'=>'[0-9]','title'=>'Ingrese solo numeros']) !!}
-          </div>
-          <div class="form-group">
-            <label >Año a Pagar: </label>
-            {!! Form::text('anoPago',null,['name'=>'anoPago','id'=>'anoPago','class'=>'form-control','placeholder'=>'20xx','pattern'=>'[0-9]{4}','title'=>'Ingrese solo numeros']) !!}
-          </div>
-          <div class="form-group">
-            <label>Selecione el Mes o Meses a Pagar: </label>
-            <br>
-            <?php $date = \Carbon\Carbon::now() ?>
-            {{ Form::select('Mes',['Enero'=>'Enero','Febrero'=>'Febrero','Marzo'=>'Marzo','Abril'=>'Abril',
-            'Mayo'=>'Mayo','Junio'=>'Junio','Julio'=>'Julio','Agosto'=>'Agosto','Septiembre'=>'Septiembre',
-            'Octubre'=>'Octubre','Noviembre'=>'Noviembre','Diciembre'=>'Diciembre'],null,
-            ['class'=>'form-control','multiple'=>'true'])}}
-            <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione los meses, dando clic en ellos</h6>
-          </div>
-            <!-- /.input group -->
-            <!-- /.input group -->
-          </div>
-        </div>
-          </div>
-        <!-- /.box-body -->
-        <!--/.col (right) -->
-  <div class="col-md-6">
-    <!-- general form elements -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Informacion General</h3>
-      </div>
-      <!-- /.box-header -->
-      <?php
-      $emp = SIGRECOFERO\condominio::where('id_Empresa', $condomine->id)->get()->first();
-      // $cont = SIGRECOFERO\empresa::where('id',$condomine->id)->get()->first();
-       ?>
-
-        <div class="box-body">
-          <div class="form-group">
-            <label>Codigo: </label>
-            {!! Form::text('codigo',null,['disabled','class'=>'form-control','placeholder'=>'Codigo']) !!}
-          </div>
-          <div class="form-group">
-            <label>Nombre del Condomine: </label>
-            {!! Form::text('nombre',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado']) !!}
-          </div>
-          <div class="form-group">
-            <label >N° de Local: </label>
-            {!! Form::text('NLocal',null,['disabled','name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}']) !!}
-          </div>
-          <div class="form-group">
-            <label >Fecha Actual: </label>
-            <?php $date = \Carbon\Carbon::now() ?>
-            {!! Form::date('fechaPago',$date,['disabled','name'=>'fechaPago','id'=>'fechaPago','class'=>'form-control']) !!}
-          </div>
-          <!-- /.form group -->
-          </div>
-          <!-- /.form group -->
-        <!-- /.box-body -->
-    </div>
-  <center>
+  {!! Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Acciones</h3>
+          <h3 class="box-title">Informacion General</h3>
         </div>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-danger">
-          Hacer Pago
-        </button>
-      {{-- <button type="submit" class="btn btn-danger" id="eliminar" onclick="return confirm('¿Seguro que deseas eliminarlo?')">Eliminar</button> --}}
-      <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscarCondomine') !!}">Cancelar</a>
-      <br>
+        <?php
+        $emp = SIGRECOFERO\condominio::where('id_Empresa', $condomine->id)->get()->first();
+        // $cont = SIGRECOFERO\empresa::where('id',$condomine->id)->get()->first();
+        $estado1 = SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('estado',0)->get();
+        $count2 = count($estado1);
+        $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
+        for ($i=2; $i <= $count2 ; $i++) {
+          # code...
+          $r=$i-1;
+          $estadobusqueda = SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
 
+        }
+        $conteo=1;
+        // dd($estadobusqueda);
+         ?>
+          <div class="box-body">
+            <div class="form-group">
+              <label>Nombre del Condomine: </label>
+              {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+            </div>
+            </div>
+      </div>
     </div>
-  </center>
-</div>
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Informacion General</h3>
+        </div>
+          <div class="box-body">
+            <div class="form-group">
+              <label>N° De Local:  </label>
+              {!! Form::text('NLocal',$condomine->Nlocal,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+            </div>
+            </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="table-responsive" id="tablaAdmin">
+  <table id="example" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+      <thead>
+          <tr>
+              <th width="50px">N°</th>
+              <th >CONCEPTO</th>
+              <th>ESTADO</th>
+              <th>MES</th>
+              <th>AÑO</th>
+              <th>ACCIONES</th>
+          </tr>
+      </thead>
+      <tbody class="busqueda">
+        @foreach($estadobusqueda as $cb)
+          <tr>
+            <td>{{$conteo++}}</td>
+            <td>{{$cb->concepto}}</td>
+            @if ($cb->estado == 0)
+              <td><span class="label label-warning">DEBE</span></td>
+            @endif
+            @if ($cb->estado == 1)
+              <td><span class="label label-info">PAGADO</span></td>
+            @endif
+            <td>{{$cb->mes}}</td>
+            <td>{{$cb->ano}}</td>
+            @if ($cb->estado == 0)
+              <td width="250px">
+                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$condomine->id)}}">IR A PAGAR</a>
+              </td>
+            @endif
+            @if ($cb->estado == 1)
+              <td width="250px">
+                <a class="btn btn-info btn-rounded" href="{{route('pago.edit',$condomine->id)}}">VER FACTURA</a>
+              </td>
+            @endif
+          </tr>
+          @endforeach
+      </tbody>
+  </table>
 </div>
 
-{!! Form::close()!!}
+{{Form::close()}}
 @endsection

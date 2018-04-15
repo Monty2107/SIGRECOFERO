@@ -23,11 +23,12 @@
   function mostrar(dato){
       if(dato=="Administracion"){
           document.getElementById("descripcion").style.display = "none";
+          <?php $m = 'Adminitracion' ?>
       }
       if(dato=="Parqueo"){
           document.getElementById("descripcion").style.display = "none";
       }
-      if(dato=="Otro"){
+      if(dato=="Otros"){
           document.getElementById("descripcion").style.display = "block";
       }
   }
@@ -47,6 +48,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   {{-- diseños personales --}}
+  <script src="js/personal/ajax.js"></script>
+  {!! Html::script('js/personal/ajax.js') !!}
   {!! Html::script('js/personal/jquery.js') !!}
   {!! Html::script('js/personal/personal.js') !!}
   {!! Html::script('js/personal/data-mask.js') !!}

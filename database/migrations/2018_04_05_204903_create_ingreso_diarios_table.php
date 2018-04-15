@@ -15,15 +15,15 @@ class CreateIngresoDiariosTable extends Migration
     {
         Schema::create('ingreso_diarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('concepto',['Administrativo','Parqueo', 'otros']);
-            $table->boolean('formaPago');// 0- efectivo  1- cheque
+            $table->enum('concepto',['Administrativo','Parqueo', 'Otros']);
+            $table->enum('formaPago',['Efectivo','Cheque']);// 0- efectivo  1- cheque
             $table->string('NCheque')->nullable();
             $table->double('cantidad',8,2);
             $table->string('descripcion')->nullable();
             $table->integer('id_Fecha')->unsigned();
             $table->foreign('id_Fecha')->references('id')->on('fechas');
-            $table->integer('id_Estado')->unsigned();
-            $table->foreign('id_Estado')->references('id')->on('estados');
+            $table->integer('id_Condominio')->unsigned();
+            $table->foreign('id_Condominio')->references('id')->on('condominios');
             $table->timestamps();
         });
     }

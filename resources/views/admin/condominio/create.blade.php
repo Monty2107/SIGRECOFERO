@@ -49,6 +49,13 @@
                 </div>
               <!-- /.input group -->
             </div>
+            <div class="form-group">
+              <label>Selecione Las Opciones para Generar Las Cuotas: </label>
+              <br>
+              {{ Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo','Otros'=>'Otros'],null,
+              ['class'=>'form-control','multiple'=>'true'])}}
+              <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
+            </div>
             <!-- /.form group -->
           <!-- /.box-body -->
       </div>
@@ -70,9 +77,10 @@
               {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
             </div>
             <div class="form-group">
-              <label >Año Inicio de Facturacion: </label>
+              <label >Año De Iniciacion de Facturacion: </label>
               {!! Form::text('facturacion',null,['name'=>'facturacion','id'=>'facturacion','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
             </div>
+
               <!-- /.input group -->
               <!-- /.input group -->
             </div>

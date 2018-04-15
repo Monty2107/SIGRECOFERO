@@ -68,18 +68,26 @@ class CondomineController extends Controller
       '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
       '11'=>'Noviembre','12'=>'Diciembre' );
       $cantMes=count($arrayMes);
+      $concepto = count($request->opciones);
 
-      for ($i=$ano; $i <= $date->year ; $i++) {
-        for ($j=1; $j <=$cantMes ; $j++) {
-          estado::create([
-            'mes'=>$arrayMes[$j],
-            'ano'=>$ano,
-            'estado'=>false,
-            'id_Condominio'=>$empresa->id,
-          ]);
+
+        for ($i=$ano; $i <= $date->year ; $i++) {
+          for ($k=1; $k <= $concepto ; $k++) {
+            $l=$k-1;
+          for ($j=1; $j <=$cantMes ; $j++) {
+            estado::create([
+              'mes'=>$arrayMes[$j],
+              'ano'=>$ano,
+              'estado'=>false,
+              'concepto'=>$request->opciones[$l],
+              'id_Condominio'=>$empresa->id,
+            ]);
         }
+        }
+
         $ano=$ano+1;
       }
+
 
 
       // dd('guardado exitosamente');

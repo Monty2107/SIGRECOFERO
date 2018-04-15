@@ -31,7 +31,7 @@
               <td>{{$cb->NLocal}}</td>
               <td width="250px">
                 <a class="btn btn-info btn-rounded" href="{{route('pago.show',$cb->id)}}">Ver Historial de Pago</a>
-                <a class="btn btn-success btn-rounded" href="{{route('pago.show',$cb->id)}}">Pago</a>
+                <a class="btn btn-success btn-rounded" href="{{route('pago.edit',$cb->id)}}">Pago</a>
               </td>
           </tr>
           @endforeach

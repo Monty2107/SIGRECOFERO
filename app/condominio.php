@@ -16,6 +16,9 @@ class condominio extends Model
     return $this->belongsTo('\SIGRECOFERO\empresa', 'id');
   }
 
+  public function ingreso_diario(){
+    return $this->belongsTo('\SIGRECOFERO\ingreso_diario', 'id_Ingreso');
+  }
   public function estado(){
     return $this->belongsTo('\SIGRECOFERO\estado', 'id_Estado');
   }

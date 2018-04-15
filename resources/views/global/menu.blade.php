@@ -45,7 +45,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="{!! asset('admin/buscarCondomine') !!}"><i class="fa fa-circle-o"></i>Registrar Pago</a></li>
+        <li><a href="{!! asset('admin/buscarCondomine') !!}"><i class="fa fa-circle-o"></i>Lista de Condomines</a></li>
         <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>Reportes</a></li>
       </ul>
     </li>

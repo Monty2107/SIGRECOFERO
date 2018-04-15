@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin'],function(){
 
   //Rutas Pagos
   Route::resource('pago','PagosController');
+  Route::resource('pagoMes','PagoMesController');
   Route::resource('buscarCondomine','PagosController@buscar');
 
 
