@@ -24,9 +24,10 @@
           </tr>
       </thead>
       <tbody class="busqueda">
+        <?php $r=1; ?>
         @foreach($condominiobusqueda as $cb)
           <tr>
-              <td>{{$cb->id}}</td>
+              <td>{{$r++}}</td>
               <td>{{$cb->codigo}}</td>
               <td>{{$cb->empresa->nombre}}</td>
               <td>{{$cb->NLocal}}</td>

@@ -4,6 +4,7 @@ namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SIGRECOFERO\condominio;
+use SIGRECOFERO\estado;
 
 class PagoMesController extends Controller
 {
@@ -57,9 +58,9 @@ class PagoMesController extends Controller
      */
     public function edit($id)
     {
-      $condomine = condominio::find($id);
+      $estado = estado::find($id);
       // dd($estado->all());
-       return view('admin.pago.editMes')->with('condomine', $condomine);
+       return view('admin.pago.editMes')->with('estado', $estado);
     }
 
     /**

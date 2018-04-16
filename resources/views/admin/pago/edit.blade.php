@@ -26,12 +26,28 @@
           <div class="form-group" id="opciones">
             <label>Selecione el Concepto: </label>
             <br>
-            {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Cuota de Adminitracion </label> &nbsp;&nbsp;&nbsp;
-            {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Cuota de Parqueo </label>&nbsp;&nbsp;&nbsp;
-            {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrar(this.value);'])}}
-            <label>Otros </label>
+            <?php
+            $admin = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Administrativo')->get()->first();
+            $parqueo = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Parqueo')->get()->first();
+            $otros = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Otros')->get()->first();
+            // dd($parqueo);
+             ?>
+             @if (!$admin)
+             @else
+               {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrar(this.value);'])}}
+               <label>Cuota de Adminitracion </label> &nbsp;&nbsp;&nbsp;
+             @endif
+             @if (!$parqueo)
+             @else
+               {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrar(this.value);'])}}
+               <label>Cuota de Parqueo </label>&nbsp;&nbsp;&nbsp;
+             @endif
+             @if (!$otros)
+             @else
+               {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrar(this.value);'])}}
+               <label>Otros </label>
+             @endif
+
           </div>
           <div class="form-group" id="descripcion" style="display:none;">
             <label >Descripcion: </label>
@@ -70,10 +86,10 @@
 
             $count1 = count($array);
             ?>
-            <select id="cont" onchange="load(this.value);">
+            {{-- <select id="cont" onchange="load(this.value);">
               <option value="">seleccione</option>
               <option value="{{$array[1]}}">{{$array[1]}}</option>
-            </select>
+            </select> --}}
               {!!Form::select('anoPago',$array, null, ['onchange'=>'load(this.value)','class'=>'form-control','placeholder' => 'Seleccione el Año....'])!!}
 
 
@@ -81,6 +97,7 @@
           <div id="myDiv"></div>
           <div class="form-group">
             <label>Selecione el Mes o Meses a Pagar: </label>
+
             <br>
             {{ Form::select('Mes[]',['Enero'=>'Enero','Febrero'=>'Febrero','Marzo'=>'Marzo','Abril'=>'Abril',
             'Mayo'=>'Mayo','Junio'=>'Junio','Julio'=>'Julio','Agosto'=>'Agosto','Septiembre'=>'Septiembre',
@@ -124,6 +141,7 @@
             <label >Fecha Actual: </label>
             {!! Form::date('fechaPago',$date,['disabled','name'=>'fechaPago','id'=>'fechaPago','class'=>'form-control']) !!}
           </div>
+          <input type="hidden" name="pagina" value="1">
           <!-- /.form group -->
           </div>
           <!-- /.form group -->
@@ -135,7 +153,7 @@
           <h3 class="box-title">Acciones</h3>
         </div>
         <button type="submit" class="btn btn-success">
-          Hacer Pago
+          SIGUIENTE
         </button>
       {{-- <button type="submit" class="btn btn-danger" id="eliminar" onclick="return confirm('¿Seguro que deseas eliminarlo?')">Eliminar</button> --}}
       <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscarCondomine') !!}">Cancelar</a>

@@ -10,6 +10,7 @@ use SIGRECOFERO\condominio;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\ingreso_diario;
 use SIGRECOFERO\estado;
+use SIGRECOFERO\fecha;
 use Carbon\Carbon;
 
 class CondomineController extends Controller
@@ -20,7 +21,7 @@ class CondomineController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function buscar(){
-      $condominiobusqueda = condominio::with('empresa')->orderBy('id')->get();
+      $condominiobusqueda = condominio::with('empresa')->orderBy('id','desc')->get();
       return view('admin.condominio.buscar')->with('condominiobusqueda',$condominiobusqueda);
     }
     public function index()
@@ -70,6 +71,11 @@ class CondomineController extends Controller
       $cantMes=count($arrayMes);
       $concepto = count($request->opciones);
 
+        $fecha = fecha::create([
+          'dia'=>$date->format('d'),
+          'mes'=>$date->format('m'),
+          'ano'=>$date->format('Y'),
+        ]);
 
         for ($i=$ano; $i <= $date->year ; $i++) {
           for ($k=1; $k <= $concepto ; $k++) {
@@ -81,6 +87,7 @@ class CondomineController extends Controller
               'estado'=>false,
               'concepto'=>$request->opciones[$l],
               'id_Condominio'=>$empresa->id,
+              'id_Fecha'=>$fecha->id,
             ]);
         }
         }

@@ -9,7 +9,7 @@ class estado extends Model
   protected $table = 'estados';
 
   protected $fillable =[
-    'mes','ano','estado','concepto','id_Condominio'
+    'mes','ano','estado','concepto','id_Condominio','id_Fecha'
   ];
 
   public function condominio(){
@@ -18,6 +18,10 @@ class estado extends Model
 
   public function facturacions(){
     return $this->belongsTo('\SIGRECOFERO\facturacion', 'id_Factura');
+  }
+
+  public function fecha(){
+    return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
   }
 
 }

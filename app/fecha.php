@@ -22,4 +22,9 @@ class fecha extends Model
   public function caja_chica(){
     return $this->belongsTo('\SIGRECOFERO\caja_chica', 'id_Caja');
   }
+
+  public function estado(){
+    return $this->belongsTo('\SIGRECOFERO\estado', 'id_Estado');
+  }
+
 }

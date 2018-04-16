@@ -30,7 +30,9 @@
         for ($i=2; $i <= $count2 ; $i++) {
           # code...
           $r=$i-1;
-          $estadobusqueda = SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
+          $estadoAdmin = SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
+          $estadoParqueo = SIGRECOFERO\estado::where('concepto','=','Parqueo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
+          $estadoOtros = SIGRECOFERO\estado::where('concepto','=','Otros')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
 
         }
         $conteo=1;
@@ -41,6 +43,13 @@
               <label>Nombre del Condomine: </label>
               {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
+            <label>Selecione el Concepto Para Ver Su Historial: </label><br>
+            {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <label>Historial en Cuotas Administrativa </label> &nbsp;&nbsp;&nbsp;
+            {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <label>Historial en Cuotas de Parqueo </label>
+            {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <label>Historial de Otras Cuotas </label>
             </div>
       </div>
     </div>
@@ -59,7 +68,8 @@
     </div>
 
   </div>
-  <div class="table-responsive" id="tablaAdmin">
+
+  <div class="table-responsive" id="tablaOtros" style="display:none;">
   <table id="example" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
       <thead>
           <tr>
@@ -72,7 +82,7 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        @foreach($estadobusqueda as $cb)
+        @foreach($estadoOtros as $cb)
           <tr>
             <td>{{$conteo++}}</td>
             <td>{{$cb->concepto}}</td>
@@ -86,7 +96,7 @@
             <td>{{$cb->ano}}</td>
             @if ($cb->estado == 0)
               <td width="250px">
-                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$condomine->id)}}">IR A PAGAR</a>
+                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
               </td>
             @endif
             @if ($cb->estado == 1)
@@ -98,6 +108,88 @@
           @endforeach
       </tbody>
   </table>
+  </div>
+
+  <div class="table-responsive" id="tablaAdmin" style="display:none;">
+  <table id="examples" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+      <thead>
+          <tr>
+              <th width="50px">N°</th>
+              <th >CONCEPTO</th>
+              <th>ESTADO</th>
+              <th>MES</th>
+              <th>AÑO</th>
+              <th>ACCIONES</th>
+          </tr>
+      </thead>
+      <tbody class="busqueda">
+        @foreach($estadoAdmin as $cb)
+          <tr>
+            <td>{{$conteo++}}</td>
+            <td>{{$cb->concepto}}</td>
+            @if ($cb->estado == 0)
+              <td><span class="label label-warning">DEBE</span></td>
+            @endif
+            @if ($cb->estado == 1)
+              <td><span class="label label-info">PAGADO</span></td>
+            @endif
+            <td>{{$cb->mes}}</td>
+            <td>{{$cb->ano}}</td>
+            @if ($cb->estado == 0)
+              <td width="250px">
+                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
+              </td>
+            @endif
+            @if ($cb->estado == 1)
+              <td width="250px">
+                <a class="btn btn-info btn-rounded" href="{{route('pago.edit',$condomine->id)}}">VER FACTURA</a>
+              </td>
+            @endif
+          </tr>
+          @endforeach
+      </tbody>
+  </table>
+</div>
+
+<div class="table-responsive" id="tablaParqueo" style="display:none;">
+<table id="examplee" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+    <thead>
+        <tr>
+            <th width="50px">N°</th>
+            <th >CONCEPTO</th>
+            <th>ESTADO</th>
+            <th>MES</th>
+            <th>AÑO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody class="busqueda">
+      @foreach($estadoParqueo as $cb)
+        <tr>
+          <td>{{$conteo++}}</td>
+          <td>{{$cb->concepto}}</td>
+          @if ($cb->estado == 0)
+            <td><span class="label label-warning">DEBE</span></td>
+          @endif
+          @if ($cb->estado == 1)
+            <td><span class="label label-info">PAGADO</span></td>
+          @endif
+          <td>{{$cb->mes}}</td>
+          <td>{{$cb->ano}}</td>
+          @if ($cb->estado == 0)
+            <td width="250px">
+              <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
+            </td>
+          @endif
+          @if ($cb->estado == 1)
+            <td width="250px">
+              <a class="btn btn-info btn-rounded" href="{{route('pago.edit',$condomine->id)}}">VER FACTURA</a>
+            </td>
+          @endif
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 </div>
 
 {{Form::close()}}

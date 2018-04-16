@@ -16,7 +16,7 @@ class CreateFacturacionsTable extends Migration
         Schema::create('facturacions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('NFactura')->unique();
-            $table->boolean('concepto'); // 0- adminitrativo ,  1- Parqueo
+            $table->enum('concepto',['Administrativo','Parqueo','Otros']); // 0- adminitrativo ,  1- Parqueo
             $table->double('cantidad',8,2);
             $table->integer('id_Fecha')->unsigned();
             $table->foreign('id_Fecha')->references('id')->on('fechas');

@@ -19,9 +19,10 @@
       background: transparent !important;
     }
   </style>
+
   <script>
   function mostrar(dato){
-      if(dato=="Administracion"){
+      if(dato=="Administrativo"){
           document.getElementById("descripcion").style.display = "none";
           <?php $m = 'Adminitracion' ?>
       }
@@ -30,6 +31,26 @@
       }
       if(dato=="Otros"){
           document.getElementById("descripcion").style.display = "block";
+      }
+  }
+  </script>
+  <script>
+  function mostrarTabla(dato){
+      if(dato=="Administrativo"){
+        document.getElementById("tablaParqueo").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "none";
+        document.getElementById("tablaAdmin").style.display = "block";
+      }
+      if(dato=="Parqueo"){
+        document.getElementById("tablaAdmin").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "none";
+        document.getElementById("tablaParqueo").style.display = "block";
+
+      }
+      if(dato=="Otros"){
+        document.getElementById("tablaAdmin").style.display = "none";
+        document.getElementById("tablaParqueo").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "block";
       }
   }
   </script>
@@ -57,6 +78,50 @@
   {!!Html::style('css/personal/jquery.dataTables.min.css')!!}
   {!! Html::script('js/personal/jquery.dataTables.min.js') !!}
   {!! Html::script('js/personal/table.js') !!}
+  <script>
+  $(document).ready(function(){
+    $('#examples').DataTable({
+      "order": [[1, "asc"]],
+      "language":{
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrada de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords":    "No se encontraron registros coincidentes",
+        "paginate": {
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+    });
+  });
+
+  </script>
+  <script>
+  $(document).ready(function(){
+    $('#examplee').DataTable({
+      "order": [[1, "asc"]],
+      "language":{
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrada de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords":    "No se encontraron registros coincidentes",
+        "paginate": {
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+    });
+  });
+
+  </script>
   <!-- Bootstrap 3.3.7 -->
   {!!Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css')!!}
   <!-- Font Awesome -->

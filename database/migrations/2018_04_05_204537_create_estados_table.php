@@ -21,6 +21,8 @@ class CreateEstadosTable extends Migration
             $table->enum('concepto',['Administrativo','Parqueo', 'Otros']);
             $table->integer('id_Condominio')->unsigned();
             $table->foreign('id_Condominio')->references('id')->on('condominios');
+            $table->integer('id_Fecha')->unsigned();
+            $table->foreign('id_Fecha')->references('id')->on('fechas');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 alert('aqui');
 }
 }
-xmlhttp.open("POST","mes.php",true);
+xmlhttp.open("POST","{{asset('')}}",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("q="+str);
 }
