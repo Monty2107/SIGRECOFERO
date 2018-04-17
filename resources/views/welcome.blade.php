@@ -13,6 +13,7 @@
       left: auto;
       display: block;
       z-index: 1;
+      
     }
 
     .example-modal .modal {
