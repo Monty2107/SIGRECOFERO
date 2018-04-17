@@ -2,7 +2,7 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="{!! asset('img/user2-160x160.jpg') !!}" class="img-circle" alt="User Image">
+      <img src="{!! asset('img/gano4.png') !!}" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p>Programador</p>
@@ -16,7 +16,7 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Menu de Navegacion</li>
     <li class="active treeview">
-      <li><a href="#"><i class="fa fa-dashboard"></i> <span>Panel Principal</span></a></li>
+      <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> <span>Panel Principal</span></a></li>
     </li>
     <li class="treeview">
       <a href="#">

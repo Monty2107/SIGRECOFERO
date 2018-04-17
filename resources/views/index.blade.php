@@ -140,7 +140,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{!! asset('/') !!}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>CF</span>
       <!-- logo for regular state and mobile devices -->
@@ -161,17 +161,17 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{!! asset('img/user2-160x160.jpg') !!}" class="user-image" alt="User Image">
+              <img src="{!! asset('img/gano4.png') !!}" class="user-image" alt="User Image">
               <span class="hidden-xs">Programador</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{!! asset('img/user2-160x160.jpg') !!}" class="img-circle" alt="User Image">
+                <img src="{!! asset('img/gano4.png') !!}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  Monterrosa - Web Developer
+                  <small>Diseño de Prueba 2018</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -232,7 +232,6 @@
       </div>
       @endif
       @yield('content')
-
     </section>
     <!-- /.content -->
   </div>
