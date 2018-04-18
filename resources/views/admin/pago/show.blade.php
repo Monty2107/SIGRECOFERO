@@ -27,16 +27,14 @@
         $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
         '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
         '11'=>'Noviembre','12'=>'Diciembre' );
-        for ($i=2; $i <= $count2 ; $i++) {
           # code...
-          $r=$i-1;
           $estadoAdmin = SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
           $estadoParqueo = SIGRECOFERO\estado::where('concepto','=','Parqueo')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
           $estadoOtros = SIGRECOFERO\estado::where('concepto','=','Otros')->where('id_Condominio','=',$condomine->id)->orderBy('ano','desc')->get();
-
-        }
         $conteo=1;
-        // dd($estadobusqueda);
+        $conteo1=1;
+        $conteo2=1;
+        // dd($estadoParqueo);
          ?>
           <div class="box-body">
             <div class="form-group">
@@ -44,12 +42,20 @@
               {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
             <label>Selecione el Concepto Para Ver Su Historial: </label><br>
+            @if(!$estadoAdmin->isEmpty())
             {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla(this.value);'])}}
             <label>Historial en Cuotas Administrativa </label> &nbsp;&nbsp;&nbsp;
+            @endif
+
+            @if(!$estadoParqueo->isEmpty())
             {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla(this.value);'])}}
             <label>Historial en Cuotas de Parqueo </label>
+            @endif
+
+            @if(!$estadoOtros->isEmpty())
             {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla(this.value);'])}}
             <label>Historial de Otras Cuotas </label>
+            @endif
             </div>
       </div>
     </div>
@@ -125,7 +131,7 @@
       <tbody class="busqueda">
         @foreach($estadoAdmin as $cb)
           <tr>
-            <td>{{$conteo++}}</td>
+            <td>{{$conteo1++}}</td>
             <td>{{$cb->concepto}}</td>
             @if ($cb->estado == 0)
               <td><span class="label label-warning">DEBE</span></td>
@@ -166,7 +172,7 @@
     <tbody class="busqueda">
       @foreach($estadoParqueo as $cb)
         <tr>
-          <td>{{$conteo++}}</td>
+          <td>{{$conteo2++}}</td>
           <td>{{$cb->concepto}}</td>
           @if ($cb->estado == 0)
             <td><span class="label label-warning">DEBE</span></td>

@@ -35,7 +35,7 @@
       }
   }
   </script>
-  <script>
+   <script>
   function mostrarTabla(dato){
       if(dato=="Administrativo"){
         document.getElementById("tablaParqueo").style.display = "none";

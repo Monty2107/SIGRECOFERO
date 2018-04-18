@@ -76,19 +76,25 @@ class CondomineController extends Controller
           'mes'=>$date->format('m'),
           'ano'=>$date->format('Y'),
         ]);
-
+        $m = $date->format('m');
+        
         for ($i=$ano; $i <= $date->year ; $i++) {
           for ($k=1; $k <= $concepto ; $k++) {
             $l=$k-1;
           for ($j=1; $j <=$cantMes ; $j++) {
-            estado::create([
-              'mes'=>$arrayMes[$j],
-              'ano'=>$ano,
-              'estado'=>false,
-              'concepto'=>$request->opciones[$l],
-              'id_Condominio'=>$empresa->id,
-              'id_Fecha'=>$fecha->id,
-            ]);
+            if ($arrayMes[$m+1] == $arrayMes[$j] && $ano == $date->year) {
+              $j=12;            
+            }else{
+              estado::create([
+                'mes'=>$arrayMes[$j],
+                'ano'=>$ano,
+                'estado'=>false,
+                'concepto'=>$request->opciones[$l],
+                'id_Condominio'=>$empresa->id,
+                'id_Fecha'=>$fecha->id,
+                ]);
+            }
+            
         }
         }
 
