@@ -5,7 +5,7 @@
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('index') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Pagos Mensuales</li>
  </ol>
 @endsection
@@ -43,10 +43,6 @@
              @endif
 
           </div>
-          <div class="form-group" id="descripcion" style="display:none;">
-            <label >Descripcion: </label>
-            {!! Form::textarea('descripcion',null,['rows'=>'3','name'=>'descripcion','id'=>'descripcion','class'=>'form-control','placeholder'=>'Escriba la razon del Pago....']) !!}
-          </div>
           <div class="form-group" id="opciones">
             <label>Selecione la Forma de Pago: </label>
             <br>
@@ -79,12 +75,15 @@
              }
 
             $count1 = count($array);
+
+            
             ?>
             {{-- <select id="cont" onchange="load(this.value);">
               <option value="">seleccione</option>
               <option value="{{$array[1]}}">{{$array[1]}}</option>
             </select> --}}
-              {!!Form::select('anoPago',$array, null, ['onchange'=>'load(this.value)','class'=>'form-control','placeholder' => 'Seleccione el Año....'])!!}
+            
+              {!!Form::select('anoPago',$array, null, ['class'=>'form-control','placeholder' => 'Seleccione el Año....'])!!}
 
 
           </div>

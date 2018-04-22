@@ -5,7 +5,7 @@
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('index') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Busqueda de Condomine</li>
  </ol>
 @endsection

@@ -5,7 +5,7 @@
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('index') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Numero de Recibos De Los Pagos Mensuales</li>
  </ol>
 @endsection
@@ -22,16 +22,17 @@
           <h3 class="box-title">Registro Administrativo</h3>
         </div>
         <?php
+        $countmes = count($arrayMes1);
         $date = \Carbon\Carbon::now();
         $l=0;
-        $fecha = \SIGRECOFERO\fecha::where('dia','=',$date->format('d'))->where('mes','=',$date->format('m'))->where('ano','=',$date->format('Y'))->get()->first();
+        $val = \SIGRECOFERO\estado::where('id_Condominio',$condomine->id)->where('mes','=',$arrayMes1[0])->get()->first();
+        $fecha = \SIGRECOFERO\fecha::find($val->id_Fecha);
           # code...
-          $countmes = count($arrayMes1);
+          
           for ($i=0; $i < $countmes ; $i++) {
             # code...
-            $meses = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('estado','=',1)->get();
-            $concepto = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('estado','=',1)->get()->first();
-
+            $meses = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get();
+            $concepto = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get()->first();
 
          ?>
          @foreach ($meses as $as)

@@ -98,19 +98,18 @@ class PagosController extends Controller
 
         $count = count($request->Mes);
         $anoV = $request->anoPago;
+        
           for ($i=0; $i < $count ; $i++) {
             $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano',$request->array[$anoV])->get()->first();
+
             $busqueda= $estado->id;
+            
             $cambio = estado::find($busqueda);
-            $cambio->estado = true;//esta pagando
             $cambio->id_Fecha = $fecha->id;
             $cambio->save();
             $arrayMes1[]= $estado->mes;
 
           }
-
-
-
             // dd('entro');
           $ingreso = ingreso_diario::create([
             'concepto'=>$request->radioConcepto,
@@ -135,28 +134,28 @@ class PagosController extends Controller
       $count = count($request->mes);
       $anoV = $request->anoPago;
 
-      $fecha = fecha::create([
-        'dia'=>$date->format('d'),
-        'mes'=>$date->format('m'),
-        'ano'=>$date->format('Y'),
-      ]);
-
       $ingreso = ingreso_diario::where('id_Condominio',$id)->where('concepto','=',$request->radioConcepto)->orderby('created_at','DESC')->take(1)->get()->first();
       $idI = $ingreso->id;
-      $guardoingreso= ingreso_diario::find($idI);
-      $guardoingreso->id_Fecha = $fecha->id;
-      $guardoingreso->save();
+
         for ($i=0; $i < $count ; $i++) {
           $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->mes[$i])->where('ano',$request->ano)->get()->first();
           $busqueda = $estado->id;
-          $arrayEstado[]=$estado->id;
+          $arrayEstado[]=$estado->id;  
+          $facturacion = facturacion::find($busqueda);
+          $facturacion->NFactura = $request->factura[$i];
+          $facturacion->save();
+          $fecha = fecha::find($estado->id_Fecha);
+          $fecha->dia = $date->format('d');
+          $fecha->mes = $date->format('m');
+          $fecha->ano = $date->format('Y');
+          $fecha->save();
+          $guardoingreso= ingreso_diario::find($idI);
+          $guardoingreso->id_Fecha = $fecha->id;
+          $guardoingreso->save();
           $cambio = estado::find($busqueda);
           $cambio->estado = true;//esta pagando
           $cambio->id_Fecha = $fecha->id;
           $cambio->save();
-          $facturacion = facturacion::find($busqueda);
-          $facturacion->NFactura = $request->factura[$i];
-          $facturacion->save();
         }
 
         $nombreCondomine = empresa::find($id);
