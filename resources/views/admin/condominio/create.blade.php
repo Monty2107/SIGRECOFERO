@@ -52,7 +52,7 @@
             <div class="form-group">
               <label>Selecione Las Opciones para Generar Las Cuotas: </label>
               <br>
-              {{ Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo','Otros'=>'Otros'],null,
+              {{ Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,
               ['class'=>'form-control','multiple'=>'true'])}}
               <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
             </div>

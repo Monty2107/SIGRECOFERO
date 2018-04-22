@@ -15,4 +15,8 @@ class ingreso_diario extends Model
   public function fecha(){
     return $this->hasMany('\SIGRECOFERO\fecha', 'id_Fecha');
   }
+
+  public function condominio(){
+    return $this->hasMany('\SIGRECOFERO\condominio', 'id_Condominio');
+  }
 }

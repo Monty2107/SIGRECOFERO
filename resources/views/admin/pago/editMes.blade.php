@@ -23,11 +23,12 @@
         <?php
           # code...
           $estadoC = \SIGRECOFERO\estado::find($estado->id);
+          $facturacion = \SIGRECOFERO\facturacion::where('id_Estado',$estadoC->id)->get()->first();
 
          ?>
            <div class="form-group">
              <label> {{$estadoC->mes}} :</label>
-            &nbsp&nbsp {!! Form::text('factura[]',null,['name'=>'factura[]','id'=>'factura','class'=>'form-control','placeholder'=>'Escriba el Numero de Factura del Mes Correspondiente']) !!}
+            &nbsp&nbsp {!! Form::text('factura',null,['name'=>'factura','id'=>'factura','class'=>'form-control','placeholder'=>'Escriba el Numero de Factura del Mes Correspondiente']) !!}
             <input type="hidden" name="mes" value="{{$estadoC->mes}}">
            </div>
            <div class="form-group" id="opciones">
@@ -49,13 +50,14 @@
            @if ($estadoC->concepto == 'Otros')
              <div class="form-group" >
                <label >Descripcion: </label>
-               {!! Form::textarea('descripcion',null,['rows'=>'3','name'=>'descripcion','id'=>'descripcion','class'=>'form-control','placeholder'=>'Escriba la razon del Pago....']) !!}
+               {!! Form::textarea('descripcion',$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad,['rows'=>'3','name'=>'descripcion','id'=>'descripcion','class'=>'form-control','disabled']) !!}
              </div>
            @endif
       </div>
       <input type="hidden" name="radioConcepto" value="{{$estadoC->concepto}}">
       <input type="hidden" name="ano" value="{{$estadoC->ano}}">
       <input type="hidden" name="id_Condominio" value="{{$estadoC->id_Condominio}}">
+      <input type="hidden" name="descripcion" value="{{$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad}}">
     </div>
           <!-- /.box-body -->
           <!--/.col (right) -->

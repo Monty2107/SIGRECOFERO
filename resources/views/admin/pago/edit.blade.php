@@ -29,8 +29,7 @@
             <?php
             $admin = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Administrativo')->get()->first();
             $parqueo = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Parqueo')->get()->first();
-            $otros = \SIGRECOFERO\estado::where('id_Condominio','=',$condomine->id)->where('concepto','=','Otros')->get()->first();
-            // dd($parqueo);
+             // dd($parqueo);
              ?>
              @if (!$admin)
              @else
@@ -41,11 +40,6 @@
              @else
                {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrar(this.value);'])}}
                <label>Cuota de Parqueo </label>&nbsp;&nbsp;&nbsp;
-             @endif
-             @if (!$otros)
-             @else
-               {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrar(this.value);'])}}
-               <label>Otros </label>
              @endif
 
           </div>

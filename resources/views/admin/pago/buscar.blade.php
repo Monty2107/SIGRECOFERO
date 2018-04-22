@@ -30,8 +30,9 @@
               <td>{{$cb->empresa->nombre}}</td>
               <td>{{$cb->NLocal}}</td>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('pago.show',$cb->id)}}">Ver Historial de Pago</a>
+                <a class="btn btn-info btn-rounded" href="{{route('pago.show',$cb->id)}}">Historial</a>
                 <a class="btn btn-success btn-rounded" href="{{route('pago.edit',$cb->id)}}">Pago</a>
+                <a class="btn btn-warning btn-rounded" href="{{route('nuevopago.edit',$cb->id)}}">Nuevo Pago</a>
               </td>
           </tr>
           @endforeach

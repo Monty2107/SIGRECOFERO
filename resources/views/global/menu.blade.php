@@ -61,7 +61,7 @@
         </span> -->
       </a>
       <ul class="treeview-menu">
-        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Emision</a></li>
+        <li><a href="{!! asset('admin/facturacion') !!}"><i class="fa fa-circle-o"></i>Emision</a></li>
         <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i>Buscar</a></li>
         <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i>Reportes</a></li>
         <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>

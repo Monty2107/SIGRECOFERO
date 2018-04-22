@@ -37,7 +37,7 @@ class PagosController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -48,7 +48,7 @@ class PagosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -124,9 +124,13 @@ class PagosController extends Controller
         $condomine = condominio::find($id);
         $concepto1 = $request->radioConcepto;
         return view('admin.pago.update')->with('arrayMes1',$arrayMes1)->with('condomine', $condomine)->with('concepto1',$concepto1);
+
       }else if($request->pagina == 2) {
         # code...
         // dd($request->all());
+        if($request->radioConcepto == 'Otros'){
+
+        }else{
         $date = \Carbon\Carbon::now();
       $count = count($request->mes);
       $anoV = $request->anoPago;
@@ -150,19 +154,9 @@ class PagosController extends Controller
           $cambio->estado = true;//esta pagando
           $cambio->id_Fecha = $fecha->id;
           $cambio->save();
-        }
-
-        $count5 = count($request->factura);
-        for ($i=0; $i < $count5 ; $i++) {
-          # code...
-          facturacion::create([
-            'NFactura' => $request->factura[$i],
-            'concepto'=> $guardoingreso->concepto,
-            'cantidad' =>$ingreso->cantidad,
-            'id_Fecha'=>$fecha->id,
-            'id_Estado'=>$arrayEstado[$i],
-
-          ]);
+          $facturacion = facturacion::find($busqueda);
+          $facturacion->NFactura = $request->factura[$i];
+          $facturacion->save();
         }
 
         $nombreCondomine = empresa::find($id);
@@ -170,6 +164,7 @@ class PagosController extends Controller
         Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre);
 
         return redirect('/admin/buscarCondomine');
+      }
 
       }else{
 
@@ -197,25 +192,20 @@ class PagosController extends Controller
             'cantidad'=>$request->cantidad,
             'descripcion'=>$request->descripcion,
             'id_Fecha'=>$fecha->id,
-            'id_Condominio'=>$id,
+            'id_Condominio'=>$estado->id_Condominio,
           ]);
 
-          $count5 = count($request->factura);
-          for ($i=0; $i < $count5 ; $i++) {
-            # code...
-            facturacion::create([
-              'NFactura' => $request->factura[$i],
-              'concepto'=> $ingreso->concepto,
-              'cantidad' =>$ingreso->cantidad,
-              'id_Fecha'=>$fecha->id,
-              'id_Estado'=>$id,
+          $facturacion = facturacion::find($estado->id);
+          $facturacion->Nfactura = $request->factura;
+          $facturacion->cantidad = $request->cantidad;
+          $facturacion->save();
 
-            ]);
-          }
+
           $idCondo = $request->id_Condominio;
           $nombreCondomine = empresa::find($idCondo);
 
-          Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre);
+          Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
+          ' En el mes de : '.$request->mes.' , Con concepto de : '.$request->radioConcepto );
 
           return redirect('/admin/buscarCondomine');
 

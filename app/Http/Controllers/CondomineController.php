@@ -11,6 +11,7 @@ use SIGRECOFERO\empresa;
 use SIGRECOFERO\ingreso_diario;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
+use SIGRECOFERO\facturacion;
 use Carbon\Carbon;
 
 class CondomineController extends Controller
@@ -82,10 +83,10 @@ class CondomineController extends Controller
           for ($k=1; $k <= $concepto ; $k++) {
             $l=$k-1;
           for ($j=1; $j <=$cantMes ; $j++) {
-            if ($arrayMes[$m+1] == $arrayMes[$j] && $ano == $date->year) {
+            if ($arrayMes[$m+2] == $arrayMes[$j] && $ano == $date->year) {
               $j=12;            
             }else{
-              estado::create([
+             $estado = estado::create([
                 'mes'=>$arrayMes[$j],
                 'ano'=>$ano,
                 'estado'=>false,
@@ -93,6 +94,35 @@ class CondomineController extends Controller
                 'id_Condominio'=>$empresa->id,
                 'id_Fecha'=>$fecha->id,
                 ]);
+                if ($request->opciones[$l] == 'Administrativo') {
+                  # code...
+                  facturacion::create([
+                    'NFactura' => '',
+                    'concepto'=> $request->opciones[$l],
+                    'cantidad' => 50,
+                    'emision'=>'Emitido',
+                    'id_Fecha'=>$fecha->id,
+                    'id_Estado'=>$estado->id,
+                    ]);
+                }else if($request->opciones[$l] == 'Parqueo'){
+                  facturacion::create([
+                    'NFactura' => '',
+                    'concepto'=> $request->opciones[$l],
+                    'cantidad' => 15,
+                    'emision'=>'Emitido',
+                    'id_Fecha'=>$fecha->id,
+                    'id_Estado'=>$estado->id,
+                    ]);
+                }else{
+                  facturacion::create([
+                    'NFactura' => '',
+                    'concepto'=> $request->opciones[$l],
+                    'cantidad' => 0,
+                    'emision'=>'Emitido',
+                    'id_Fecha'=>$fecha->id,
+                    'id_Estado'=>$estado->id,
+                    ]);
+                }                  
             }
             
         }

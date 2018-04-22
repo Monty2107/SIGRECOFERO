@@ -9,7 +9,7 @@ class estado extends Model
   protected $table = 'estados';
 
   protected $fillable =[
-    'mes','ano','estado','concepto','id_Condominio','id_Fecha'
+    'mes','ano','estado','concepto','descripcion','id_Condominio','id_Fecha'
   ];
 
   public function condominio(){

@@ -34,7 +34,7 @@
               <td width="250px">
                 <a class="btn btn-success btn-rounded" href="{{route('condominio.show',$cb->id)}}">Ver</a>
                 <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$cb->id)}}">Modificar</a>
-
+                <a class="btn btn-warning btn-rounded" href="{{route('nuevopago.edit',$cb->id)}}">Nuevo Pago</a>
               </td>
           </tr>
           @endforeach

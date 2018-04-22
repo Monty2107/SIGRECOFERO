@@ -81,6 +81,7 @@
           <tr>
               <th width="50px">N°</th>
               <th >CONCEPTO</th>
+              <th >DESCRIPCION</th>
               <th>ESTADO</th>
               <th>MES</th>
               <th>AÑO</th>
@@ -92,6 +93,7 @@
           <tr>
             <td>{{$conteo++}}</td>
             <td>{{$cb->concepto}}</td>
+            <td>{{$cb->descripcion}}</td>
             @if ($cb->estado == 0)
               <td><span class="label label-warning">DEBE</span></td>
             @endif
