@@ -24,4 +24,14 @@ class estado extends Model
     return $this->hasMany('\SIGRECOFERO\fechas', 'id_Fecha');
   }
 
+  public static function mesesAdmin($id){
+
+    return \SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('ano','=',$id)->where('estado','=',0)->get();
+  }
+
+  public static function mesesParqueo($id){
+
+    return \SIGRECOFERO\estado::where('concepto','=','Parqueo')->where('ano','=',$id)->where('estado','=',0)->get();
+  }
+
 }

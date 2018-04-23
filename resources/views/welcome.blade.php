@@ -233,7 +233,7 @@
       </div>
       @endif
       @yield('content')
-      <label class="label-warning">Ultima Actualizacion: 15/Abril/2018</label><br>
+      <label class="label-warning">Ultima Actualizacion: 21/Abril/2018</label><br>
       <center>
         <label>LOGO DEL SISTEMA.
         </label><br>
@@ -246,13 +246,16 @@
           1.3 Ver Condominio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           1.4 Modificar Condomine<br>
           1.5 Eliminar Condominio <br>
-          1.6 Generador de Pagos desde años antiguos hasta la actualidad<br><br>
+          1.6 Generador de Pagos desde años antiguos hasta la actualidad<br>
+          1.7 Agregar nuevos pagos, no comunes como lo son administrativo y parque.<br><br>
         2- Modulo de pago diario <br>
           2.1 Buscar Condomine para pago&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           2.2 Realizar pago de varios meses<br>
           2.2 Historial de pagos
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           2.3 Realizar pago de un mes, Viendo el historial
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Modificacion de Validaciones a la hora de pagos, y seleccion de Meses
       </label>
       </center>
       <br><br>

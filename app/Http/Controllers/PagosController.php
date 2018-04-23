@@ -20,6 +20,22 @@ class PagosController extends Controller
     $condominiobusqueda = condominio::with('empresa')->orderBy('id')->get();
     return view('admin.pago.buscar')->with('condominiobusqueda',$condominiobusqueda);
   }
+
+  public function getMesesAdmin(Request $request, $id){
+
+    if($request->ajax()){
+      $estado = estado::mesesAdmin($id);
+      return response()->json($estado);
+    }
+
+  }
+
+  public function getMesesParqueo(Request $request,$id){
+    if($request->ajax()){
+      $estado1 = estado::mesesParqueo($id);
+      return response()->json($estado1);
+    }
+  }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +45,7 @@ class PagosController extends Controller
     {
 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -97,10 +114,15 @@ class PagosController extends Controller
           ]);
 
         $count = count($request->Mes);
-        $anoV = $request->anoPago;
+        if($request->anoPagoAdmin != 0){
+          $anoPago = $request->anoPagoAdmin;
+        }else{
+          $anoPago = $request->anoPagoParqueo;
+        }
+        
         
           for ($i=0; $i < $count ; $i++) {
-            $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano',$request->array[$anoV])->get()->first();
+            $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano','=',$anoPago)->get()->first();
 
             $busqueda= $estado->id;
             
@@ -110,7 +132,7 @@ class PagosController extends Controller
             $arrayMes1[]= $estado->mes;
 
           }
-            // dd('entro');
+            // dd($arrayMes1);
           $ingreso = ingreso_diario::create([
             'concepto'=>$request->radioConcepto,
             'formaPago'=>$request->radioPago,
@@ -159,8 +181,15 @@ class PagosController extends Controller
         }
 
         $nombreCondomine = empresa::find($id);
+        if($cambio->concepto == 'Parqueo'){
+          Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
+          " En Concepto de : Pago de ".$cambio->concepto);
+        }else{
+          Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
+          " En Concepto de : Pago ".$cambio->concepto);
+        }
 
-        Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre);
+       
 
         return redirect('/admin/buscarCondomine');
       }
@@ -203,8 +232,18 @@ class PagosController extends Controller
           $idCondo = $request->id_Condominio;
           $nombreCondomine = empresa::find($idCondo);
 
-          Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
+          if($request->radioConcepto == 'Otros'){
+
+            Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
+          ' En el mes de : '.$request->mes.' , Con concepto de : '.$estado->descripcion);
+
+          }else{
+
+            Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
           ' En el mes de : '.$request->mes.' , Con concepto de : '.$request->radioConcepto );
+
+          }
+          
 
           return redirect('/admin/buscarCondomine');
 

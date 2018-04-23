@@ -22,10 +22,11 @@
           <h3 class="box-title">Registro Administrativo</h3>
         </div>
         <?php
+
+        // dd('llego');
         $countmes = count($arrayMes1);
         $date = \Carbon\Carbon::now();
-        $l=0;
-        $val = \SIGRECOFERO\estado::where('id_Condominio',$condomine->id)->where('mes','=',$arrayMes1[0])->get()->first();
+        $val = \SIGRECOFERO\estado::where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('mes','=',$arrayMes1[0])->get()->first();
         $fecha = \SIGRECOFERO\fecha::find($val->id_Fecha);
           # code...
           
@@ -33,7 +34,7 @@
             # code...
             $meses = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get();
             $concepto = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get()->first();
-
+            // dd($meses);
          ?>
          @foreach ($meses as $as)
            <div class="form-group">

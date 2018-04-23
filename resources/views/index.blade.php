@@ -23,15 +23,15 @@
   <script>
   function mostrar(dato){
       if(dato=="Administrativo"){
-          document.getElementById("descripcion").style.display = "none";
-          <?php $m = 'Adminitracion' ?>
+          document.getElementById("anoPagoParqueo").style.display = "none";
+          document.getElementById("anoPagoAdmin").style.display = "block";   
+
       }
       if(dato=="Parqueo"){
-          document.getElementById("descripcion").style.display = "none";
+          document.getElementById("anoPagoAdmin").style.display = "none";
+          document.getElementById("anoPagoParqueo").style.display = "block";
       }
-      if(dato=="Otros"){
-          document.getElementById("descripcion").style.display = "block";
-      }
+
   }
   </script>
   <script>
@@ -69,59 +69,6 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   {{-- diseños personales --}}
-  <script src="js/personal/ajax.js"></script>
-  {!! Html::script('js/personal/ajax.js') !!}
-  {!! Html::script('js/personal/jquery.js') !!}
-  {!! Html::script('js/personal/personal.js') !!}
-  {!! Html::script('js/personal/data-mask.js') !!}
-  {!! Html::script('js/personal/jquery.maskedinput.js') !!}
-  {!!Html::style('css/personal/jquery.dataTables.min.css')!!}
-  {!! Html::script('js/personal/jquery.dataTables.min.js') !!}
-  {!! Html::script('js/personal/table.js') !!}
-  <script>
-  $(document).ready(function(){
-    $('#examples').DataTable({
-      "order": [[1, "asc"]],
-      "language":{
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "info": "Mostrando pagina _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponibles",
-        "infoFiltered": "(filtrada de _MAX_ registros)",
-        "loadingRecords": "Cargando...",
-        "processing":     "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords":    "No se encontraron registros coincidentes",
-        "paginate": {
-          "next":       "Siguiente",
-          "previous":   "Anterior"
-        },
-      }
-    });
-  });
-
-  </script>
-  <script>
-  $(document).ready(function(){
-    $('#examplee').DataTable({
-      "order": [[1, "asc"]],
-      "language":{
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "info": "Mostrando pagina _PAGE_ de _PAGES_",
-        "infoEmpty": "No hay registros disponibles",
-        "infoFiltered": "(filtrada de _MAX_ registros)",
-        "loadingRecords": "Cargando...",
-        "processing":     "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords":    "No se encontraron registros coincidentes",
-        "paginate": {
-          "next":       "Siguiente",
-          "previous":   "Anterior"
-        },
-      }
-    });
-  });
-
-  </script>
   <!-- Bootstrap 3.3.7 -->
   {!!Html::style('bower_components/bootstrap/dist/css/bootstrap.min.css')!!}
   <!-- Font Awesome -->
@@ -240,10 +187,65 @@
 
 
 <!-- Bootstrap 3.3.7 -->
-{!!Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js')!!}
+
+{!! Html::script('js/personal/jquery.js') !!}
+{!!Html::script('js/personal/dropdown.js')!!}
+{!! Html::script('js/personal/ajax.js') !!}
+  
+  {!! Html::script('js/personal/personal.js') !!}
+  {!! Html::script('js/personal/data-mask.js') !!}
+  {!! Html::script('js/personal/jquery.maskedinput.js') !!}
+  {!!Html::style('css/personal/jquery.dataTables.min.css')!!}
+  {!! Html::script('js/personal/jquery.dataTables.min.js') !!}
+  {!! Html::script('js/personal/table.js') !!}
+  {!!Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js')!!}
 <!-- AdminLTE App -->
 {!!Html::script('js/adminlte.min.js')!!}
-
+{!!Html::script('js/adminlte.js')!!}
+<script>
+    $(document).ready(function(){
+      $('#examples').DataTable({
+        "order": [[1, "asc"]],
+        "language":{
+          "lengthMenu": "Mostrar _MENU_ registros por pagina",
+          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "infoEmpty": "No hay registros disponibles",
+          "infoFiltered": "(filtrada de _MAX_ registros)",
+          "loadingRecords": "Cargando...",
+          "processing":     "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords":    "No se encontraron registros coincidentes",
+          "paginate": {
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          },
+        }
+      });
+    });
+  
+    </script>
+    <script>
+    $(document).ready(function(){
+      $('#examplee').DataTable({
+        "order": [[1, "asc"]],
+        "language":{
+          "lengthMenu": "Mostrar _MENU_ registros por pagina",
+          "info": "Mostrando pagina _PAGE_ de _PAGES_",
+          "infoEmpty": "No hay registros disponibles",
+          "infoFiltered": "(filtrada de _MAX_ registros)",
+          "loadingRecords": "Cargando...",
+          "processing":     "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords":    "No se encontraron registros coincidentes",
+          "paginate": {
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+          },
+        }
+      });
+    });
+  
+    </script>
 {{-- Cierre script propio --}}
 </body>
 </html>

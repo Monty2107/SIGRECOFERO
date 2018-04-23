@@ -33,4 +33,8 @@ Route::group(['prefix' => 'admin'],function(){
   Route::resource('buscarCondomine','PagosController@buscar');
 
 
+Route::match(['get','post'],'/mesesAdmin/{id}','PagosController@getMesesAdmin');
+Route::match(['get','post'],'/mesesParqueo/{id}','PagosController@getMesesParqueo');
+
+
 });
