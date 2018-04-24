@@ -66,32 +66,54 @@
             $date = \Carbon\Carbon::now();
 
             $busqueda = \SIGRECOFERO\estado::where('id_Condominio',$condomine->id)->where('ano','<=',$date->format('Y'))->get()->first();
-            $count = $busqueda->ano;
-            for ($i= $count; $i <= $date->format('Y') ; $i++) {
+            $count2 = $busqueda->ano;
+            for ($i= $count2; $i <= $date->format('Y') ; $i++) {
               $busquedas = \SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio',$condomine->id)->where('ano','=',$i)->get()->first();
-              $array[]=$busquedas->ano;
+              $array1[]=$busquedas->ano;
               
              }
 
-            $count1 = count($array);
+            $count1 = count($array1);
 
             $estado = \SIGRECOFERO\estado::all();
             ?>
             <select id="anoPagoAdmin" name="anoPagoAdmin" class="form-control" aria-placeholder="Seleccione el año a Pagar...">
               <option value="">seleccione</option>
-              @foreach($array as $a)
-              <option value="{{$a}}">{{$a}}</option>
+              @foreach($array1 as $a)
+              <option value="{{$a.'-'.$condomine->id}}">{{$a}}</option>
               @endforeach
-            </select>          
+            </select> 
+                    
           </div>
-          <div class="form-group">
+          
+        </div>
+
+        <?php
+        $arrayMes2 = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+      '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+      '11'=>'Noviembre','12'=>'Diciembre' );
+
+      $count3 = count($arrayMes2);
+      for ($i=1; $i <=$count3 ; $i++) { 
+        # code...
+        $parqueo2 = \SIGRECOFERO\estado::where('mes','=',$arrayMes2[$i])->where('ano','=',$date->format('Y'))->where('id_Condominio','=',$condomine->id)->where('concepto','=','Parqueo')->get()->first();
+        if (!$parqueo2) {
+          # code...
+        }else{
+          $parqueoArray[]= $parqueo2->id;
+        } 
+      }
+
+        ?>
+        
+        {!!Form::select('id2',$parqueoArray,null,['id'=>'id2[]','name'=>'id2','class'=>'hidden'])!!}
+        <div class="form-group" id="anoPagoAdmin1" style="display:none">
             <label>Selecione el Mes o Meses a Pagar: </label>
             <br>
             {!! Form::select('Mes[]',[],null,
             ['id'=>'MesAdmin','class'=>'form-control','multiple'=>'true'])!!}
             <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione los meses, dando clic en ellos</h6>
           </div>
-        </div>
 
         <div id="anoPagoParqueo" style="display:none">
             <div class="form-group">      
@@ -100,8 +122,8 @@
               $date = \Carbon\Carbon::now();
   
               $busqueda = \SIGRECOFERO\estado::where('concepto','=','Parqueo')->where('id_Condominio',$condomine->id)->where('ano','<=',$date->format('Y'))->get()->first();
-              $count = $busqueda->ano;
-              for ($i= $count; $i <= $date->format('Y') ; $i++) {
+              $count1 = $busqueda->ano;
+              for ($i= $count1; $i <= $date->format('Y') ; $i++) {
                 $busquedas = \SIGRECOFERO\estado::where('id_Condominio',$condomine->id)->where('ano','=',$i)->get()->first();
                 $array2[]=$busquedas->ano;
                }
@@ -112,18 +134,18 @@
               <select id="anoPagoParqueo" name="anoPagoParqueo" class="form-control" aria-placeholder="Seleccione el año a Pagar...">
                 <option value="">seleccione</option>
                 @foreach($array2 as $a)
-                <option value="{{$a}}">{{$a}}</option>
+                <option value="{{$a.'-'.$condomine->id}}">{{$a}}</option>
                 @endforeach
               </select>          
-            </div>
-            <div class="form-group">
+            </div>         
+          </div>
+          <div class="form-group" id="anoPagoParqueo1" style="display:none">
               <label>Selecione el Mes o Meses a Pagar: </label>
               <br>
               {!! Form::select('Mes[]',[],null,
               ['id'=>'MesParqueo','class'=>'form-control','multiple'=>'true'])!!}
               <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione los meses, dando clic en ellos</h6>
             </div>
-          </div>
             <!-- /.input group -->
             <!-- /.input group -->
           </div>

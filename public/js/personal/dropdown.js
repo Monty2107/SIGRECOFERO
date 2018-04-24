@@ -1,3 +1,16 @@
+$("#anoPagoParqueo").change(function(event){
+    $.get("/Personal/SIGRECOFERO/public/admin/mesesParqueo/"+event.target.value+"",function(response, anoPagoParqueo1){
+        console.log(response);
+        $('#MesParqueo').empty();
+        
+        for (i=0; i<response.length; i++) {
+            
+                $("#MesParqueo").append("<option value'"+response[i].mes+"'>"+response[i].mes+"</option>"); 
+            
+        }
+    });
+});
+
 $("#anoPagoAdmin").change(function(event){
     $.get("/Personal/SIGRECOFERO/public/admin/mesesAdmin/"+event.target.value+"",function(response, anoPagoAdmin1){
         // console.log(response);
@@ -9,16 +22,7 @@ $("#anoPagoAdmin").change(function(event){
     });
 });
 
-$("#anoPagoParqueo").change(function(event){
-    $.get("/Personal/SIGRECOFERO/public/admin/mesesParqueo/"+event.target.value+"",function(response, anoPagoAdmin1){
-        // console.log(response);
-        $('#MesAdmin').empty();
-        for (i=0; i<response.length; i++) {
-            $("#MesParqueo").append("<option value'"+response[i].mes+"'>"+response[i].mes+"</option>");
-            
-        }
-    });
-});
+
 
 // $('#anoPagoAdmin').on('change',function(e){
     

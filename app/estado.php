@@ -26,12 +26,16 @@ class estado extends Model
 
   public static function mesesAdmin($id){
 
-    return \SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('ano','=',$id)->where('estado','=',0)->get();
+    $val = explode("-",$id);
+
+    return \SIGRECOFERO\estado::where('id_Condominio','=',$val['1'])->where('concepto','=','Administrativo')->where('ano','=',$val['0'])->where('estado','=',0)->get();
   }
 
   public static function mesesParqueo($id){
 
-    return \SIGRECOFERO\estado::where('concepto','=','Parqueo')->where('ano','=',$id)->where('estado','=',0)->get();
+    $val = explode("-",$id);
+
+    return \SIGRECOFERO\estado::where('id_Condominio','=',$val['1'])->where('concepto','=','Parqueo')->where('ano','=',$val['0'])->where('estado','=',0)->get();
   }
 
 }

@@ -24,12 +24,16 @@
   function mostrar(dato){
       if(dato=="Administrativo"){
           document.getElementById("anoPagoParqueo").style.display = "none";
-          document.getElementById("anoPagoAdmin").style.display = "block";   
+          document.getElementById("anoPagoParqueo1").style.display = "none";
+          document.getElementById("anoPagoAdmin").style.display = "block";
+          document.getElementById("anoPagoAdmin1").style.display = "block";   
 
       }
       if(dato=="Parqueo"){
           document.getElementById("anoPagoAdmin").style.display = "none";
+          document.getElementById("anoPagoAdmin1").style.display = "none";
           document.getElementById("anoPagoParqueo").style.display = "block";
+          document.getElementById("anoPagoParqueo1").style.display = "block";
       }
 
   }

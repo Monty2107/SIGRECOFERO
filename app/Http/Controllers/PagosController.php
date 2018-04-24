@@ -22,7 +22,7 @@ class PagosController extends Controller
   }
 
   public function getMesesAdmin(Request $request, $id){
-
+    
     if($request->ajax()){
       $estado = estado::mesesAdmin($id);
       return response()->json($estado);
@@ -115,14 +115,17 @@ class PagosController extends Controller
 
         $count = count($request->Mes);
         if($request->anoPagoAdmin != 0){
-          $anoPago = $request->anoPagoAdmin;
+          $cambio = $request->anoPagoAdmin;
+          $anoPago = explode('-',$cambio);
         }else{
-          $anoPago = $request->anoPagoParqueo;
+          $cambio= $request->anoPagoParqueo;
+          $anoPago = explode('-',$cambio);
         }
         
         
+        
           for ($i=0; $i < $count ; $i++) {
-            $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano','=',$anoPago)->get()->first();
+            $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano','=',$anoPago['0'])->get()->first();
 
             $busqueda= $estado->id;
             
@@ -144,7 +147,7 @@ class PagosController extends Controller
           ]);
         $condomine = condominio::find($id);
         $concepto1 = $request->radioConcepto;
-        return view('admin.pago.update')->with('arrayMes1',$arrayMes1)->with('condomine', $condomine)->with('concepto1',$concepto1);
+        return view('admin.pago.update')->with('anoPago',$anoPago['0'])->with('arrayMes1',$arrayMes1)->with('condomine', $condomine)->with('concepto1',$concepto1);
 
       }else if($request->pagina == 2) {
         # code...

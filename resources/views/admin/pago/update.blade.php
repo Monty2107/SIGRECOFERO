@@ -23,19 +23,21 @@
         </div>
         <?php
 
-        // dd('llego');
+        // dd($arrayMes1);
         $countmes = count($arrayMes1);
         $date = \Carbon\Carbon::now();
-        $val = \SIGRECOFERO\estado::where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('mes','=',$arrayMes1[0])->get()->first();
+        $val = \SIGRECOFERO\estado::where('ano','=',$anoPago)->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('mes','=',$arrayMes1[0])->get()->first();
         $fecha = \SIGRECOFERO\fecha::find($val->id_Fecha);
           # code...
-          
+          // dd($fecha->id);
           for ($i=0; $i < $countmes ; $i++) {
             # code...
-            $meses = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get();
-            $concepto = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get()->first();
-            // dd($meses);
+            $meses = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('ano','=',$anoPago)->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get();
+            $concepto = \SIGRECOFERO\estado::where('mes','=',$arrayMes1[$i])->where('ano','=',$anoPago)->where('concepto','=',$concepto1)->where('id_Condominio',$condomine->id)->where('id_Fecha','=',$fecha->id)->get()->first();
+            
          ?>
+         
+
          @foreach ($meses as $as)
            <div class="form-group">
              <label> {{$as->mes}} :</label>
@@ -43,8 +45,8 @@
             <input type="hidden" name="mes[]" value="{{$as->mes}}">
            </div>
          @endforeach
-
-         <?php   } ?>
+         <?php   }    ?>
+         
       </div>
       <input type="hidden" name="pagina" value="2">
       <input type="hidden" name="radioConcepto" value="{{$concepto->concepto}}">
