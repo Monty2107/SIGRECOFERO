@@ -1,8 +1,12 @@
 <?php
 
 namespace SIGRECOFERO\Http\Controllers;
-
+use Session;
+use Redirect;
 use Illuminate\Http\Request;
+use SIGRECOFERO\condominio;
+use SIGRECOFERO\facturacion;
+use SIGRECOFERO\estado;
 
 class FacturacionController extends Controller
 {
@@ -13,7 +17,8 @@ class FacturacionController extends Controller
      */
     public function index()
     {
-        return view('admin.facturacion.create');
+        $condomine = condominio::with('estado')->get();
+        return view('admin.facturacion.create')->with('condomine', $condomine);
     }
 
     /**
@@ -45,7 +50,8 @@ class FacturacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $condominio = condominio::find($id);
+        return view('admin.facturacion.show')->with('condominio',$condominio);
     }
 
     /**

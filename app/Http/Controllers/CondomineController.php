@@ -50,6 +50,8 @@ class CondomineController extends Controller
     public function store(Request $request)
     {
       // dd($request->all());
+
+      // dd(empty($request->cantidadAdmin));
       $carbon = new \Carbon\Carbon();
       $date = $carbon->now();
       $empresa = empresa::create([
@@ -78,12 +80,67 @@ class CondomineController extends Controller
           'ano'=>$date->format('Y'),
         ]);
         $m = $date->format('m');
-        
         for ($i=$ano; $i <= $date->year ; $i++) {
           for ($k=1; $k <= $concepto ; $k++) {
             $l=$k-1;
           for ($j=1; $j <=$cantMes ; $j++) {
-            if ($arrayMes[$m+2] == $arrayMes[$j] && $ano == $date->year) {
+            if ($arrayMes[$m+1] == $arrayMes[$j] && $ano == $date->year) {
+              
+              $estado = estado::create([
+                'mes'=>$arrayMes[$j],
+                'ano'=>$ano,
+                'estado'=>false,
+                'concepto'=>$request->opciones[$l],
+                'id_Condominio'=>$empresa->id,
+                'id_Fecha'=>$fecha->id,
+                ]);
+                if ($request->opciones[$l] == 'Administrativo') {
+                  # code...
+                  if(empty($request->cantidadAdmin)){
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => 50,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }else{
+                    
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => $request->cantidadAdmin,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }
+                  
+                }else if($request->opciones[$l] == 'Parqueo'){
+                  if(empty($request->cantidadParqueo)){
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => 15,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }else{
+                    
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => $request->cantidadParqueo,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }
+                  
+                }
+
               $j=12;            
             }else{
              $estado = estado::create([
@@ -96,33 +153,49 @@ class CondomineController extends Controller
                 ]);
                 if ($request->opciones[$l] == 'Administrativo') {
                   # code...
-                  facturacion::create([
-                    'NFactura' => '',
-                    'concepto'=> $request->opciones[$l],
-                    'cantidad' => 50,
-                    'emision'=>'Emitido',
-                    'id_Fecha'=>$fecha->id,
-                    'id_Estado'=>$estado->id,
-                    ]);
+                  if(empty($request->cantidadAdmin)){
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => 50,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }else{
+                    
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => $request->cantidadAdmin,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }
+                  
                 }else if($request->opciones[$l] == 'Parqueo'){
-                  facturacion::create([
-                    'NFactura' => '',
-                    'concepto'=> $request->opciones[$l],
-                    'cantidad' => 15,
-                    'emision'=>'Emitido',
-                    'id_Fecha'=>$fecha->id,
-                    'id_Estado'=>$estado->id,
-                    ]);
-                }else{
-                  facturacion::create([
-                    'NFactura' => '',
-                    'concepto'=> $request->opciones[$l],
-                    'cantidad' => 0,
-                    'emision'=>'Emitido',
-                    'id_Fecha'=>$fecha->id,
-                    'id_Estado'=>$estado->id,
-                    ]);
-                }                  
+                  if(empty($request->cantidadParqueo)){
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => 15,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }else{
+                    facturacion::create([
+                      'NFactura' => '',
+                      'concepto'=> $request->opciones[$l],
+                      'cantidad' => $request->cantidadParqueo,
+                      'emision'=>'Emitido',
+                      'id_Fecha'=>$fecha->id,
+                      'id_Estado'=>$estado->id,
+                      ]);
+                  }
+                  
+                }                
             }
             
         }
@@ -183,6 +256,16 @@ class CondomineController extends Controller
       $condominio->codigo = $request->codigo;
       $condominio->NLocal = $request->NLocal;
       $condominio->save();
+
+      $estadoAdmin= estado::where('id_Condominio','=',$id)->where('concepto','=','Administrativo')->get()->last();
+      $facturacionAdmin = facturacion::where('id_Estado','=',$estadoAdmin->id)->get()->last();
+      $facturacionAdmin->cantidad = $request->cantidadAdmin;
+      $facturacionAdmin->save();
+
+      $estadoParqueo= estado::where('id_Condominio','=',$id)->where('concepto','=','Parqueo')->get()->last();
+      $facturacionParqueo = facturacion::where('id_Estado','=',$estadoParqueo->id)->get()->last();
+      $facturacionParqueo->cantidad = $request->cantidadParqueo;
+      $facturacionParqueo->save();
 
       Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');

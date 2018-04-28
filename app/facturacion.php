@@ -9,7 +9,7 @@ class facturacion extends Model
   protected $table = 'facturacions';
 
   protected $fillable =[
-    'NFactura','concepto','cantidad','id_Fecha','id_Estado'
+    'NFactura','concepto','cantidad','emision','id_Fecha','id_Estado'
   ];
 
   public function fecha(){
@@ -17,7 +17,7 @@ class facturacion extends Model
   }
 
   public function estado(){
-    return $this->hasMany('\SIGRECOFERO\estados', 'id_Estado');
+    return $this->hasMany('\SIGRECOFERO\estado', 'id');
   }
   public function factura_anulada(){
     return $this->belongsTo('\SIGRECOFERO\factura_anuladas', 'id_Anular');

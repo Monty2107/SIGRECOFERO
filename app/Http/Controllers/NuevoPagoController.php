@@ -84,13 +84,14 @@ class NuevoPagoController extends Controller
 
         $mI= $request->anoI;
         $mF= $request->anoF;
+        
         $fecha_detI= explode("-",$mI);
         $fecha_detF= explode("-",$mF);
-        $validacion = $fecha_detF[0].$fecha_detF[1];
+        $validacion = $fecha_detF[0].(($fecha_detF[1]+1)-1);
+        $validacion1 = $fecha_detF[0].$fecha_detF[1];
         $mesI = ($fecha_detI[1]+1)-1;
         $mesF = ($fecha_detF[1]+1)-1;
         $valI = $mesI;
-        
 
         $fecha = fecha::create([
             'dia'=>$date->format('d'),
@@ -104,61 +105,103 @@ class NuevoPagoController extends Controller
 
       for ($i=$fecha_detI[0]; $i <=$fecha_detF[0]  ; $i++) { 
           # code...
-          if($valI != 12){
-              
+            
             for ($j=$mesI; $j <= 12 ; $j++) { 
-                # code...
-                if ($i.$j != $validacion || $i.$j == $validacion) {
-                    # code...
-                    $estado = estado::create([
-                      'mes'=>$arrayMes[$j],
-                      'ano'=>$i,
-                      'estado'=>false,
-                      'concepto'=>'Otros',
-                      'descripcion'=>$request->descripcion,
-                      'id_Condominio'=>$id,
-                      'id_Fecha'=>$fecha->id,
-                      ]);
-      
-                      facturacion::create([
-                          'NFactura' => '',
-                          'concepto'=> 'Otros',
-                          'cantidad' => $request->cantidad,
-                          'emision'=>'No Emitido',
+                # code...  
+                if($j ==12 || $j==11 || $j==10 ){
+                    
+                    if ($i.$j < $validacion1 ) {                
+                        # code...            
+                        $estado = estado::create([
+                          'mes'=>$arrayMes[$j],
+                          'ano'=>$i,
+                          'estado'=>false,
+                          'concepto'=>'Otros',
+                          'descripcion'=>$request->descripcion,
+                          'id_Condominio'=>$id,
                           'id_Fecha'=>$fecha->id,
-                          'id_Estado'=>$estado->id,
                           ]);
+          
+                          facturacion::create([
+                              'NFactura' => '',
+                              'concepto'=> 'Otros',
+                              'cantidad' => $request->cantidad,
+                              'emision'=>'Emitido',
+                              'id_Fecha'=>$fecha->id,
+                              'id_Estado'=>$estado->id,
+                              ]);
+                    }else if( $i.$j == $validacion){
+                        $estado = estado::create([
+                            'mes'=>$arrayMes[$j],
+                            'ano'=>$i,
+                            'estado'=>false,
+                            'concepto'=>'Otros',
+                            'descripcion'=>$request->descripcion,
+                            'id_Condominio'=>$id,
+                            'id_Fecha'=>$fecha->id,
+                            ]);
+            
+                            facturacion::create([
+                                'NFactura' => '',
+                                'concepto'=> 'Otros',
+                                'cantidad' => $request->cantidad,
+                                'emision'=>'No Emitido',
+                                'id_Fecha'=>$fecha->id,
+                                'id_Estado'=>$estado->id,
+                                ]);
+                    } 
+                    if($j==12){
+                        $mesI=1;
+                    }
+                }else{
+                    if ($i.$j < $validacion ) {
+                   
+                        # code...            
+                        $estado = estado::create([
+                          'mes'=>$arrayMes[$j],
+                          'ano'=>$i,
+                          'estado'=>false,
+                          'concepto'=>'Otros',
+                          'descripcion'=>$request->descripcion,
+                          'id_Condominio'=>$id,
+                          'id_Fecha'=>$fecha->id,
+                          ]);
+          
+                          facturacion::create([
+                              'NFactura' => '',
+                              'concepto'=> 'Otros',
+                              'cantidad' => $request->cantidad,
+                              'emision'=>'Emitido',
+                              'id_Fecha'=>$fecha->id,
+                              'id_Estado'=>$estado->id,
+                              ]);
+                    }else if($i.$j == $validacion){
+                        $estado = estado::create([
+                            'mes'=>$arrayMes[$j],
+                            'ano'=>$i,
+                            'estado'=>false,
+                            'concepto'=>'Otros',
+                            'descripcion'=>$request->descripcion,
+                            'id_Condominio'=>$id,
+                            'id_Fecha'=>$fecha->id,
+                            ]);
+            
+                            facturacion::create([
+                                'NFactura' => '',
+                                'concepto'=> 'Otros',
+                                'cantidad' => $request->cantidad,
+                                'emision'=>'No Emitido',
+                                'id_Fecha'=>$fecha->id,
+                                'id_Estado'=>$estado->id,
+                                ]);
+                    }
+                    
+                    
                 }  
-            }
-          }else{
-            if ($i.$valI != $validacion || $i.$valI == $validacion) {
-                # code...
-                $estado = estado::create([
-                  'mes'=>$arrayMes[12],
-                  'ano'=>$i,
-                  'estado'=>false,
-                  'concepto'=>'Otros',
-                  'descripcion'=>$request->descripcion,
-                  'id_Condominio'=>$id,
-                  'id_Fecha'=>$fecha->id,
-                  ]);
-  
-                  facturacion::create([
-                      'NFactura' => '',
-                      'concepto'=> 'Otros',
-                      'cantidad' => $request->cantidad,
-                      'emision'=>'No Emitido',
-                      'id_Fecha'=>$fecha->id,
-                      'id_Estado'=>$estado->id,
-                      ]);
-            } 
-            $mesI = 1;
-            $valI = $mesI;
-          }
-          
-          
+                 
+               
+            }                         
       }
-
 
     $empresa = empresa::find($id);
 

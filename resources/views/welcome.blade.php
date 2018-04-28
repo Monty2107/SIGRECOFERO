@@ -233,7 +233,7 @@
       </div>
       @endif
       @yield('content')
-      <label class="label-warning">Ultima Actualizacion: 21/Abril/2018</label><br>
+      <label class="label-warning">Ultima Actualizacion: 28/Abril/2018</label><br>
       <center>
         <label>LOGO DEL SISTEMA.
         </label><br>
@@ -241,21 +241,26 @@
 
       <label class="label-success">
         MODULOS Y ACCIONES YA PROGRAMADAS, Y ACTUALIZADAS.<br><br>
-        1- Modulo de Condominio <br>
-          1.1 Registrar Codominio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.2 Buscar Condominio <br>
-          1.3 Ver Condominio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          1.4 Modificar Condomine<br>
+        <span style="color:black"> 1- Modulo de Condominio</span> <br>
+          1.1 Registrar Codominio(Pantalla arreglada)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.2 Buscar Condominio <br>
+          1.3 Ver Condominio<br>
+          1.4 Modificar Condomine(Modiciacion de pagos a futuros recibos)(Pamtalla arreglada)<br>
           1.5 Eliminar Condominio <br>
           1.6 Generador de Pagos desde años antiguos hasta la actualidad<br>
           1.7 Agregar nuevos pagos, no comunes como lo son administrativo y parque.<br><br>
-        2- Modulo de pago diario <br>
+          <span style="color:black"> 2- Modulo de pago diario</span> <br>
           2.1 Buscar Condomine para pago&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           2.2 Realizar pago de varios meses<br>
           2.2 Historial de pagos
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
           2.3 Realizar pago de un mes, Viendo el historial
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Modificacion de Validaciones a la hora de pagos, y seleccion de Meses
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+          2.4 Agregar nuevos pagos, no comunes como lo son administrativo y parque.<br>
+          Modificacion de Validaciones a la hora de pagos, y seleccion de Meses<br><br>
+          <span style="color:black">3- Modulo de Facturacion</span> <br>
+          3.1 Buscar Condomine para Facturacion(Emision de factura)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <br>
+          Esta en Proceso de arreglo el modulo de facturacion, pendientes para la proxima actualizacion.
       </label>
       </center>
       <br><br>

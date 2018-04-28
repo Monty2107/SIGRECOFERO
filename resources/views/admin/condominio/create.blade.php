@@ -73,12 +73,22 @@
               {!! Form::text('codigo',null,['class'=>'form-control','placeholder'=>'Codigo']) !!}
             </div>
             <div class="form-group">
-              <label >N° de Local: </label>
+              <label >N° de Local a Emitir la Factura: </label>
               {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
             </div>
             <div class="form-group">
+                <label >Cantidad a Pagar en Factura Administrativa: </label>
+                {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$']) !!}
+                <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $50 </h6>
+              </div>
+              <div class="form-group">
+                  <label >Cantidad a Pagar en Factura Parqueo: </label>
+                  {!! Form::number('cantidadParqueo',null,['name'=>'cantidadParqueo','id'=>'cantidadParqueo','class'=>'form-control','placeholder'=>'$$']) !!}
+                  <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $15</h6>
+                </div>
+            <div class="form-group">
               <label >Año De Iniciacion de Facturacion: </label>
-              {!! Form::text('facturacion',null,['name'=>'facturacion','id'=>'facturacion','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
+              {!! Form::text('facturacion',null,['name'=>'facturacion','id'=>'facturacion','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}']) !!}
             </div>
 
               <!-- /.input group -->

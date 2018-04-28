@@ -59,7 +59,10 @@
             <label >Cantidad: </label>
             {!! Form::text('cantidad',null,['name'=>'cantidad','id'=>'cantidad','class'=>'form-control','placeholder'=>'$$']) !!}
           </div >
+
+         
           <div id="anoPagoAdmin" style="display:none">
+              @if(!is_null($admin))
           <div class="form-group">      
             <label >En Que Año Va A Pagar: </label>
             <?php
@@ -85,28 +88,10 @@
             </select> 
                     
           </div>
-          
+          @endif
         </div>
-
-        <?php
-        $arrayMes2 = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
-      '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
-      '11'=>'Noviembre','12'=>'Diciembre' );
-
-      $count3 = count($arrayMes2);
-      for ($i=1; $i <=$count3 ; $i++) { 
-        # code...
-        $parqueo2 = \SIGRECOFERO\estado::where('mes','=',$arrayMes2[$i])->where('ano','=',$date->format('Y'))->where('id_Condominio','=',$condomine->id)->where('concepto','=','Parqueo')->get()->first();
-        if (!$parqueo2) {
-          # code...
-        }else{
-          $parqueoArray[]= $parqueo2->id;
-        } 
-      }
-
-        ?>
         
-        {!!Form::select('id2',$parqueoArray,null,['id'=>'id2[]','name'=>'id2','class'=>'hidden'])!!}
+
         <div class="form-group" id="anoPagoAdmin1" style="display:none">
             <label>Selecione el Mes o Meses a Pagar: </label>
             <br>
@@ -115,7 +100,9 @@
             <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione los meses, dando clic en ellos</h6>
           </div>
 
+          
         <div id="anoPagoParqueo" style="display:none">
+            @if(!is_null($parqueo))
             <div class="form-group">      
               <label >En Que Año Va A Pagar: </label>
               <?php
@@ -137,8 +124,11 @@
                 <option value="{{$a.'-'.$condomine->id}}">{{$a}}</option>
                 @endforeach
               </select>          
-            </div>         
+            </div> 
+            @endif        
           </div>
+         
+
           <div class="form-group" id="anoPagoParqueo1" style="display:none">
               <label>Selecione el Mes o Meses a Pagar: </label>
               <br>

@@ -17,7 +17,7 @@ class PagosController extends Controller
 {
 
   public function buscar(){
-    $condominiobusqueda = condominio::with('empresa')->orderBy('id')->get();
+    $condominiobusqueda = condominio::with('empresa')->get();
     return view('admin.pago.buscar')->with('condominiobusqueda',$condominiobusqueda);
   }
 
