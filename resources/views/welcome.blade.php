@@ -233,7 +233,7 @@
       </div>
       @endif
       @yield('content')
-      <label class="label-warning">Ultima Actualizacion: 28/Abril/2018</label><br>
+      <label class="label-warning">Ultima Actualizacion: 01/Mayo/2018</label><br>
       <center>
         <label>LOGO DEL SISTEMA.
         </label><br>
@@ -244,7 +244,7 @@
         <span style="color:black"> 1- Modulo de Condominio</span> <br>
           1.1 Registrar Codominio(Pantalla arreglada)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.2 Buscar Condominio <br>
           1.3 Ver Condominio<br>
-          1.4 Modificar Condomine(Modiciacion de pagos a futuros recibos)(Pamtalla arreglada)<br>
+          1.4 Modificar Condomine(Modificacion de pagos a futuros recibos)(Pantalla arreglada)<br>
           1.5 Eliminar Condominio <br>
           1.6 Generador de Pagos desde años antiguos hasta la actualidad<br>
           1.7 Agregar nuevos pagos, no comunes como lo son administrativo y parque.<br><br>
@@ -260,7 +260,11 @@
           <span style="color:black">3- Modulo de Facturacion</span> <br>
           3.1 Buscar Condomine para Facturacion(Emision de factura)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <br>
-          Esta en Proceso de arreglo el modulo de facturacion, pendientes para la proxima actualizacion.
+          3.2 Modificar Datos antes de Facturar.<br>
+          3.4 Ver Facturacion de ultimo mes emitida con datos correspondientes<br>
+          3.5 Seleccion de Recibos a emitir, y mostrar datos correspondientes.<br>
+          Esta en Proceso de arreglo el modulo de facturacion, y creacion de la factura para su impresion <br>
+          , pendientes para la proxima actualizacion.
       </label>
       </center>
       <br><br>

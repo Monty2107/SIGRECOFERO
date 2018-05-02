@@ -59,6 +59,35 @@
   }
   </script>
   <script>
+      function mostrarTabla2(dato){
+          if(dato=="Administrativo"){ 
+            document.getElementById("btnOtros").style.display = "none"        
+            document.getElementById("btnParqueo").style.display = "none"
+            document.getElementById("tablaParqueo").style.display = "none";
+            document.getElementById("tablaOtros").style.display = "none";
+            document.getElementById("btnAdmin").style.display = "block";
+            document.getElementById("tablaAdmin").style.display = "block";
+          }
+          if(dato=="Parqueo"){
+            document.getElementById("btnOtros").style.display = "none"
+            document.getElementById("btnAdmin").style.display = "none";
+            document.getElementById("tablaAdmin").style.display = "none";
+            document.getElementById("tablaOtros").style.display = "none";
+            document.getElementById("btnParqueo").style.display = "block"
+            document.getElementById("tablaParqueo").style.display = "block";
+    
+          }
+          if(dato=="Otros"){
+            document.getElementById("btnParqueo").style.display = "none"
+            document.getElementById("btnAdmin").style.display = "none";
+            document.getElementById("tablaAdmin").style.display = "none";
+            document.getElementById("tablaParqueo").style.display = "none";
+            document.getElementById("btnOtros").style.display = "block"
+            document.getElementById("tablaOtros").style.display = "block";
+          }
+      }
+      </script>
+  <script>
   function mostrarC(dato){
       if(dato=="Efectivo"){
           document.getElementById("NCheque").style.display = "none";

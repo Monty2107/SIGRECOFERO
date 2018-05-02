@@ -23,6 +23,8 @@ class CreateFacturacionsTable extends Migration
             $table->foreign('id_Fecha')->references('id')->on('fechas');
             $table->integer('id_Estado')->unsigned();
             $table->foreign('id_Estado')->references('id')->on('estados');
+            $table->integer('id_Condominio')->unsigned();
+            $table->foreign('id_Condominio')->references('id')->on('condominios');
             $table->timestamps();
         });
     }

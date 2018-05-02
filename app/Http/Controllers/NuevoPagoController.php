@@ -174,6 +174,7 @@ class NuevoPagoController extends Controller
                               'emision'=>'Emitido',
                               'id_Fecha'=>$fecha->id,
                               'id_Estado'=>$estado->id,
+                              'id_Condominio'=>$id,
                               ]);
                     }else if($i.$j == $validacion){
                         $estado = estado::create([
@@ -193,6 +194,7 @@ class NuevoPagoController extends Controller
                                 'emision'=>'No Emitido',
                                 'id_Fecha'=>$fecha->id,
                                 'id_Estado'=>$estado->id,
+                                'id_Condominio'=>$id,
                                 ]);
                     }
                     
