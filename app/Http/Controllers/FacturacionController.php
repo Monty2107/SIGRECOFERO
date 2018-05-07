@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\estado;
+use PDF;
 
 class FacturacionController extends Controller
 {
@@ -26,9 +27,28 @@ class FacturacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
-        //
+        $facturas = facturacion::where('emision','=','No Emitido')->get();
+        // dd($facturas);
+        $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
+        return $pdf->stream();
+    }
+    public function create2()
+    {
+        $facturas = facturacion::where('emision','=','No Emitido')->get();
+        // dd($facturas);
+        $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
+        return $pdf->stream();
+    }
+
+    public function create3()
+    {
+        $facturas = facturacion::where('emision','=','No Emitido')->get();
+        // dd($facturas);
+        $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
+        return $pdf->stream();
     }
 
     /**

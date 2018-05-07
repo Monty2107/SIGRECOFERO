@@ -240,9 +240,16 @@ class CondomineController extends Controller
      */
     public function edit($id)
     {
-        // dd('estoy en el edit');
-        $condomine = condominio::find($id);
+      $idE = explode('-',$id);
+      if ($idE[1]==2) {
+        # code...
+        $condomine = condominio::find($id[0]);
+        return view('admin.facturacion.edit')->with('condomine',$condomine);
+      }else{
+        $condomine = condominio::find($id[0]);
         return view('admin.condominio.edit')->with('condomine',$condomine);
+      }
+        
     }
 
     /**
@@ -267,7 +274,7 @@ class CondomineController extends Controller
       $condominio->save();
 
       if(!empty($request->cantidadAdmin)){
-      $estadoAdmin= estado::where('id_Condominio','=',$id)->where('concepto','=','Administrativo')->get()->first();
+      $estadoAdmin= estado::where('id_Condominio','=',$id)->where('concepto','=','Administrativo')->get()->last();
       $facturacionAdmin = facturacion::where('id_Estado','=',$estadoAdmin->id)->where('emision','=','No Emitido')->get()->last();
       $facturacionAdmin->cantidad = $request->cantidadAdmin;
       $facturacionAdmin->save();
@@ -275,18 +282,24 @@ class CondomineController extends Controller
       
       if (!empty($request->cantidadParqueo)) {
         # code...
-        $estadoParqueo= estado::where('id_Condominio','=',$id)->where('concepto','=','Parqueo')->get()->first();
+        $estadoParqueo= estado::where('id_Condominio','=',$id)->where('concepto','=','Parqueo')->get()->last();
         $facturacionParqueo = facturacion::where('id_Estado','=',$estadoParqueo->id)->where('emision','=','No Emitido')->get()->last();
         $facturacionParqueo->cantidad = $request->cantidadParqueo;
         $facturacionParqueo->save();
       }
 
-     
-
+     if ($request->factura == 2) {
+       # code...
+       Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
+      .$condominio->NLocal.' Fue Modificado Correctamente!!');
+      // return redirect()->back();
+      return redirect('/admin/facturacion');
+     }else{
       Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');
       // return redirect()->back();
       return redirect('/admin/buscar');
+     }   
     }
 
     /**

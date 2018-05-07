@@ -19,6 +19,10 @@ Route::get('/tabla', function () {
     return view('tabla');
 });
 
+Route::get('/conversor', function () {
+    return view('letrasNumeros');
+});
+
 Route::group(['prefix' => 'admin'],function(){
 
   // Rutas condomine
@@ -29,6 +33,8 @@ Route::group(['prefix' => 'admin'],function(){
   Route::resource('pago','PagosController');
   Route::resource('pagoMes','PagoMesController');
   Route::resource('facturacion','FacturacionController');
+  Route::resource('facturacionAdmin','FacturacionController@create2');
+  Route::resource('facturacionParqueo','FacturacionController@create3');
   Route::resource('nuevopago','NuevoPagoController');
   Route::resource('buscarCondomine','PagosController@buscar');
 

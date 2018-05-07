@@ -80,7 +80,7 @@
 
             $estado = \SIGRECOFERO\estado::all();
             ?>
-            <select id="anoPagoAdmin" name="anoPagoAdmin" class="form-control" aria-placeholder="Seleccione el año a Pagar...">
+            <select id="anoPagoAdmin" name="anoPagoAdmin" class="form-control">
               <option value="">seleccione</option>
               @foreach($array1 as $a)
               <option value="{{$a.'-'.$condomine->id}}">{{$a}}</option>

@@ -52,23 +52,23 @@
     </div>
       <div class="box-body">
         <div class="form-group">
-          {!! Form::submit('Imprimir Todas las Facturas',['class'=>'form-control btn btn-success'])!!}
+        <a class="form-control btn btn-success" href="{{asset('admin/facturacion/create')}}" target="_blank">Imprimir Todas las Facturas</a>
           <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
             facturas no emitidas con los datos que contengan la base en estos momentos.
             (solo imprimira Administrativa y de Parqueo) </h6>
          </div>
          <div class="form-group" id="btnAdmin" style="display:none;">
-            {!! Form::submit('Imprimir Todas las Facturas Administrativas',['class'=>'form-control btn btn-warning'])!!}
+            <a class="form-control btn btn-warning" href="{{asset('admin/facturacionAdmin')}}" target="_blank" >Imprimir Todas las Facturas Administrativas</a>
             <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
               facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
            </div>
            <div class="form-group" id="btnParqueo" style="display:none;">
-              {!! Form::submit('Imprimir Todas las Facturas de Parqueo',['class'=>'form-control btn btn-warning'])!!}
+              <a class="form-control btn btn-warning" href="{{asset('admin/facturacionParqueo')}}" target="_blank">Imprimir Todas las Facturas de Parqueo</a>
               <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
                 facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
              </div>
              <div class="form-group" id="btnOtros" style="display:none;">
-                {!! Form::submit('Imprimir Todas las Facturas de Otros Pagos',['class'=>'form-control btn btn-warning'])!!}
+                <a class="form-control btn btn-warning">Imprimir Todas las Facturas de Otros Pagos</a>
                 <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
                   facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
                </div>
@@ -77,8 +77,10 @@
 </div>
 </div>
 
+<input type="hidden" value="2" id="pagina" name="pagina">
+
 <div class="table-responsive" id="tablaAdmin" style="display:none;">
-  <table id="example" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+  <table id="fact" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
       <thead>
           <tr>
               <th width="50px">N°</th>
@@ -104,7 +106,7 @@
               <td align="center">$ {{$facturacion->cantidad}}</td>
               <td width="250px">
                 <a class="btn btn-success btn-rounded" href="{{route('facturacion.show',$c->id)}}">Ver Facturacion</a>
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id)}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
               </td>
               @endif
           </tr>
@@ -140,7 +142,7 @@
               <td align="center">$ {{$facturacion->cantidad}}</td>
               <td width="250px">
                 <a class="btn btn-success btn-rounded" href="{{route('facturacion.show',$c->id)}}">Ver Facturacion</a>
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id)}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
               </td>
               @endif
           </tr>
@@ -176,7 +178,7 @@
               <td align="center">$ {{$facturacion->cantidad}}</td>
               <td width="250px">
                 <a class="btn btn-success btn-rounded" href="{{route('facturacion.show',$c->id)}}">Ver Facturacion</a>
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id)}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
               </td>
               @endif
           </tr>

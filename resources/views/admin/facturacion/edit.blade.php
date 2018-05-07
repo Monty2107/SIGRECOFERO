@@ -31,7 +31,7 @@
         
         // $cont = SIGRECOFERO\empresa::where('id',$condomine->id)->get()->first();
          ?>
-
+         <input type="hidden" name="factura" id="factura" value="2">
           <div class="box-body">
             <div class="form-group">
               <label>Nombre del Encargado: </label>
@@ -66,12 +66,12 @@
             </div>
             <div class="form-group">
           <label >Cantidad a Pagar en Factura Administracion: </label>
-          {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
+          {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$','pattern'=>'[0-9]']) !!}
           <h6>Este Cambio Se Vera Afectado En El Siguiente Recibo Que Emita</h6>
         </div>
         <div class="form-group">
             <label >Cantidad a Pagar en Factura Parque: </label>
-            {!! Form::number('cantidadParqueo',null,['name'=>'cantidadParqueo','id'=>'cantidadParqueo','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
+            {!! Form::number('cantidadParqueo',null,['name'=>'cantidadParqueo','id'=>'cantidadParqueo','class'=>'form-control','placeholder'=>'$$$','pattern'=>'[0-9]']) !!}
             <h6>Este Cambio Se Vera Afectado En El Siguiente Recibo Que Emita</h6>
           </div>
           

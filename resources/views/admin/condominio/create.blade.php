@@ -78,12 +78,12 @@
             </div>
             <div class="form-group">
                 <label >Cantidad a Pagar en Factura Administrativa: </label>
-                {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$']) !!}
+                {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
                 <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $50 </h6>
               </div>
               <div class="form-group">
                   <label >Cantidad a Pagar en Factura Parqueo: </label>
-                  {!! Form::number('cantidadParqueo',null,['name'=>'cantidadParqueo','id'=>'cantidadParqueo','class'=>'form-control','placeholder'=>'$$']) !!}
+                  {!! Form::number('cantidadParqueo',null,['name'=>'cantidadParqueo','id'=>'cantidadParqueo','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
                   <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $15</h6>
                 </div>
             <div class="form-group">
