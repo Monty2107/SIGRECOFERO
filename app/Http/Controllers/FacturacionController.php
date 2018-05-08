@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\estado;
+use SIGRECOFERO\empresa;
 use PDF;
 
 class FacturacionController extends Controller
@@ -31,13 +32,15 @@ class FacturacionController extends Controller
     public function create()
     {
         $facturas = facturacion::where('emision','=','No Emitido')->get();
-        // dd($facturas);
+        $empresas = empresa::all();
+        $count = count($empresas);
+
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
         return $pdf->stream();
     }
     public function create2()
     {
-        $facturas = facturacion::where('emision','=','No Emitido')->get();
+        $facturas = facturacion::where('concepto','=','Administrativo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         return $pdf->stream();
@@ -45,9 +48,17 @@ class FacturacionController extends Controller
 
     public function create3()
     {
-        $facturas = facturacion::where('emision','=','No Emitido')->get();
+        $facturas = facturacion::where('concepto','=','Parqueo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
+        return $pdf->stream();
+    }
+
+    public function create4()
+    {
+        $facturas = facturacion::where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
+        // dd($facturas);
+        $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
         return $pdf->stream();
     }
 

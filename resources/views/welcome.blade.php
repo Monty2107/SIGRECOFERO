@@ -233,7 +233,7 @@
       </div>
       @endif
       @yield('content')
-      <label class="label-warning">Ultima Actualizacion: 01/Mayo/2018</label><br>
+      <label class="label-warning">Ultima Actualizacion: 07/Mayo/2018</label><br>
       <center>
         <label>LOGO DEL SISTEMA.
         </label><br>
@@ -261,8 +261,11 @@
           3.1 Buscar Condomine para Facturacion(Emision de factura)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <br>
           3.2 Modificar Datos antes de Facturar.<br>
-          3.4 Ver Facturacion de ultimo mes emitida con datos correspondientes<br>
-          3.5 Seleccion de Recibos a emitir, y mostrar datos correspondientes.<br>
+          3.3 Ver Facturacion de ultimo mes emitida con datos correspondientes<br>
+          3.4 Seleccion de Recibos a emitir, y mostrar datos correspondientes.<br>
+          3.5 Generacion de Facturas, Dependiendo del concepto, o global<br>
+          3.6 Impresion de Facturas con el formato dado por la empresa.<br>
+          3.7 Aceptacion o aprobacion de Facturacion.<br> 
           Esta en Proceso de arreglo el modulo de facturacion, y creacion de la factura para su impresion <br>
           , pendientes para la proxima actualizacion.
       </label>

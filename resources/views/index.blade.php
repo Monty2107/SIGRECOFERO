@@ -14,7 +14,6 @@
       display: block;
       z-index: 1;
     }
-
     .example-modal .modal {
       background: transparent !important;
     }
@@ -27,7 +26,6 @@
           document.getElementById("anoPagoParqueo1").style.display = "none";
           document.getElementById("anoPagoAdmin").style.display = "block";
           document.getElementById("anoPagoAdmin1").style.display = "block";   
-
       }
       if(dato=="Parqueo"){
           document.getElementById("anoPagoAdmin").style.display = "none";
@@ -35,7 +33,6 @@
           document.getElementById("anoPagoParqueo").style.display = "block";
           document.getElementById("anoPagoParqueo1").style.display = "block";
       }
-
   }
   </script>
   <script>
@@ -49,7 +46,6 @@
         document.getElementById("tablaAdmin").style.display = "none";
         document.getElementById("tablaOtros").style.display = "none";
         document.getElementById("tablaParqueo").style.display = "block";
-
       }
       if(dato=="Otros"){
         document.getElementById("tablaAdmin").style.display = "none";

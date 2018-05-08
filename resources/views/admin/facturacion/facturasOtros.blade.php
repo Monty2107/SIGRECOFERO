@@ -97,10 +97,9 @@
        
 
         <div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
-        <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
         <div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
-            
-       <?php 
+        <?php 
         }
     }else if($f->id_Condominio % 2 == '0' && $r=='1'){
         if(!is_null($nombre)){
@@ -113,10 +112,9 @@
                
         
         <div style="position: absolute;left: 170px; top: {{'650'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
-        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
         <div style="position: absolute;left: 350px; top: {{'700'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
-            
-       </div>
+      </div>
     </div>
 
           </body>
@@ -134,10 +132,9 @@
                
         
         <div style="position: absolute;left: 170px; top: {{'650'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
-        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
         <div style="position: absolute;left: 350px; top: {{'700'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
-            
-       </div>
+      </div>
     </div>
 
           </body>
@@ -154,7 +151,7 @@
            
     
             <div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
-            <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+            <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
             <div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
             
         <?php }

@@ -73,53 +73,92 @@
     }
   </style>
 </head>
-@foreach($facturas as $f)
-<?php 
-if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '1'){
-?>
+<?php  $r='0'; ?>
 <body> 
+    @foreach($facturas as $f)
         <div class="col-md-12">
                 <div class="box-header with-border">
+                        
 <?php 
         
         $letras = NumeroALetras::convertir($f->cantidad, 'dolares', 'centavos');
         $nombre = \SIGRECOFERO\empresa::find($f->id_Condominio);
-
-        $n = $f->increment('id_Condominio');
-        $f2 = \SIGRECOFERO\facturacion::where('concepto','=','Parqueo')->where('emision','=','No Emitido')->where('id_Condominio','=',$f->id_Condominio)->get()->last();
-        $n = $f->decrement('id_Condominio');
-        
-        $letras2 = NumeroALetras::convertir($f2->cantidad, 'dolares', 'centavos');
-        $nombre2 = \SIGRECOFERO\empresa::find($f2->id_Condominio);
+        $mes = \SIGRECOFERO\estado::find($f->id_Estado);  
+        $local = \SIGRECOFERO\condominio::find($f->id_Condominio);      
         ?>            
         <?php 
-        if(!is_null($nombre) && $f->concepto == 'Parqueo'){
+        if($f->id_Condominio % 2 == '1' && $r=='0'){
+        if(!is_null($nombre)){
+            $r='1';
         ?>
         <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+        <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
         <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
        
 
         <div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
-        <div style="position: absolute;left: 150px; top: {{'200'}}px; z-index: 1;"><h4>{{'CUOTA ADMINISTRATIVA DEL MES DE: '.$f->mes}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE PARQUEO CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO: '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
         <?php 
         }
-        if(!is_null($nombre2) && $f->concepto == 'Parqueo'){
+    }else if($f->id_Condominio % 2 == '0' && $r=='1'){
+        if(!is_null($nombre)){
+            $r='0';
         ?>  
                
-        <div style="position: absolute;left: 650px; top: 550px; z-index: 1;"><h1>{{$f2->cantidad}}</h1></div>
-        <div style="position: absolute;left: 175px; top: 600px; z-index: 1;"><h3>{{$nombre2->nombre}}.</h3></div>
+        <div style="position: absolute;left: 650px; top: 550px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+        <div style="position: absolute;left: 175px; top: 580px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+        <div style="position: absolute;left: 175px; top: 600px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
                
         
-        <div style="position: absolute;left: 170px; top: {{'650'}}px; z-index: 1;"><h4>{{$letras2}}.</h4></div>
-        <div style="position: absolute;left: 150px; top: {{'700'}}px; z-index: 1;"><h4>{{'CUOTA ADMINISTRATIVA'}}.</h4></div>
-        <?php } ?>
+        <div style="position: absolute;left: 170px; top: {{'650'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE PARQUEO CORRESPONDIENTE AL MES DE : '.$mes->mes.' DEL AÑO: '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 350px; top: {{'700'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+      </div>
+    </div>
+      </body>
+      <body> 
+        <?php }
+        }else if($f->id_Condominio % 2 == '1' && $r=='1'){
+            if(!is_null($nombre)){
+            $r='0';
+             ?>
+
+        <div style="position: absolute;left: 650px; top: 550px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+        <div style="position: absolute;left: 175px; top: 580px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+        <div style="position: absolute;left: 175px; top: 600px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+               
+        
+        <div style="position: absolute;left: 170px; top: {{'650'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'690'}}px; z-index: 1;"><h4>{{'CUOTA DE PARQUEO CORRESPONDIENTE AL MES DE : '.$mes->mes.' DEL AÑO: '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 350px; top: {{'700'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+      </div>
+    </div>
+      </body>
+      <body>
+        
+        <?php }
+        }else if($f->id_Condominio % 2 == '0' && $r=='0'){ 
+            if(!is_null($nombre)){
+            $r='1';
+            ?>
+            <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+            <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+            <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+           
+    
+            <div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+            <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE PARQUEO CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO: '.$mes->ano}}.</h4></div>
+            <div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+            
+        <?php }
+        }
+        ?>
         </div>
     </div>
-          </body>
-          <?php 
-          }
-          ?>
-
+    
   @endforeach
+          </body>
+
 </html>
 
