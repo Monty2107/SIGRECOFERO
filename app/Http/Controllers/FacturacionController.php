@@ -8,6 +8,7 @@ use SIGRECOFERO\condominio;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
+use Carbon\Carbon;
 use PDF;
 
 class FacturacionController extends Controller
@@ -23,6 +24,12 @@ class FacturacionController extends Controller
         return view('admin.facturacion.create')->with('condomine', $condomine);
     }
 
+    public function buscar()
+    {
+        $condomine = condominio::with('estado')->get();
+        return view('admin.facturacion.buscar')->with('condomine', $condomine);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,16 +38,27 @@ class FacturacionController extends Controller
     
     public function create()
     {
-        $facturas = facturacion::where('emision','=','No Emitido')->get();
-        $empresas = empresa::all();
-        $count = count($empresas);
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        $m = $date->format('m')+1;
+        $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
+
+            $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('emision','=','No Emitido')->get();
 
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
         return $pdf->stream();
     }
     public function create2()
     {
-        $facturas = facturacion::where('concepto','=','Administrativo')->where('emision','=','No Emitido')->get();
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        $m = $date->format('m')+1;
+        $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
+        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Administrativo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         return $pdf->stream();
@@ -48,7 +66,13 @@ class FacturacionController extends Controller
 
     public function create3()
     {
-        $facturas = facturacion::where('concepto','=','Parqueo')->where('emision','=','No Emitido')->get();
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        $m = $date->format('m')+1;
+        $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
+        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Parqueo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
         return $pdf->stream();
@@ -56,10 +80,24 @@ class FacturacionController extends Controller
 
     public function create4()
     {
-        $facturas = facturacion::where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        $m = $date->format('m')+1;
+        $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
+        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
         return $pdf->stream();
+    }
+
+    public function create5($id)
+    {
+    
+            $facturas = facturacion::find($id);
+            $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
+            return $pdf->stream();
     }
 
     /**
@@ -81,8 +119,24 @@ class FacturacionController extends Controller
      */
     public function show($id)
     {
+        $val = explode('-',$id);
+        if ($val[1]== 1) {
+
+            $factura = facturacion::find($val[0]);
+            return view('admin.facturacion.anular')->with('factura',$factura);
+
+        }else if($val[1]== 2){
+
+        $factura = facturacion::find($val[0]);
+        $condomine = condominio::find($factura->id_Condominio);
+        return view('admin.facturacion.edit')->with('condomine',$condomine);       
+
+        }else{
+
         $condominio = condominio::find($id);
         return view('admin.facturacion.show')->with('condominio',$condominio);
+
+        }
     }
 
     /**

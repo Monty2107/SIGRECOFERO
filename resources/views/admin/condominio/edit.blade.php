@@ -25,7 +25,7 @@
         </div>
         <!-- /.box-header -->
         <?php
-        $emp = SIGRECOFERO\condominio::where('id_Empresa','=', $condomine->id)->get()->first();
+        $emp = \SIGRECOFERO\condominio::where('id_Empresa','=', $condomine->id)->get()->first();
         $estado = \SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$emp->id)->get()->first();
         // dd($estado);
         

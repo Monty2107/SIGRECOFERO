@@ -33,9 +33,11 @@ Route::group(['prefix' => 'admin'],function(){
   Route::resource('pago','PagosController');
   Route::resource('pagoMes','PagoMesController');
   Route::resource('facturacion','FacturacionController');
+  Route::resource('facturacionBuscar','FacturacionController@buscar');
   Route::resource('facturacionAdmin','FacturacionController@create2');
   Route::resource('facturacionParqueo','FacturacionController@create3');
   Route::resource('facturacionOtros','FacturacionController@create4');
+  Route::resource('facturacionIndividual','FacturacionController@create5');
   Route::resource('nuevopago','NuevoPagoController');
   Route::resource('buscarCondomine','PagosController@buscar');
 

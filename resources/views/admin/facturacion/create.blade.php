@@ -24,6 +24,7 @@
       $estadoParqueo = SIGRECOFERO\estado::where('concepto','=','Parqueo')->get()->first();
       $estadoOtros = SIGRECOFERO\estado::where('concepto','=','Otros')->get()->first();
      ?>
+
       <div class="box-body">
         <label>Selecione el Concepto Para Ver Su Historial: </label><br>
         @if(!is_null($estadoAdmin))
@@ -217,6 +218,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            
             <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" target="_blank" >Si Acepto.</a>
           </div>
         </div>

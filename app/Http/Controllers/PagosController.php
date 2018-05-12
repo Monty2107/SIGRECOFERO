@@ -126,9 +126,9 @@ class PagosController extends Controller
         
           for ($i=0; $i < $count ; $i++) {
             $estado = estado::where('id_Condominio',$id)->where('concepto',$request->radioConcepto)->where('mes',$request->Mes[$i])->where('ano','=',$anoPago['0'])->get()->first();
-
-            $busqueda= $estado->id;
             
+            $busqueda= $estado->id;
+
             $cambio = estado::find($busqueda);
             $cambio->id_Fecha = $fecha->id;
             $cambio->save();
@@ -168,6 +168,7 @@ class PagosController extends Controller
           $arrayEstado[]=$estado->id;  
           $facturacion = facturacion::find($busqueda);
           $facturacion->NFactura = $request->factura[$i];
+          $facturacion->estado = true;//esta pagado
           $facturacion->save();
           $fecha = fecha::find($estado->id_Fecha);
           $fecha->dia = $date->format('d');
@@ -229,6 +230,7 @@ class PagosController extends Controller
           $facturacion = facturacion::find($estado->id);
           $facturacion->Nfactura = $request->factura;
           $facturacion->cantidad = $request->cantidad;
+          $facturacion->estado = true;//esta pagado
           $facturacion->save();
 
 

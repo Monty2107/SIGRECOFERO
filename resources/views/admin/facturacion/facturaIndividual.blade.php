@@ -75,26 +75,25 @@
 </head>
 <?php  $r='0'; ?>
 
-    @foreach($facturas as $f)
-
                         
 <?php 
         
-        $letras = NumeroALetras::convertir($f->cantidad, 'dolares', 'centavos');
-        $nombre = \SIGRECOFERO\empresa::find($f->id_Condominio);
-        $mes = \SIGRECOFERO\estado::find($f->id_Estado);  
-        $local = \SIGRECOFERO\condominio::find($f->id_Condominio);  
-        $carbon = new \Carbon\carbon(); 
+        $letras = NumeroALetras::convertir($facturas->cantidad, 'dolares', 'centavos');
+        $nombre = \SIGRECOFERO\empresa::find($facturas->id_Condominio);
+        $mes = \SIGRECOFERO\estado::find($facturas->id_Estado);  
+        $local = \SIGRECOFERO\condominio::find($facturas->id_Condominio);
+        $carbon = new \Carbon\carbon();
+        // dd($carbon->format('d/m/Y'));   
         ?>            
         <?php 
-        if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '1' && $r=='0'){
+        if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '1' && $r=='0'){
         if(!is_null($nombre)){
             $r='1';
         ?>
         <body> 
-            <div class="col-md-12">
-                    <div class="box-header with-border">
-        <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+                <div class="col-md-12">
+                        <div class="box-header with-border">
+        <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
         <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
         <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
        
@@ -105,7 +104,7 @@
         <div style="position: absolute;left: 450px; top: {{'300'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
         <?php 
         }
-    }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '0' && $r=='1'){
+    }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '0' && $r=='1'){
         if(!is_null($nombre)){
             $r='0';
         ?>  
@@ -122,9 +121,9 @@
       </div>
     </div>
       </body>
-
+      
         <?php }
-        }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '1' && $r=='1'){
+        }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '1' && $r=='1'){
             if(!is_null($nombre)){
             $r='0';
              ?>
@@ -141,17 +140,16 @@
       </div>
     </div>
       </body>
-
         
         <?php }
-        }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '0' && $r=='0'){ 
+        }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '0' && $r=='0'){ 
             if(!is_null($nombre)){
             $r='1';
             ?>
             <body> 
-                <div class="col-md-12">
-                        <div class="box-header with-border">
-            <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+                    <div class="col-md-12">
+                            <div class="box-header with-border">
+            <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
             <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
             <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
            
@@ -163,17 +161,16 @@
             
         <?php }
         }
-        ?>
-            
+        ?>            
         <?php 
-        if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '1' && $r=='0'){
+        if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '1' && $r=='0'){
         if(!is_null($nombre)){
             $r='1';
         ?>
         <body> 
-            <div class="col-md-12">
-                    <div class="box-header with-border">
-        <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+                <div class="col-md-12">
+                        <div class="box-header with-border">
+        <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
         <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
         <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
        
@@ -184,7 +181,7 @@
         <div style="position: absolute;left: 450px; top: {{'300'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
         <?php 
         }
-    }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '0' && $r=='1'){
+    }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '0' && $r=='1'){
         if(!is_null($nombre)){
             $r='0';
         ?>  
@@ -201,9 +198,8 @@
       </div>
     </div>
       </body>
-
         <?php }
-        }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '1' && $r=='1'){
+        }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '1' && $r=='1'){
             if(!is_null($nombre)){
             $r='0';
              ?>
@@ -220,17 +216,16 @@
       </div>
     </div>
       </body>
-      <body>
         
         <?php }
-        }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '0' && $r=='0'){ 
+        }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '0' && $r=='0'){ 
             if(!is_null($nombre)){
             $r='1';
             ?>
             <body> 
-                <div class="col-md-12">
-                        <div class="box-header with-border">
-            <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+                    <div class="col-md-12">
+                            <div class="box-header with-border">
+            <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
             <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
             <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
            
@@ -243,10 +238,88 @@
         <?php }
         }
         ?>
+            
+<?php 
+if($facturas->concepto == 'Otros' &&$facturas->id_Condominio % 2 == '1' && $r=='0'){
+if(!is_null($nombre)){
+    $r='1';
+?>
+<body> 
+        <div class="col-md-12">
+                <div class="box-header with-border">
+<div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
+<div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+<div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+
+
+<div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+<div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+<div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+<div style="position: absolute;left: 450px; top: {{'300'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
+<?php 
+}
+}else if($facturas->concepto == 'Otros' &&$facturas->id_Condominio % 2 == '0' && $r=='1'){
+if(!is_null($nombre)){
+    $r='0';
+?>  
+       
+       <div style="position: absolute;left: 650px; top: 625px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+       <div style="position: absolute;left: 175px; top: 655px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+       <div style="position: absolute;left: 175px; top: 675px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+              
+       
+       <div style="position: absolute;left: 170px; top: {{'725'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+       <div style="position: absolute;left: 150px; top: {{'765'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+       <div style="position: absolute;left: 350px; top: {{'775'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+       <div style="position: absolute;left: 450px; top: {{'875'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
+</div>
+</div>
+
+  </body>
+
+<?php }
+}else if($facturas->concepto == 'Otros' && $facturas->id_Condominio % 2 == '1' && $r=='1'){
+    if(!is_null($nombre)){
+    $r='0';
+     ?>
+
+<div style="position: absolute;left: 650px; top: 625px; z-index: 1;"><h1>{{$f->cantidad}}</h1></div>
+        <div style="position: absolute;left: 175px; top: 655px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+        <div style="position: absolute;left: 175px; top: 675px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+               
+        
+        <div style="position: absolute;left: 170px; top: {{'725'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+        <div style="position: absolute;left: 150px; top: {{'765'}}px; z-index: 1;"><h4>{{'CUOTA DE ADMINISTRACION CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+        <div style="position: absolute;left: 350px; top: {{'775'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+        <div style="position: absolute;left: 450px; top: {{'875'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
+</div>
+</div>
+
+  </body>
+
+<?php }
+}else if($facturas->concepto == 'Otros' && $facturas->id_Condominio % 2 == '0' && $r=='0'){ 
+    if(!is_null($nombre)){
+    $r='1';
+    ?>
+    <body> 
+            <div class="col-md-12">
+                    <div class="box-header with-border">
+    <div style="position: absolute;left: 650px; top: 57px; z-index: 1;"><h1>{{$facturas->cantidad}}</h1></div>
+    <div style="position: absolute;left: 175px; top: 80px; z-index: 1;"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+    <div style="position: absolute;left: 175px; top: 100px; z-index: 1;"><h3>{{$nombre->nombre}}.</h3></div>
+   
+
+    <div style="position: absolute;left: 170px; top: {{'150'}}px; z-index: 1;"><h4>{{$letras}}.</h4></div>
+    <div style="position: absolute;left: 150px; top: {{'190'}}px; z-index: 1;"><h4>{{'CUOTA DE: '.$mes->descripcion.' CORRESPONDIENTE AL MES DE: '.$mes->mes.' DEL AÑO : '.$mes->ano}}.</h4></div>
+    <div style="position: absolute;left: 350px; top: {{'200'}}px; z-index: 1;"><h4>{{'LOCAL: '.$local->NLocal}}.</h4></div>
+    <div style="position: absolute;left: 450px; top: {{'300'}}px; z-index: 1;"><h4>{{$carbon->format('d/m/Y')}}.</h4></div>
+    
+<?php }
+}
+?>
         </div>
     </div>
-    
-  @endforeach
           </body>
 
 </html>

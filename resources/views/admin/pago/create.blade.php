@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                         <label >Cantidad: </label>
-                        {!! Form::number('cantidad',null,['name'=>'cantidad','id'=>'cantidad','class'=>'form-control','placeholder'=>'$$']) !!}
+                        {!! Form::number('cantidad',null,['name'=>'cantidad','id'=>'cantidad','class'=>'form-control','placeholder'=>'$$','step'=>'any']) !!}
                       </div>
 
               <!-- /.input group -->

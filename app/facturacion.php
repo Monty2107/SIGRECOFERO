@@ -9,7 +9,7 @@ class facturacion extends Model
   protected $table = 'facturacions';
 
   protected $fillable =[
-    'NFactura','concepto','cantidad','emision','id_Fecha','id_Estado','id_Condominio'
+    'NFactura','concepto','cantidad','emision','mes','ano','estado','id_Fecha','id_Estado','id_Condominio'
   ];
 
   public function fecha(){
