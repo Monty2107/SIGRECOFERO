@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 
 
 @section('posicion')
@@ -13,7 +13,7 @@
 @endsection
 @section('content')
   <div class="table-responsive">
-  <table id="rere" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+  <table id="example" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
       <thead>
           <tr>
               <th width="50px">N°</th>

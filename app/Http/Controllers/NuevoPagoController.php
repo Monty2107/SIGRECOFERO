@@ -11,6 +11,7 @@ use SIGRECOFERO\fecha;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\empresa;
+use SIGRECOFERO\Http\Requests\NuevoPagoRequest;
 
 class NuevoPagoController extends Controller
 {
@@ -19,6 +20,10 @@ class NuevoPagoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     public function index()
     {
         //
@@ -75,15 +80,15 @@ class NuevoPagoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NuevoPagoRequest $request, $id)
     {
         // dd($request->descripcion);
 
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
-        $mI= $request->anoI;
-        $mF= $request->anoF;
+        $mI= $request->fechaInicial;
+        $mF= $request->fechaFinal;
         
         $fecha_detI= explode("-",$mI);
         $fecha_detF= explode("-",$mF);

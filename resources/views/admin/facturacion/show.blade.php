@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 
 
 @section('posicion')
@@ -52,9 +52,9 @@
             </div>
                   <?php
                     # code...
-                    $estadoAdmin = SIGRECOFERO\estado::where('concepto','=','Administrativo')->get()->first();
-                    $estadoParqueo = SIGRECOFERO\estado::where('concepto','=','Parqueo')->get()->first();
-                    $estadoOtros = SIGRECOFERO\estado::where('concepto','=','Otros')->get()->first();
+                    $estadoAdmin = SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Administrativo')->get()->first();
+                    $estadoParqueo = SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Parqueo')->get()->first();
+                    $estadoOtros = SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Otros')->get()->first();
                    ?>
               
                     <div class="box-body">
@@ -96,7 +96,7 @@
       </thead>
       <tbody class="busqueda">
         <?php $t1=1; 
-        $facturacion = \SIGRECOFERO\facturacion::where('concepto','=','Administrativo')->where('id_Condominio','=',$condominio->id)->get();
+        $facturacion = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Administrativo')->where('id_Condominio','=',$condominio->id)->get();
         ?>
         @foreach($facturacion as $c)
           <tr>
@@ -149,7 +149,7 @@
       </thead>
       <tbody class="busqueda">
         <?php $t2=1; 
-        $facturacion1 = \SIGRECOFERO\facturacion::where('concepto','=','Parqueo')->where('id_Condominio','=',$condominio->id)->get();
+        $facturacion1 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Parqueo')->where('id_Condominio','=',$condominio->id)->get();
         ?>
         @foreach($facturacion1 as $c)
           <tr>
@@ -202,7 +202,7 @@
       </thead>
       <tbody class="busqueda">
         <?php $t3=1; 
-        $facturacion2 = \SIGRECOFERO\facturacion::where('concepto','=','Otros')->where('id_Condominio','=',$condominio->id)->get();       
+        $facturacion2 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Otros')->where('id_Condominio','=',$condominio->id)->get();       
         ?>
         @foreach($facturacion2 as $c)
           <tr>

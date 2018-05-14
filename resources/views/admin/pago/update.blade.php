@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 @section('posicion')
   <h1>
    Dashboard
@@ -41,7 +41,7 @@
          @foreach ($meses as $as)
            <div class="form-group">
              <label> {{$as->mes}} :</label>
-            &nbsp&nbsp {!! Form::text('factura[]',null,['name'=>'factura[]','id'=>'factura','class'=>'form-control','placeholder'=>'Escriba el Numero de Factura del Mes Correspondiente']) !!}
+            &nbsp&nbsp {!! Form::text('factura[]',null,['name'=>'factura[]','id'=>'factura','class'=>'form-control','placeholder'=>'Escriba el Numero de Factura del Mes Correspondiente','required']) !!}
             <input type="hidden" name="mes[]" value="{{$as->mes}}">
            </div>
          @endforeach

@@ -13,6 +13,8 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\facturacion;
 use Carbon\Carbon;
+use SIGRECOFERO\Http\Requests\CondomineRequest;
+use SIGRECOFERO\Http\Requests\CondomineUpdateRequest;
 
 class CondomineController extends Controller
 {
@@ -21,6 +23,10 @@ class CondomineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     public function buscar(){
       $condominiobusqueda = condominio::with('empresa')->orderBy('id','desc')->get();
       return view('admin.condominio.buscar')->with('condominiobusqueda',$condominiobusqueda);
@@ -47,7 +53,7 @@ class CondomineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CondomineRequest $request)
     {
       // dd($request->all());
 
@@ -283,7 +289,7 @@ class CondomineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CondomineUpdateRequest $request, $id)
     {
       $empresa = empresa::find($id);
       $empresa->nombre = $request->nombre;

@@ -17,8 +17,8 @@ class CreateEmpresasTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('correo');
-            $table->string('telefonoFijo');
-            $table->string('telefonoMovil');
+            $table->string('telefonoFijo')->nullable();
+            $table->string('telefonoMovil')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

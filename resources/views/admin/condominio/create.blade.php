@@ -1,4 +1,5 @@
-@extends('index')
+@extends('welcome')
+
 
 
 @section('posicion')
@@ -11,11 +12,22 @@
    <li class="active">Registro de Condominios</li>
  </ol>
 @endsection
+
 @section('content')
 
+@if(count($errors) > 0)
+      <div class="alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+      </div>
+      @endif
   {!! Form::open(['route' => 'condominio.store', 'method' => 'POST','id'=>'form']) !!}
 
   <div class="row">
+      
     <!-- left column -->
     <div class="col-md-6">
       <!-- general form elements -->

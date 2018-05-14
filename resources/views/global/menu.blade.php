@@ -5,8 +5,8 @@
       <img src="{!! asset('img/gano4.png') !!}" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-      <p>Programador</p>
-      <a href="#"><i class="fa fa-circle text-success"></i> Administrador</a>
+      <p>{{Auth::User()->name}}</p>
+      <a href="#"><i class="fa fa-circle text-success"></i> {{Auth::User()->cargo}}</a>
     </div>
   </div>
   <!-- search form -->
@@ -16,7 +16,7 @@
   <ul class="sidebar-menu" data-widget="tree">
     <li class="header">Menu de Navegacion</li>
     <li class="active treeview">
-      <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> <span>Panel Principal</span></a></li>
+      <li><a href="{!! asset('/admin/welcome') !!}"><i class="fa fa-dashboard"></i> <span>Panel Principal</span></a></li>
     </li>
     <li class="treeview">
       <a href="#">

@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 @section('posicion')
   <h1>
    Dashboard
@@ -11,6 +11,15 @@
 @endsection
 
 @section('content')
+@if(count($errors) > 0)
+      <div class="alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+      </div>
+      @endif
   {!! Form::model($estado,['route' => ['pago.update',$estado->id], 'method' => 'PUT','id'=>'form']) !!}
 
   <div class="row">
@@ -58,6 +67,7 @@
       <input type="hidden" name="ano" value="{{$estadoC->ano}}">
       <input type="hidden" name="id_Condominio" value="{{$estadoC->id_Condominio}}">
       <input type="hidden" name="descripcion" value="{{$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad}}">
+      <input type="hidden" name="Mes[]" value="{{$estadoC->mes}}">
     </div>
           <!-- /.box-body -->
           <!--/.col (right) -->

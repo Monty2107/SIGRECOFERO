@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 
 
 @section('posicion')
@@ -12,7 +12,15 @@
  </ol>
 @endsection
 @section('content')
-
+@if(count($errors) > 0)
+      <div class="alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+      </div>
+      @endif
 {!! Form::model($condomine,['route' => ['nuevopago.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
 <div class="row">
     <!-- left column -->
@@ -35,11 +43,11 @@
                 </div>
                 <div class="form-group">
                     <label >Fecha De Iniciacion de Facturacion: </label>
-                    {!! Form::date('anoI',null,['name'=>'anoI','id'=>'anoI','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
+                    {!! Form::date('fechaInicial',null,['name'=>'fechaInicial','id'=>'fechaInicial','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
                 </div>
                 <div class="form-group">
                     <label >Fecha De Finalizacion De Facturacion: </label>
-                    {!! Form::date('anoF',null,['name'=>'anoF','id'=>'anoF','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
+                    {!! Form::date('fechaFinal',null,['name'=>'fechaFinal','id'=>'fechaFinal','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}','title'=>'']) !!}
                 </div>
                 <div class="form-group">
                         <label >Cantidad: </label>
@@ -62,15 +70,15 @@
           <div class="box-body">
                 <div class="form-group">
                         <label>Nombre del Condominio: </label>
-                        {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+                        {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine','disabled']) !!}
                       </div>
             <div class="form-group">
               <label>Codigo: </label>
-              {!! Form::text('codigo',null,['class'=>'form-control','placeholder'=>'Codigo']) !!}
+              {!! Form::text('codigo',null,['class'=>'form-control','placeholder'=>'Codigo','disabled']) !!}
             </div>
             <div class="form-group">
               <label >N° de Local: </label>
-              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
+              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F','disabled']) !!}
             </div>
               <!-- /.input group -->
               <!-- /.input group -->

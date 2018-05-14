@@ -12,10 +12,15 @@ use SIGRECOFERO\ingreso_diario;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\facturacion;
+use SIGRECOFERO\Http\Requests\PagoRequest;
 
 class PagosController extends Controller
 {
 
+  public function __construct()
+{
+    $this->middleware('auth');
+}
   public function buscar(){
     $condominiobusqueda = condominio::with('empresa')->get();
     return view('admin.pago.buscar')->with('condominiobusqueda',$condominiobusqueda);
@@ -100,7 +105,7 @@ class PagosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PagoRequest $request, $id)
     {
       // dd($request->all());
       if ($request->pagina == 1) {

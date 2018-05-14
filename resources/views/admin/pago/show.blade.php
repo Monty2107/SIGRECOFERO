@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 @section('posicion')
   <h1>
    Dashboard

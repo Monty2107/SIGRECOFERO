@@ -1,4 +1,4 @@
-@extends('index')
+@extends('welcome')
 
 
 @section('posicion')
@@ -12,6 +12,15 @@
  </ol>
 @endsection
 @section('content')
+@if(count($errors) > 0)
+      <div class="alert alert-danger" role="alert">
+        <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+      </div>
+      @endif
   {!! Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
 
   <div class="row">

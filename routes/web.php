@@ -10,40 +10,40 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
-Route::get('/tabla', function () {
-    return view('tabla');
-});
 
-Route::get('/conversor', function () {
-    return view('letrasNumeros');
-});
+
+Auth::routes();
+
+
 
 Route::group(['prefix' => 'admin'],function(){
 
+    Route::get('/welcome', 'HomeController@index');
+    
   // Rutas condomine
   Route::resource('condominio','CondomineController');
   Route::resource('buscar','CondomineController@buscar');
 
-  //Rutas Pagos
-  Route::resource('pago','PagosController');
-  Route::resource('pagoMes','PagoMesController');
-  Route::resource('facturacion','FacturacionController');
-  Route::resource('facturacionBuscar','FacturacionController@buscar');
-  Route::resource('facturacionAdmin','FacturacionController@create2');
-  Route::resource('facturacionParqueo','FacturacionController@create3');
-  Route::resource('facturacionOtros','FacturacionController@create4');
-  Route::resource('facturacionIndividual','FacturacionController@create5');
-  Route::resource('nuevopago','NuevoPagoController');
-  Route::resource('buscarCondomine','PagosController@buscar');
+//Rutas Pagos
+Route::resource('pago','PagosController');
+Route::resource('pagoMes','PagoMesController');
+Route::resource('facturacion','FacturacionController');
+Route::resource('facturacionBuscar','FacturacionController@buscar');
+Route::resource('facturacionAdmin','FacturacionController@create2');
+Route::resource('facturacionParqueo','FacturacionController@create3');
+Route::resource('facturacionOtros','FacturacionController@create4');
+Route::resource('facturacionIndividual','FacturacionController@create5');
+Route::resource('nuevopago','NuevoPagoController');
+Route::resource('buscarCondomine','PagosController@buscar');
 
 
 Route::match(['get','post'],'/mesesAdmin/{id}','PagosController@getMesesAdmin');
 Route::match(['get','post'],'/mesesParqueo/{id}','PagosController@getMesesParqueo');
 
-
 });
+
+
