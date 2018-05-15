@@ -82,11 +82,13 @@
           <div class="box-header with-border">
             <h3 class="box-title">Acciones</h3>
           </div>
+          <?php if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador'){?>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger">
             Eliminar
           </button>
         {{-- <button type="submit" class="btn btn-danger" id="eliminar" onclick="return confirm('¿Seguro que deseas eliminarlo?')">Eliminar</button> --}}
         <a type="submit" class="btn btn-primary" href="{{route('condominio.edit',$emp->id.'-'.'1')}}">Modificar</a>
+        <?php } ?>
         <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscar') !!}">Cancelar</a>
         <br>
 

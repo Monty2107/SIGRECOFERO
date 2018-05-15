@@ -3,6 +3,7 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('index');
+    }
+
+    public function login()
+    {
+        return view('auth/login');
     }
 }

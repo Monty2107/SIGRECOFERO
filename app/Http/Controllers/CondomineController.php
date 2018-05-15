@@ -3,6 +3,7 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Redirect;
 use SIGRECOFERO\contacto;
@@ -43,8 +44,12 @@ class CondomineController extends Controller
      */
     public function create()
     {
-
-      return view('admin.condominio.create');
+      if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Administracion'  ){
+        return view('admin.condominio.create');
+      }else{
+        return rediderct('/');
+      }
+     
     }
 
     /**
@@ -56,10 +61,22 @@ class CondomineController extends Controller
     public function store(CondomineRequest $request)
     {
       // dd($request->all());
-
-      // dd(empty($request->cantidadAdmin));
+      $ano  = $request->facturacion;
       $carbon = new \Carbon\Carbon();
       $date = $carbon->now();
+      $LNum= explode('-',$request->NLocal);
+
+      if($ano > $date->year ){
+        Session::flash('error','El Año de Inicio de la Facturacion no Debe Ser Mayor al año: '.$date->year);
+      return redirect('admin/condominio/create');
+      }
+
+      if($LNum[1] == 0 ){
+        Session::flash('error','No Puede Usar Local: '.$request->NLocal.' Ya Que Su Valor Es: '.$LNum[1]);
+      return redirect('admin/condominio/create');
+      }
+      // dd(empty($request->cantidadAdmin));
+      
       $empresa = empresa::create([
         'nombre'=>$request->nombre,
         'correo' => $request->correo,
@@ -73,7 +90,7 @@ class CondomineController extends Controller
         'id_Empresa'=>$empresa->id,
       ]);
 
-      $ano  = $request->facturacion;
+      
       $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
       '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
       '11'=>'Noviembre','12'=>'Diciembre' );
@@ -87,6 +104,8 @@ class CondomineController extends Controller
         ]);
         $m = $date->format('m');
         for ($i=$ano; $i <= $date->year ; $i++) {
+
+          
           for ($k=1; $k <= $concepto ; $k++) {
             $l=$k-1;
           for ($j=1; $j <=$cantMes ; $j++) {
@@ -242,9 +261,6 @@ class CondomineController extends Controller
 
         $ano=$ano+1;
       }
-
-
-
       // dd('guardado exitosamente');
       Session::flash('message','Comdomine: '.$empresa->nombre.' ha sido registrado Correctamente!!');
       return redirect()->route('condominio.create');
@@ -270,14 +286,25 @@ class CondomineController extends Controller
      */
     public function edit($id)
     {
-      $idE = explode('-',$id);
+      
+        $idE = explode('-',$id);
       if ($idE[1]==2) {
         # code...
-        $condomine = condominio::find($id[0]);
+        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+          $condomine = condominio::find($id[0]);
         return view('admin.facturacion.edit')->with('condomine',$condomine);
+        }else{
+          return redirect('/');
+        }
+        
       }else{
+        if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Administracion'  ){
         $condomine = condominio::find($id[0]);
         return view('admin.condominio.edit')->with('condomine',$condomine);
+      }else{
+        return redirect('/');
+      }  
+
       }
         
     }
@@ -340,7 +367,7 @@ class CondomineController extends Controller
      */
     public function destroy($id)
     {
-
+      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
         $empresa = empresa::findOrFail($id);
         $empresa->delete();
         $condominio = condominio::findOrFail($id);
@@ -353,5 +380,9 @@ class CondomineController extends Controller
         Session::flash('message','El Condominio: '.$empresa->nombre
         .' Con Numero de Local: '.$condominio->NLocal.' Fue Eliminado Exitosamente!!');
         return redirect('/admin/buscar');
+      }else{
+        return redirect('/');
+      }
+        
     }
 }

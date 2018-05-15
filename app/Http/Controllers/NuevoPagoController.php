@@ -3,6 +3,7 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -69,8 +70,13 @@ class NuevoPagoController extends Controller
      */
     public function edit($id)
     {
-        $condomine = condominio::find($id);
+        if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+            $condomine = condominio::find($id);
         return view('admin.pago.create')->with('condomine',$condomine);
+        }else{
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -92,6 +98,7 @@ class NuevoPagoController extends Controller
         
         $fecha_detI= explode("-",$mI);
         $fecha_detF= explode("-",$mF);
+        $validacion3 = $date->year.(($fecha_detI[1]+1)-1);
         $validacion = $fecha_detF[0].(($fecha_detF[1]+1)-1);
         $validacion1 = $fecha_detF[0].$fecha_detF[1];
         $mesI = ($fecha_detI[1]+1)-1;
@@ -165,7 +172,7 @@ class NuevoPagoController extends Controller
                         $mesI=1;
                     }
                 }else{
-                    if ($i.$j < $validacion ) {
+                    if ($i.$j <= $validacion3 ) {
                    
                         # code...            
                         $estado = estado::create([
@@ -190,7 +197,7 @@ class NuevoPagoController extends Controller
                               'id_Estado'=>$estado->id,
                               'id_Condominio'=>$id,
                               ]);
-                    }else if($i.$j == $validacion){
+                    }else if($i.$j > $validacion3 && $i.$j <= $validacion){
                         $estado = estado::create([
                             'mes'=>$arrayMes[$j],
                             'ano'=>$i,

@@ -28,17 +28,17 @@
       <div class="box-body">
         <label>Selecione el Concepto Para Ver Su Historial: </label><br>
         @if(!is_null($estadoAdmin))
-        {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla(this.value);'])}}
         <label>Factura en Cuotas Administrativa </label> &nbsp;&nbsp;&nbsp;
         @endif
         <br>
         @if(!is_null($estadoParqueo))
-        {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla(this.value);'])}}
         <label>Factura en Cuotas de Parqueo </label>
         @endif
         <br>
         @if(!is_null($estadoOtros))
-        {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla(this.value);'])}}
         <label>Factura de Otras Cuotas </label>
         @endif
         </div>
@@ -51,42 +51,9 @@
       <h3 class="box-title">ACCIONES</h3>
     </div>
       <div class="box-body">
-        <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){?>
-          @if(!is_null($estadoAdmin) || !is_null($estadoParqueo) )
-        <div class="form-group">
-            
-            <button type="button" class="form-control btn btn-success" data-toggle="modal" data-target="#modal-infoAll">
-                Imprimir Todas las Facturas
-              </button>
-              
-          <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
-            facturas no emitidas con los datos que contengan la base en estos momentos.
-            (solo imprimira Administrativa y de Parqueo) </h6>
-         </div>
-         @endif
-         <div class="form-group" id="btnAdmin" style="display:none;">
-            <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoAdmin">
-                Imprimir Todas las Facturas Administrativas
-              </button>
-            <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
-              facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-           </div>
-           <div class="form-group" id="btnParqueo" style="display:none;">
-              <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoParqueo">
-                  Imprimir Todas las Facturas de Parqueo
-                </button>
-              <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
-                facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-             </div>
-             <div class="form-group" id="btnOtros" style="display:none;">
-                <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoOtros">
-                    Imprimir Todas las Facturas de Otros Pagos
-                  </button>
-                <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
-                  facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-               </div>
-              <?php } ?>
-        </div>
+          <span>SOLO ES PARA OBSERVACION, Y HACER MODIFICACIONES SI EN CASO LO NECESITARA
+        ANTES DE SU DEBIDA EMISION.</span>
+          </div>
   </div>
 </div>
 </div>

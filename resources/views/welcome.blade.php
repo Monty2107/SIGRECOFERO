@@ -85,6 +85,7 @@
           }
       }
       </script>
+      
       <script>
           function mostrarC(dato){
               if(dato=="Efectivo"){
@@ -178,7 +179,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="{!! asset('/admin/welcome') !!}" class="logo">
+    <a href="{!! asset('/') !!}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>CF</span>
       <!-- logo for regular state and mobile devices -->
@@ -272,7 +273,7 @@
       @if(Session::has('error'))
       <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-         Mensaje: <a class="alert-link" href="#">{{Session::get('error')}}</a>.
+         Mensaje: {{Session::get('error')}}.
       </div>
       @endif
       @yield('content')

@@ -23,6 +23,7 @@ class CondomineRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
             'nombre'=> 'required|string|min:4|max:120',
             'correo'=> 'required|min:4|max:120',

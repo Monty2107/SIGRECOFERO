@@ -10,19 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('auth/login');
-});
+
 
 
 
 Auth::routes();
 
-
+// Route::get('/', 'HomeController@login');
+Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'admin'],function(){
-
-    Route::get('/welcome', 'HomeController@index');
     
   // Rutas condomine
   Route::resource('condominio','CondomineController');
@@ -32,6 +29,7 @@ Route::group(['prefix' => 'admin'],function(){
 Route::resource('pago','PagosController');
 Route::resource('pagoMes','PagoMesController');
 Route::resource('facturacion','FacturacionController');
+Route::resource('VerFacturacion','FacturacionController@index2');
 Route::resource('facturacionBuscar','FacturacionController@buscar');
 Route::resource('facturacionAdmin','FacturacionController@create2');
 Route::resource('facturacionParqueo','FacturacionController@create3');

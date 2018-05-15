@@ -3,6 +3,7 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\estado;
 
@@ -62,9 +63,14 @@ class PagoMesController extends Controller
      */
     public function edit($id)
     {
-      $estado = estado::find($id);
+        if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+            $estado = estado::find($id);
       // dd($estado->all());
        return view('admin.pago.editMes')->with('estado', $estado);
+        }else{
+            return redirect('/');
+        }
+      
     }
 
     /**

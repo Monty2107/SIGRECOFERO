@@ -3,6 +3,7 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -22,8 +23,13 @@ class PagosController extends Controller
     $this->middleware('auth');
 }
   public function buscar(){
-    $condominiobusqueda = condominio::with('empresa')->get();
+    if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador'){
+      $condominiobusqueda = condominio::with('empresa')->get();
     return view('admin.pago.buscar')->with('condominiobusqueda',$condominiobusqueda);
+    }else{
+      return redirect('/');
+    }
+    
   }
 
   public function getMesesAdmin(Request $request, $id){
@@ -81,8 +87,13 @@ class PagosController extends Controller
      */
     public function show($id)
     {
-      $condomine = condominio::find($id);
-      return view('admin.pago.show')->with('condomine',$condomine);
+      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+        $condomine = condominio::find($id);
+        return view('admin.pago.show')->with('condomine',$condomine);
+      }else{
+        return redirect('/');
+      }
+     
     }
 
     /**
@@ -93,9 +104,13 @@ class PagosController extends Controller
      */
     public function edit($id)
     {
+      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
       $condomine = condominio::find($id);
       // dd($estado->all());
        return view('admin.pago.edit')->with('condomine', $condomine);
+      }else{
+        return redirect('/');
+      }
     }
 
     /**

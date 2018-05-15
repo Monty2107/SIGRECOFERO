@@ -39,7 +39,7 @@
           <div class="box-body">
             <div class="form-group">
               <label>Nombre del Condomine: </label>
-              {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              {!! Form::text('nombre',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
             <label>Selecione el Concepto Para Ver Su Historial: </label><br>
             @if(!$estadoAdmin->isEmpty())
@@ -67,7 +67,7 @@
           <div class="box-body">
             <div class="form-group">
               <label>N° De Local:  </label>
-              {!! Form::text('NLocal',$condomine->Nlocal,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              {!! Form::text('NLocal',$condomine->Nlocal,['disabled','name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
             </div>
       </div>
