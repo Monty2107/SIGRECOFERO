@@ -6,12 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "arielcr/numero-a-letras": "dev-master",
         "barryvdh/laravel-dompdf": "^0.8.2",
+        "dompdf/dompdf": "^0.8.2",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.3.0",
-        "nesbot/carbon": "^1.25",
-        "arielcr/numero-a-letras": "dev-master"
+        "nesbot/carbon": "^1.25"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

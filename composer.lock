@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e514b77f700d275c0d5a118181a7ee4d",
+    "content-hash": "e5939b794de893640b464da2052fa984",
     "packages": [
         {
             "name": "arielcr/numero-a-letras",

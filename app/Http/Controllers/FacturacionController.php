@@ -10,6 +10,7 @@ use SIGRECOFERO\facturacion;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use PDF;
 
 class FacturacionController extends Controller
@@ -59,7 +60,7 @@ class FacturacionController extends Controller
     
     public function create()
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
 
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
@@ -72,24 +73,27 @@ class FacturacionController extends Controller
         $mese=$date->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
-        for ($i=0; $i < $countF ; $i++) { 
-            $facturas[$i]->emision = 'Emitido';
-            $facturas[$i]->save();
+        // for ($i=0; $i < $countF ; $i++) { 
+        //     $facturas[$i]->emision = 'Emitido';
+        //     $facturas[$i]->save();
             
-            facturacion::create([
-                'NFactura' => '',
-                'concepto'=> $facturas[$i]->concepto,
-                'cantidad' => $facturas[$i]->cantidad,
-                'emision'=>'No Emitido',
-                'mes'=>$arrayMes[$jDate],
-                'ano'=>$mese->year,
-                'estado'=>false,
-                'id_Fecha'=>$facturas[$i]->id_Fecha,
-                'id_Estado'=>$facturas[$i]->id_Estado,
-                'id_Condominio'=>$facturas[$i]->id_Condominio,
-                ]);
-        }
+        //     facturacion::create([
+        //         'NFactura' => '',
+        //         'concepto'=> $facturas[$i]->concepto,
+        //         'cantidad' => $facturas[$i]->cantidad,
+        //         'emision'=>'No Emitido',
+        //         'mes'=>$arrayMes[$jDate],
+        //         'ano'=>$mese->year,
+        //         'estado'=>false,
+        //         'id_Fecha'=>$facturas[$i]->id_Fecha,
+        //         'id_Estado'=>$facturas[$i]->id_Estado,
+        //         'id_Condominio'=>$facturas[$i]->id_Condominio,
+        //         ]);
+        // }
+
+        
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
+        $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
     }else{
         return redirect('/');
@@ -97,7 +101,7 @@ class FacturacionController extends Controller
     }
     public function create2()
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->format('m')+1;
@@ -127,6 +131,7 @@ class FacturacionController extends Controller
                 ]);
         }
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
+        $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
     }else{
         return redirect('/');
@@ -135,7 +140,7 @@ class FacturacionController extends Controller
 
     public function create3()
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->format('m')+1;
@@ -165,6 +170,7 @@ class FacturacionController extends Controller
                 ]);
         }
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
+        $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
     }else{
         return redirect('/');
@@ -173,7 +179,7 @@ class FacturacionController extends Controller
 
     public function create4()
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->format('m')+1;
@@ -189,6 +195,7 @@ class FacturacionController extends Controller
         }
 
         $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
+        $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
     }else{
         return redirect('/');
@@ -197,9 +204,10 @@ class FacturacionController extends Controller
 
     public function create5($id)
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
             $facturas = facturacion::find($id);
             $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
+            $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
             return $pdf->stream();
         }else{
             return redirect('/');
