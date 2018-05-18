@@ -59,6 +59,10 @@
             {{ Form::radio('radioPago','Cheque',false,['onchange'=>'mostrarC(this.value);'])}}
             <label>Cheque</label>
           </div>
+          <div class="form-group" id="NBanco" style="display:none;">
+            <label >Ingrese el Nombre Del Banco: </label>
+            {!! Form::text('NBanco',null,['name'=>'NBanco','id'=>'NBanco','class'=>'form-control','placeholder'=>'Nombre Del Banco...']) !!}
+          </div>
           <div class="form-group" id="NCheque" style="display:none;">
             <label >Ingrese el N° de Cheque: </label>
             {!! Form::text('NCheque',null,['name'=>'NCheque','id'=>'NCheque','class'=>'form-control','placeholder'=>'### ###']) !!}

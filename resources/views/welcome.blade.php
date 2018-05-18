@@ -89,12 +89,14 @@
       <script>
           function mostrarC(dato){
               if(dato=="Efectivo"){
+                  document.getElementById("NBanco").style.display = "none";
                   document.getElementById("NCheque").style.display = "none";
                   document.getElementById("Cantidad").style.display = "block";
               }
               if(dato=="Cheque"){
                   document.getElementById("NCheque").style.display = "block";
                   document.getElementById("Cantidad").style.display = "block";
+                  document.getElementById("NBanco").style.display = "block";
               }
           }
           </script>

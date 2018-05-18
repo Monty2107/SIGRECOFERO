@@ -48,6 +48,10 @@
              {{ Form::radio('radioPago','Cheque',false,['onchange'=>'mostrarC(this.value);'])}}
              <label>Cheque</label>
            </div>
+           <div class="form-group" id="NBanco" style="display:none;">
+            <label >Ingrese el Nombre Del Banco: </label>
+            {!! Form::text('NBanco',null,['name'=>'NBanco','id'=>'NBanco','class'=>'form-control','placeholder'=>'Nombre Del Banco...']) !!}
+          </div>
            <div class="form-group" id="NCheque" style="display:none;">
              <label >Ingrese el N° de Cheque: </label>
              {!! Form::text('NCheque',null,['name'=>'NCheque','id'=>'NCheque','class'=>'form-control','placeholder'=>'### ###']) !!}
@@ -60,13 +64,13 @@
              <div class="form-group" >
                <label >Descripcion: </label>
                {!! Form::textarea('descripcion',$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad,['rows'=>'3','name'=>'descripcion','id'=>'descripcion','class'=>'form-control','disabled']) !!}
+               <input type="hidden" name="descripcion" value="{{$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad}}">
              </div>
            @endif
       </div>
       <input type="hidden" name="radioConcepto" value="{{$estadoC->concepto}}">
       <input type="hidden" name="ano" value="{{$estadoC->ano}}">
       <input type="hidden" name="id_Condominio" value="{{$estadoC->id_Condominio}}">
-      <input type="hidden" name="descripcion" value="{{$estadoC->descripcion.' Con Pago de : $ '.$facturacion->cantidad}}">
       <input type="hidden" name="Mes[]" value="{{$estadoC->mes}}">
     </div>
           <!-- /.box-body -->

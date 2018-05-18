@@ -18,6 +18,7 @@ class CreateIngresoDiariosTable extends Migration
             $table->enum('concepto',['Administrativo','Parqueo', 'Otros']);
             $table->enum('formaPago',['Efectivo','Cheque']);// 0- efectivo  1- cheque
             $table->string('NCheque')->nullable();
+            $table->text('NBanco')->nullable();
             $table->double('cantidad',8,2);
             $table->string('descripcion')->nullable();
             $table->integer('id_Fecha')->unsigned();

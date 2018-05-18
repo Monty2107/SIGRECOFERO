@@ -23,6 +23,6 @@ class condominio extends Model
     return $this->belongsTo('\SIGRECOFERO\estado', 'id_Estado');
   }
   public function facturacion(){
-    return $this->belongsTo('\SIGRECOFERO\facturacion', 'id');
+    return $this->BelongsTo('\SIGRECOFERO\condominio', 'id');
   }
 }

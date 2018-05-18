@@ -9,7 +9,7 @@ class ingreso_diario extends Model
   protected $table = 'ingreso_diarios';
 
   protected $fillable =[
-    'concepto','formaPago','NCheque','cantidad','descripcion','id_Fecha','id_Condominio'
+    'concepto','formaPago','NCheque','NBanco','cantidad','descripcion','id_Fecha','id_Factura','id_Condominio'
   ];
 
   public function fecha(){

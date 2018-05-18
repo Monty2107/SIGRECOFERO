@@ -27,7 +27,7 @@ class PagoRequest extends FormRequest
             'radioConcepto'=>'required',
             'radioPago'=>'required',
             'cantidad'=>'required',
-            'Mes'=>'array|required|min:1'
+            'Mes'=>'array|required'
         ];
     }
 }

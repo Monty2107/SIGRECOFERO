@@ -25,4 +25,5 @@ class facturacion extends Model
   public function factura_anulada(){
     return $this->belongsTo('\SIGRECOFERO\factura_anuladas', 'id_Anular');
   }
+
 }
