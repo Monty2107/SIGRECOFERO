@@ -39,22 +39,22 @@ z-index: -1; /*image */
 }
 
    #arpno {
-top: 100px;
+top: 157px;
 left: 10px;
 position:absolute;
 }
 #payee {
-top: 100px;
+top: 157px;
 left: 200px;
 position:absolute;
 }
 #credit {
-top: 100px;
+top: 157px;
 right: 30px; /*   distance from right */
 position:absolute;
 }
 #paydate {
-top: 57px;
+top: 107px;
 right: 120px;
 position:absolute;
 }
@@ -80,15 +80,15 @@ position:absolute;
        <body> 
            <div class="col-md-12">
                    <div class="box-header with-border">
-       <div style="position: absolute;left: 650px; top: 57px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
-       <div style="position: absolute;left: 175px; top: 100px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-       <div style="position: absolute;left: 175px; top: 120px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
+       <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
+       <div style="position: absolute;left: 175px; top: 157px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+       <div style="position: absolute;left: 175px; top: 170px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
       
 
-       <div style="position: absolute;left: 170px; top: {{'170'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
-       <div style="position: absolute;left: 150px; top: {{'195'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
-        <div style="position: absolute;left: 150px; top: {{'212'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
-        <div style="position: absolute;left: 450px; top: {{'320'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
+       <div style="position: absolute;left: 170px; top: {{'200'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
+       <div style="position: absolute;left: 150px; top: {{'245'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
+        <div style="position: absolute;left: 150px; top: {{'262'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
+        <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
        <?php 
        }
    }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '0' && $r=='1'){
@@ -96,15 +96,15 @@ position:absolute;
            $r='0';
        ?>  
               
-              <div style="position: absolute;left: 650px; top: 665px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
-              <div style="position: absolute;left: 175px; top: 695px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-              <div style="position: absolute;left: 175px; top: 715px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
+              <div style="position: absolute;left: 650px; top: 715px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
+              <div style="position: absolute;left: 175px; top: 745px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+              <div style="position: absolute;left: 175px; top: 765px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
                      
               
-              <div style="position: absolute;left: 170px; top: {{'765'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
-              <div style="position: absolute;left: 150px; top: {{'805'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
-              <div style="position: absolute;left: 150px; top: {{'823'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
-              <div style="position: absolute;left: 450px; top: {{'923'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
+              <div style="position: absolute;left: 170px; top: {{'815'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
+              <div style="position: absolute;left: 150px; top: {{'855'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
+              <div style="position: absolute;left: 150px; top: {{'873'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
+              <div style="position: absolute;left: 450px; top: {{'980'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
      </div>
    </div>
      </body>
@@ -115,15 +115,15 @@ position:absolute;
            $r='0';
             ?>
             
-       <div style="position: absolute;left: 650px; top: 665px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
-       <div style="position: absolute;left: 175px; top: 695px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-       <div style="position: absolute;left: 175px; top: 715px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
+       <div style="position: absolute;left: 650px; top: 715px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
+       <div style="position: absolute;left: 175px; top: 745px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+       <div style="position: absolute;left: 175px; top: 765px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
               
        
-       <div style="position: absolute;left: 170px; top: {{'765'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
-       <div style="position: absolute;left: 150px; top: {{'805'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
-       <div style="position: absolute;left: 150px; top: {{'823'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
-       <div style="position: absolute;left: 450px; top: {{'923'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
+       <div style="position: absolute;left: 170px; top: {{'815'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
+       <div style="position: absolute;left: 150px; top: {{'855'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
+       <div style="position: absolute;left: 150px; top: {{'873'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
+       <div style="position: absolute;left: 450px; top: {{'980'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
      </div>
    </div>
      </body>
@@ -137,15 +137,15 @@ position:absolute;
            <body> 
                <div class="col-md-12">
                        <div class="box-header with-border">
-           <div style="position: absolute;left: 650px; top: 57px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
-           <div style="position: absolute;left: 175px; top: 100px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-           <div style="position: absolute;left: 175px; top: 120px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
+           <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$f->cantidad}}</h1></div>
+           <div style="position: absolute;left: 175px; top: 157px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
+           <div style="position: absolute;left: 175px; top: 170px; z-index: 1;" class="customFont"><h3>{{$nombre->nombre}}.</h3></div>
           
    
-           <div style="position: absolute;left: 170px; top: {{'170'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
-           <div style="position: absolute;left: 150px; top: {{'195'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
-           <div style="position: absolute;left: 150px; top: {{'212'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
-           <div style="position: absolute;left: 450px; top: {{'320'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
+           <div style="position: absolute;left: 170px; top: {{'200'}}px; z-index: 1;" class="customFont"><h3>{{$letras}}.</h3></div>
+           <div style="position: absolute;left: 150px; top: {{'245'}}px; z-index: 1;" class="customFont"><h3>{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</h3></div>
+           <div style="position: absolute;left: 150px; top: {{'262'}}px; z-index: 1;" class="customFont"><h3>{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</h3></div>
+           <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><h3>{{$carbon->format('d/m/Y')}}.</h3></div>
            
        <?php }
        }
