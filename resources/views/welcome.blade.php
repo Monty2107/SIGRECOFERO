@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="img/sigrecofero.ico">
+  <meta name="copyright" content="2018, 2019, 2020, Enigmaticos Group" />
   <title>SIGRECOFERO</title>
   <style>
     .example-modal .modal {
