@@ -11,9 +11,6 @@
 |
 */
 
-
-
-
 Auth::routes();
 
 // Route::get('/', 'HomeController@login');
@@ -28,6 +25,10 @@ Route::group(['prefix' => 'admin'],function(){
 //Rutas Pagos
 Route::resource('pago','PagosController');
 Route::resource('pagoMes','PagoMesController');
+Route::resource('nuevopago','NuevoPagoController');
+Route::resource('buscarCondomine','PagosController@buscar');
+
+//Rutas Facturacion
 Route::resource('facturacion','FacturacionController');
 Route::resource('VerFacturacion','FacturacionController@index2');
 Route::resource('facturacionBuscar','FacturacionController@buscar');
@@ -35,10 +36,13 @@ Route::resource('facturacionAdmin','FacturacionController@create2');
 Route::resource('facturacionParqueo','FacturacionController@create3');
 Route::resource('facturacionOtros','FacturacionController@create4');
 Route::resource('facturacionIndividual','FacturacionController@create5');
-Route::resource('nuevopago','NuevoPagoController');
-Route::resource('buscarCondomine','PagosController@buscar');
 
 
+//Rutas Usuario
+Route::resource('usuario','UsuarioController');
+Route::resource('Perfil','UsuarioController@perfil');
+
+//Rutas Para Atraer meses de pago
 Route::match(['get','post'],'/mesesAdmin/{id}','PagosController@getMesesAdmin');
 Route::match(['get','post'],'/mesesParqueo/{id}','PagosController@getMesesParqueo');
 

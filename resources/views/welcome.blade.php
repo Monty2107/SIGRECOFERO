@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="copyright" content="2018, 2019, 2020, Enigmaticos Group" />
-  <link rel="shortcut icon" href="img/sigrecofero.ico">
-  <!-- <link rel="shortcut icon" href="img/gano4.png" type="image/png" /> -->
+  <!--<link rel="shortcut icon" href="img/sigrecofero.ico">-->
+   <link rel="shortcut icon" href="{!! asset('img/gano4.png') !!}" type="image/png" /> 
 
   <title>SIGRECOFERO</title>
   <style>
@@ -60,6 +60,35 @@
           }
       }
       </script>
+
+<script>
+  function mostrarTablaA(dato){
+      if(dato=="Administrativo"){
+        document.getElementById("tablaParqueo").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "none";
+        document.getElementById("tablaAnulada").style.display = "none";
+        document.getElementById("tablaAdmin").style.display = "block";
+      }
+      if(dato=="Parqueo"){
+        document.getElementById("tablaAdmin").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "none";
+        document.getElementById("tablaAnulada").style.display = "none";
+        document.getElementById("tablaParqueo").style.display = "block";
+      }
+      if(dato=="Otros"){
+        document.getElementById("tablaAdmin").style.display = "none";
+        document.getElementById("tablaParqueo").style.display = "none";
+        document.getElementById("tablaAnulada").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "block";
+      }
+      if(dato=="Anulada"){
+        document.getElementById("tablaAdmin").style.display = "none";
+        document.getElementById("tablaParqueo").style.display = "none";
+        document.getElementById("tablaOtros").style.display = "none";
+        document.getElementById("tablaAnulada").style.display = "block";
+        }
+  }
+  </script>
   <script>
       function mostrarTabla2(dato){
           if(dato=="Administrativo"){ 
@@ -145,6 +174,30 @@
   });
 
   </script>
+
+  <script>
+  $(document).ready(function(){
+    $('#exampli').DataTable({
+      "order": [[1, "asc"]],
+      "language":{
+        "lengthMenu": "Mostrar _MENU_ registros por pagina",
+        "info": "Mostrando pagina _PAGE_ de _PAGES_",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrada de _MAX_ registros)",
+        "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords":    "No se encontraron registros coincidentes",
+        "paginate": {
+          "next":       "Siguiente",
+          "previous":   "Anterior"
+        },
+      }
+    });
+  });
+
+  </script>
+
   <script>
   $(document).ready(function(){
     $('#examplee').DataTable({
@@ -223,7 +276,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                  <a href="{{asset('admin/Perfil')}}" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ url('/logout') }}" 

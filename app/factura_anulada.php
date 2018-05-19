@@ -9,9 +9,10 @@ class factura_anulada extends Model
   protected $table = 'factura_anuladas';
 
   protected $fillable =[
-    'desripcion','id_Factura'
+    'descripcion','id_Factura'
   ];
 
   public function facturacion(){
     return $this->hasMany('\SIGRECOFERO\facturacion', 'id_Factura');
+}
 }

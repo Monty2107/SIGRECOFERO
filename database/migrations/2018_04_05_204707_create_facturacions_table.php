@@ -18,7 +18,8 @@ class CreateFacturacionsTable extends Migration
             $table->text('NFactura');
             $table->enum('concepto',['Administrativo','Parqueo','Otros']); // 0- adminitrativo ,  1- Parqueo
             $table->double('cantidad',8,2)->nullable();
-            $table->enum('emision',['No Emitido','Emitido','Anulado']);
+            $table->enum('emision',['No Emitido','Emitido','Anulado','Anulado He Imprimir']);
+            $table->text('permiso')->nullable();
             $table->text('mes');
             $table->integer('ano');
             $table->boolean('estado'); // 0- Debe , 1- Pago

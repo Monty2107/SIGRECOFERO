@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\facturacion;
+use SIGRECOFERO\factura_anulada;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
 use Carbon\Carbon;
@@ -222,7 +223,7 @@ class FacturacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -237,7 +238,8 @@ class FacturacionController extends Controller
         if ($val[1]== 1) {
 
             $factura = facturacion::find($val[0]);
-            return view('admin.facturacion.anular')->with('factura',$factura);
+            $condominio = condominio::find($val[2]);
+            return view('admin.facturacion.anular')->with('factura',$factura)->with('condominio',$condominio);
 
         }else if($val[1]== 2){
 
@@ -245,6 +247,9 @@ class FacturacionController extends Controller
         $condomine = condominio::find($factura->id_Condominio);
         return view('admin.facturacion.edit')->with('condomine',$condomine);       
 
+        }else if($val[1]== 3){
+            $condominio = condominio::find($val[2]);
+        return view('admin.facturacion.show')->with('condominio',$condominio);
         }else{
 
         $condominio = condominio::find($id);
@@ -261,7 +266,19 @@ class FacturacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $factura = facturacion::find($id);
+        $explo = explode('-',$factura->permiso);
+                $factura->emision = 'Anulado He Imprimir';
+                $factura->permiso = '1'.'-'.$explo[1].'-'.Auth::User()->id;
+                $factura->save();
+
+        $condominio = condominio::find($factura->id_Condominio);
+
+        Session::flash('message','Factura del Mes: '.$factura->mes.' Del Año: '.
+        $factura->ano.' Del Condominio: '.$condominio->empresa->nombre.' Con Local N° '.
+        $condominio->NLocal.' Fue Dado Su Permiso Correctamente!!');
+
+        return redirect()->back();
     }
 
     /**
@@ -273,7 +290,50 @@ class FacturacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        $factura_anulada = factura_anulada::create([
+            'descripcion' => $request->descripcion,
+            'id_Factura'=> $id,
+            ]);
+
+            if($request->emision == "Imprimir"){
+                // 0 = Pide Permiso 1- Dio Permiso 2- Ya se anulo
+                $factura = facturacion::find($id);
+                $factura->emision = 'Anulado';
+                $factura->permiso = '2'.'-'.$factura_anulada->id.'-'.Auth::User()->id;
+                $factura->save();
+
+                
+                facturacion::create([
+                    'NFactura' => '',
+                    'concepto'=> $factura->concepto,
+                    'cantidad' => $factura->cantidad,
+                    'emision'=>'Anulado He Imprimir',
+                    'permiso'=>'0'.'-'.$factura_anulada->id.'-'.Auth::User()->id,
+                    'mes'=>$factura->mes,
+                    'ano'=>$factura->ano,
+                    'estado'=>$factura->estado,
+                    'id_Fecha'=>$factura->id_Fecha,
+                    'id_Estado'=>$factura->id_Estado,
+                    'id_Condominio'=>$factura->id_Condominio,
+                    ]);
+
+            }else{
+
+                $factura = facturacion::find($id);
+                $factura->emision = 'Anulado';
+                $factura->save();
+
+            }
+
+        $condominio = condominio::find($factura->id_Condominio);
+
+        Session::flash('message','Factura del Mes: '.$factura->mes.' Del Año: '.
+        $factura->ano.' Del Condominio: '.$condominio->empresa->nombre.' Con Local N° '.
+        $condominio->NLocal.' Fue Anulado Correctamente!!'); 
+        return view('admin.facturacion.show')->with('condominio',$condominio);
+
     }
 
     /**
