@@ -207,6 +207,8 @@ class FacturacionController extends Controller
     {
         if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
             $facturas = facturacion::find($id);
+            $facturas->emision = 'Emitido';
+            $facturas->save();
             $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
             $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
             return $pdf->stream();

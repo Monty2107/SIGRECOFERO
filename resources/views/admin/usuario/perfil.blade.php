@@ -28,12 +28,12 @@
           <div class="box-body">
             <div class="form-group">
               <label>Su Nombre: </label>
-              {!! Form::text('nombre',$usuario->name,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'ejemplo: empresa@mail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
+              {!! Form::text('nombre',$usuario->name,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Ingrese Su Nombre.....']) !!}
             </div>
             
             <div class="form-group">
               <label >Correo: </label>
-              {!! Form::email('correo',$usuario->email,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'Ingrese Su Correo...']) !!}
+              {!! Form::email('correo',$usuario->email,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@mail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
             </div>
 
             <div class="form-group">

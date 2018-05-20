@@ -114,7 +114,7 @@
                 <br>
                 <span class="label label-warning">A SOLICITADO PERMISO</span>
                 
-                @if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador')
+                @if(Auth::User()->cargo != $permiso[2] || Auth::User()->cargo == 'Programador')
                 <a class="btn btn-success btn-rounded" href="{{route('facturacion.edit',$f->id)}}">DAR PERMISO</a>
                 @endif
                 @endif
