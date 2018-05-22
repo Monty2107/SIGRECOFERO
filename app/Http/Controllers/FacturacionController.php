@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\factura_anulada;
+use SIGRECOFERO\cuenta_por_cobrar;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
 use Carbon\Carbon;
@@ -65,20 +66,22 @@ class FacturacionController extends Controller
 
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
-        $m = $date->format('m')+1;
+        $m = $date->addMonth(1);
+
         $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
         '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
         '11'=>'Noviembre','12'=>'Diciembre' );
 
-        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('emision','=','No Emitido')->get();
-        $mese=$date->addMonth(2);
+        $facturas = facturacion::where('mes','=',$arrayMes[$m->month])->where('emision','=','No Emitido')->get();
+        $date1 = $carbon->now();
+        $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
         // for ($i=0; $i < $countF ; $i++) { 
         //     $facturas[$i]->emision = 'Emitido';
         //     $facturas[$i]->save();
             
-        //     facturacion::create([
+        //    $fati = facturacion::create([
         //         'NFactura' => '',
         //         'concepto'=> $facturas[$i]->concepto,
         //         'cantidad' => $facturas[$i]->cantidad,
@@ -91,6 +94,12 @@ class FacturacionController extends Controller
         //         'id_Condominio'=>$facturas[$i]->id_Condominio,
         //         ]);
         // }
+
+        // cuenta_por_cobrar::create([
+        //     'mes'=>$arrayMes[$m->month],
+        //     'ano'=>$date->format('Y'),
+        //     'id_Fecha'=>$fati->id_Fecha,
+        // ]);
 
         
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
@@ -105,20 +114,21 @@ class FacturacionController extends Controller
         if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
-        $m = $date->format('m')+1;
+        $m = $date->addMonth(1);
         $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
         '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
         '11'=>'Noviembre','12'=>'Diciembre' );
-        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Administrativo')->where('emision','=','No Emitido')->get();
+        $facturas = facturacion::where('mes','=',$arrayMes[$m->month])->where('concepto','=','Administrativo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
-        $mese=$date->addMonth(2);
+        $date1 = $carbon->now();
+        $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
             
-            facturacion::create([
+            $fati = facturacion::create([
                 'NFactura' => '',
                 'concepto'=> $facturas[$i]->concepto,
                 'cantidad' => $facturas[$i]->cantidad,
@@ -131,6 +141,12 @@ class FacturacionController extends Controller
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
         }
+
+        cuenta_por_cobrar::create([
+            'mes'=>$arrayMes[$m->month],
+            'ano'=>$date->format('Y'),
+            'id_Fecha'=>$fati->id_Fecha,
+        ]);
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -144,20 +160,21 @@ class FacturacionController extends Controller
         if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
-        $m = $date->format('m')+1;
+        $m = $date->addMonth(1);
         $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
         '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
         '11'=>'Noviembre','12'=>'Diciembre' );
-        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Parqueo')->where('emision','=','No Emitido')->get();
+        $facturas = facturacion::where('mes','=',$arrayMes[$m->month])->where('concepto','=','Parqueo')->where('emision','=','No Emitido')->get();
         // dd($facturas);
-        $mese=$date->addMonth(2);
+        $date1 = $carbon->now();
+        $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
             
-            facturacion::create([
+            $fati = facturacion::create([
                 'NFactura' => '',
                 'concepto'=> $facturas[$i]->concepto,
                 'cantidad' => $facturas[$i]->cantidad,
@@ -170,6 +187,12 @@ class FacturacionController extends Controller
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
         }
+        cuenta_por_cobrar::create([
+            'mes'=>$arrayMes[$m->month],
+            'ano'=>$date->format('Y'),
+            'id_Fecha'=>$fati->id_Fecha,
+        ]); 
+
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -183,17 +206,24 @@ class FacturacionController extends Controller
         if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
-        $m = $date->format('m')+1;
+        $m = $date->addMonth(1);
+
         $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
         '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
         '11'=>'Noviembre','12'=>'Diciembre' );
-        $facturas = facturacion::where('mes','=',$arrayMes[$m])->where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
+        $facturas = facturacion::where('mes','=',$arrayMes[$m->month])->where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $countF = count($facturas);
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
         }
+
+        cuenta_por_cobrar::create([
+            'mes'=>$arrayMes[$m->month],
+            'ano'=>$date->format('Y'),
+            'id_Fecha'=>$facturas[0]->id_Fecha,
+        ]);
 
         $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
@@ -212,6 +242,7 @@ class FacturacionController extends Controller
             $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
             $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
             return $pdf->stream();
+
         }else{
             return redirect('/');
         }

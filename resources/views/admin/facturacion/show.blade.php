@@ -293,7 +293,7 @@
                 <a class="btn btn-success btn-rounded" href="{{route('facturacion.show',$f->id.'-'.'2')}}">MODIFICAR</a>
                 @endif
                 @if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Financiero')
-                <a class="btn btn-info btn-rounded" href="{{asset('admin/facturacionIndividual').'/'.$f->id}}" target="_blank">EMITIR</a>
+                <a class="btn btn-info btn-rounded" href="{{asset('admin/facturacionIndividual').'/'.$f->id}}" onclick="javascript:window.location.reload();" target="_blank">EMITIR</a>
                 @endif
                 @endif
 

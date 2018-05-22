@@ -73,7 +73,7 @@
         <?php } ?>
         <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
           <li><a href="{!! asset('admin/VerFacturacion') !!}"><i class="fa fa-circle-o"></i>Ver Facturacion</a></li>
-        <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>
+        <li><a href="{!! asset('admin/cuenta') !!} "><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>
         <?php } ?>
       </ul>
     </li>

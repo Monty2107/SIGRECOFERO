@@ -19,8 +19,6 @@ class CreateCuentaPorCobrarsTable extends Migration
             $table->integer('ano');
             $table->integer('id_Fecha')->unsigned();
             $table->foreign('id_Fecha')->references('id')->on('fechas');
-            $table->integer('id_Factura')->unsigned();
-            $table->foreign('id_Factura')->references('id')->on('facturacions');
             $table->timestamps();
         });
     }

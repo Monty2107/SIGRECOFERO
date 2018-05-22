@@ -36,6 +36,9 @@ Route::resource('facturacionAdmin','FacturacionController@create2');
 Route::resource('facturacionParqueo','FacturacionController@create3');
 Route::resource('facturacionOtros','FacturacionController@create4');
 Route::resource('facturacionIndividual','FacturacionController@create5');
+Route::resource('cuenta','Cuenta_por_CobrarController');
+Route::resource('VerCuenta','Cuenta_por_CobrarController@show');
+Route::resource('DescargarCuenta','Cuenta_por_CobrarController@edit');
 
 
 //Rutas Usuario

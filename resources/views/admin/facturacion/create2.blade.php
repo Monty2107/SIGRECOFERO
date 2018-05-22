@@ -192,7 +192,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
             
-            <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" target="_blank" >Si Acepto.</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" onclick="javascript:window.location.reload();" target="_blank" >Si Acepto.</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -229,7 +229,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionParqueo')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionParqueo')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -266,7 +266,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionOtros')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionOtros')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -303,7 +303,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacion/create')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacion/create')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->

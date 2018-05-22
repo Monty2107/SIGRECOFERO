@@ -20,9 +20,22 @@
     </div>
     <?php
       # code...
+      $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        $m = $date->addMonth(1);
+        $date1 = $carbon->now();
+        $me = $date1->addMonth(2);
+      $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
+        '5'=>'Mayo','6'=>'Junio','7'=>'Julio','8'=>'Agosto','9'=>'Septiembre','10'=>'Octubre',
+        '11'=>'Noviembre','12'=>'Diciembre' );
       $estadoAdmin = SIGRECOFERO\estado::where('concepto','=','Administrativo')->get()->first();
       $estadoParqueo = SIGRECOFERO\estado::where('concepto','=','Parqueo')->get()->first();
       $estadoOtros = SIGRECOFERO\estado::where('concepto','=','Otros')->get()->first();
+
+      $val1 = SIGRECOFERO\facturacion::where('emision','=','No Emitido')->where('concepto','=','Administrativo')->get()->last();
+      $val2 = SIGRECOFERO\facturacion::where('emision','=','No Emitido')->where('concepto','=','Parqueo')->get()->last();
+
+
      ?>
 
       <div class="box-body">
@@ -52,7 +65,7 @@
     </div>
       <div class="box-body">
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){?>
-          @if(!is_null($estadoAdmin) || !is_null($estadoParqueo) )
+          @if($val1->mes == $arrayMes[$m->month] || $val2->mes == $arrayMes[$m->month] )
         <div class="form-group">
             
             <button type="button" class="form-control btn btn-success" data-toggle="modal" data-target="#modal-infoAll">
@@ -64,20 +77,40 @@
             (solo imprimira Administrativa y de Parqueo) </h6>
          </div>
          @endif
+         @if($val1->mes == $arrayMes[$me->month] || $val2->mes == $arrayMes[$me->month] )
+         <span>Espere Hasta el Siguiente mes Para Volver a Emitir las Facturas.</span>
+         @endif
          <div class="form-group" id="btnAdmin" style="display:none;">
+            @if($val1->mes == $arrayMes[$m->month])
             <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoAdmin">
                 Imprimir Todas las Facturas Administrativas
               </button>
             <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
-              facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-           </div>
+              facturas no emitidas con los datos que contengan la base en estos momentos. </h6>        
+           @endif
+           @if($val1->mes == $arrayMes[$me->month] )
+           <span>-------------------------------------------------------------------------------
+              -----------------</span>
+              <br>
+         <span>Espere Hasta el Siguiente mes Para Volver a Emitir la Factura Administrativa.</span>
+         @endif
+        </div>
+           
            <div class="form-group" id="btnParqueo" style="display:none;">
+              @if($val2->mes == $arrayMes[$m->month])
               <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoParqueo">
                   Imprimir Todas las Facturas de Parqueo
                 </button>
               <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
                 facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-             </div>
+                @endif
+                @if($val2->mes == $arrayMes[$me->month] )
+                <span>-------------------------------------------------------------------------------
+                -----------------</span>
+                <br><span>Espere Hasta el Siguiente mes Para Volver a Emitir la Factura de Parqueo.</span>
+                @endif
+            
+            </div>
              <div class="form-group" id="btnOtros" style="display:none;">
                 <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoOtros">
                     Imprimir Todas las Facturas de Otros Pagos
@@ -225,7 +258,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
             
-            <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" target="_blank" >Si Acepto.</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" onclick="javascript:window.location.reload();" target="_blank" >Si Acepto.</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -262,7 +295,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionParqueo')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionParqueo')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -299,7 +332,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionOtros')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacionOtros')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -336,7 +369,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacion/create')}}" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="{{asset('admin/facturacion/create')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
