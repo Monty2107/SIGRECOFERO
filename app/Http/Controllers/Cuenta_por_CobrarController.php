@@ -7,6 +7,7 @@ use Session;
 use Redirect;
 use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\cuenta_por_cobrar;
+use SIGRECOFERO\bitacora;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use PDF;
@@ -59,6 +60,7 @@ class Cuenta_por_CobrarController extends Controller
     public function show($id)
     {
         $cuenta = cuenta_por_cobrar::find($id);
+        bitacora::bitacoras('Generacion','Generacion de Cuenta Por Cobrar ');
         $pdf = PDF::loadView('admin/facturacion/cuentasPorCobrar',['cuenta' => $cuenta]);
         $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
         return $pdf->stream('Cuenta_por_cobrar');
@@ -75,6 +77,7 @@ class Cuenta_por_CobrarController extends Controller
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $cuenta = cuenta_por_cobrar::find($id);
+        bitacora::bitacoras('Descarga','Descarga de la Cuenta Por Cobrar ');
         $pdf = PDF::loadView('admin/facturacion/cuentasPorCobrar',['cuenta' => $cuenta]);
         $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
         return $pdf->download('Cuenta_Por_Cobrar'.' Generado el : '.$date->format('d/m/Y').'.pdf');

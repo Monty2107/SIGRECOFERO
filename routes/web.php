@@ -45,6 +45,17 @@ Route::resource('DescargarCuenta','Cuenta_por_CobrarController@edit');
 Route::resource('usuario','UsuarioController');
 Route::resource('Perfil','UsuarioController@perfil');
 
+//Rutas Bitacora
+Route::Resource('Bitacora','BitacoraController');
+Route::match(['get','post'],'/ReporteBitacoras/{id}','BitacoraController@ReporteBitacoras');
+
+//Rutas Backups
+Route::get('backup', 'BackupController@index');
+Route::get('backup/createAPP', 'BackupController@create');
+Route::get('backup/createBase', 'BackupController@create1');
+Route::get('backup/download/{file_name}', 'BackupController@download');
+Route::get('backup/delete/{file_name}', 'BackupController@delete');
+
 //Rutas Para Atraer meses de pago
 Route::match(['get','post'],'/mesesAdmin/{id}','PagosController@getMesesAdmin');
 Route::match(['get','post'],'/mesesParqueo/{id}','PagosController@getMesesParqueo');

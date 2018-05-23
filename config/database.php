@@ -64,6 +64,8 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            'dump_command_path' => 'C:\wamp64\bin\mysql\mysql5.7.19\bin', // only the path, so without 'mysqldump' or 'pg_dump'
+		    'dump_using_single_transaction' => true, // perform dump using a single transaction
         ],
 
         'pgsql' => [

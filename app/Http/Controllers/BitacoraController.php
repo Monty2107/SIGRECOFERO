@@ -3,34 +3,56 @@
 namespace SIGRECOFERO\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Session;
-use Redirect;
-use SIGRECOFERO\User;
 use SIGRECOFERO\bitacora;
+use SIGRECOFERO\fecha;
+use SIGRECOFERO\User;
+use Input;
+use Session;
 
-class UsuarioController extends Controller
+class BitacoraController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth');
     }
-
     public function index()
     {
-        //
+        $bitas = bitacora::all();
+        $userss = User::all();
+        return view('admin.seguridad.bitacora',compact('bitas','userss'));
     }
 
-    public function perfil()
+    public function ReporteBitacoras($tipo)
     {
-        $usuario = \SIGRECOFERO\User::find(Auth::User()->id);
-        return view('admin.usuario.perfil')->with('usuario',$usuario);
+        $vistaurl="admin.seguridad.ReporteBitacoras";
+        return $this->crearReporteBitacoras($vistaurl,$tipo);
+    }
+
+    public function crearReporteBitacoras($vistaurl,$tipo)
+    {
+        $carbon = new \Carbon\Carbon();
+        $dates = $carbon->now();
+        $date = $dates->format('Y-m-d');
+        $view = \View::make($vistaurl, compact('date'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        if ($tipo==1) {
+            return $pdf->stream('ReporteBitacoras.pdf');
+        }
+        if ($tipo==2) {
+            return $pdf->download('ReporteBitacoras.pdf');
+        }else{
+            $bitas = bitacora::all();
+        $userss = User::all();
+        return view('admin.seguridad.bitacora',compact('bitas','userss'));
+        }
+
     }
 
     /**
@@ -62,7 +84,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -83,19 +105,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(usuarioRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $usuario = User::find($id);
-        $usuario->name = $request->nombre;
-        $usuario->email = $request->correo;
-        $usuario->password = $request->password;
-        $usuario->save();
-
-        bitacora::bitacoras('Modificacion de Usuario','Usuario: '.$usuario->name.' Modificado');
-        Session::flash('message',' Usuario: '.$usuario->name.' Con Correo: '.$usuario->email.' ha sido Modificado Correctamente!!');
-      return redirect()->back();
-
-
+        //
     }
 
     /**

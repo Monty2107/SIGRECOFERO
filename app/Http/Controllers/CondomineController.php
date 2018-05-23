@@ -13,6 +13,7 @@ use SIGRECOFERO\ingreso_diario;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\facturacion;
+use SIGRECOFERO\bitacora;
 use Carbon\Carbon;
 use SIGRECOFERO\Http\Requests\CondomineRequest;
 use SIGRECOFERO\Http\Requests\CondomineUpdateRequest;
@@ -262,6 +263,7 @@ class CondomineController extends Controller
         $ano=$ano+1;
       }
       // dd('guardado exitosamente');
+      bitacora::bitacoras('Registro','Registro de Condominio: '.$empresa->nombre);
       Session::flash('message','Comdomine: '.$empresa->nombre.' ha sido registrado Correctamente!!');
       return redirect()->route('condominio.create');
     }
@@ -347,11 +349,13 @@ class CondomineController extends Controller
 
      if ($request->factura == 2) {
        # code...
+       bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$empresa->nombre);
        Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');
       // return redirect()->back();
       return redirect('/admin/facturacion');
      }else{
+      bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$empresa->nombre);
       Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');
       // return redirect()->back();
@@ -377,6 +381,7 @@ class CondomineController extends Controller
         $facturacion = facturacion::where('id_Condominio',$empresa->id);
         $facturacion->delete();
         // $facturacion = facturacion::where('id_estado','=',$cont);
+        bitacora::bitacoras('Eliminacion','Elimino el Condominio: '.$empresa->nombre);
         Session::flash('message','El Condominio: '.$empresa->nombre
         .' Con Numero de Local: '.$condominio->NLocal.' Fue Eliminado Exitosamente!!');
         return redirect('/admin/buscar');

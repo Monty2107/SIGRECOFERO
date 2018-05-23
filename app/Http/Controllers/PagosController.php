@@ -11,6 +11,7 @@ use SIGRECOFERO\ingreso_diario;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\facturacion;
+use SIGRECOFERO\bitacora;
 use SIGRECOFERO\Http\Requests\PagoRequest;
 class PagosController extends Controller
 {
@@ -214,9 +215,13 @@ class PagosController extends Controller
         }
         $nombreCondomine = empresa::find($id);
         if($cambio->concepto == 'Parqueo'){
+          bitacora::bitacoras('Registro Pago','Pago Registrado al Condominie: '.
+          $nombreCondomine->nombre.' En Concepto de: '.$cambio->concepto);
           Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
           " En Concepto de : Pago de ".$cambio->concepto);
         }else{
+          bitacora::bitacoras('Registro Pago','Pago Registrado al Condominie: '.
+          $nombreCondomine->nombre.' En Concepto de: '.$cambio->concepto);
           Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
           " En Concepto de : Pago ".$cambio->concepto);
         }
@@ -256,9 +261,13 @@ class PagosController extends Controller
           $idCondo = $request->id_Condominio;
           $nombreCondomine = empresa::find($idCondo);
           if($request->radioConcepto == 'Otros'){
+            bitacora::bitacoras('Registro Pago','Pago Registrado al Condominie: '.
+            $nombreCondomine->nombre.' En Concepto de: '.$estado->descripcion);
             Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
           ' En el mes de : '.$request->mes.' , Con concepto de : '.$estado->descripcion);
           }else{
+            bitacora::bitacoras('Registro Pago','Pago Registrado al Condominie: '.
+            $nombreCondomine->nombre.' En Concepto de: '.$request->radioConcepto);
             Session::flash('message','Pago Registrado Exitosamente del Condomine: '.$nombreCondomine->nombre.
           ' En el mes de : '.$request->mes.' , Con concepto de : '.$request->radioConcepto );
           }

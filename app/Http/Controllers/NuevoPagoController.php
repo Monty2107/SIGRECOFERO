@@ -12,6 +12,7 @@ use SIGRECOFERO\fecha;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\empresa;
+use SIGRECOFERO\bitacora;
 use SIGRECOFERO\Http\Requests\NuevoPagoRequest;
 
 class NuevoPagoController extends Controller
@@ -230,6 +231,7 @@ class NuevoPagoController extends Controller
       }
 
     $empresa = empresa::find($id);
+    bitacora::bitacoras('Registro','Pago Registrado al Condominie: '.$empresa->nombre);
 
           Session::flash('message','Nuevo Pago Registrado Exitosamente al Condomine: '.$empresa->nombre.'  
           ,Con concepto de : '.$request->descripcion );

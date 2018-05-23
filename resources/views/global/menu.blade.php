@@ -88,13 +88,13 @@
       </a>
       <ul class="treeview-menu">
 
-        <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i>Bitacora</a></li>
+        <li><a href="{!! asset('admin/Bitacora') !!}"><i class="fa fa-circle-o"></i>Bitacora</a></li>
         <?php if(Auth::User()->cargo == "Programador" ){ ?>
         <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i>Nuevo Usuario</a></li> 
         <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i>Buscar Usuario</a></li>
         <?php } ?>
-        <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
-        <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i>Backups de Base</a></li>
+        <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
+        <li><a href="{!! asset('admin/backup') !!}"><i class="fa fa-circle-o"></i>Backups de Base</a></li>
         <?php } ?>
       </ul>
     </li>

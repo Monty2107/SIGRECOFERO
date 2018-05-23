@@ -11,6 +11,7 @@ use SIGRECOFERO\factura_anulada;
 use SIGRECOFERO\cuenta_por_cobrar;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
+use SIGRECOFERO\bitacora;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use PDF;
@@ -116,7 +117,7 @@ class FacturacionController extends Controller
             'id_Fecha'=>$fati->id_Fecha,
         ]);
 
-        
+        bitacora::bitacoras('Emision','Emision de Facturas  de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
         $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -177,6 +178,7 @@ class FacturacionController extends Controller
             'concepto'=>'Administracion',
             'id_Fecha'=>$fati->id_Fecha,
         ]);
+        bitacora::bitacoras('Emision','Emision de Facturas  de Administracion de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -237,7 +239,7 @@ class FacturacionController extends Controller
             'concepto'=>'Parqueo',
             'id_Fecha'=>$fati->id_Fecha,
         ]); 
-
+        bitacora::bitacoras('Emision','Emision de Facturas  de Parqueo de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -275,7 +277,7 @@ class FacturacionController extends Controller
             'concepto'=>'Otros',
             'id_Fecha'=>$facturas[0]->id_Fecha,
         ]);
-
+        bitacora::bitacoras('Emision','Emision de Facturas  de Otros Pagos');
         $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
         return $pdf->stream();
@@ -290,6 +292,7 @@ class FacturacionController extends Controller
             $facturas = facturacion::find($id);
             $facturas->emision = 'Emitido';
             $facturas->save();
+            bitacora::bitacoras('Emision','Emision de Factura  Anulada');
             $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
             $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
             return $pdf->stream();
@@ -357,7 +360,7 @@ class FacturacionController extends Controller
                 $factura->save();
 
         $condominio = condominio::find($factura->id_Condominio);
-
+        bitacora::bitacoras('Permiso',Auth::User()->cargo.' Dio Permiso Correspondiente a la Anulacion');
         Session::flash('message','Factura del Mes: '.$factura->mes.' Del Año: '.
         $factura->ano.' Del Condominio: '.$condominio->empresa->nombre.' Con Local N° '.
         $condominio->NLocal.' Fue Dado Su Permiso Correctamente!!');
@@ -413,6 +416,8 @@ class FacturacionController extends Controller
 
         $condominio = condominio::find($factura->id_Condominio);
 
+        bitacora::bitacoras('Anulacion','Factura del mes de: '.$factura->mes.
+        'del condomine '.$condominio->empresa->nombre.' Anulado');
         Session::flash('message','Factura del Mes: '.$factura->mes.' Del Año: '.
         $factura->ano.' Del Condominio: '.$condominio->empresa->nombre.' Con Local N° '.
         $condominio->NLocal.' Fue Anulado Correctamente!!'); 

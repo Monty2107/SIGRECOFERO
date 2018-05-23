@@ -478,7 +478,7 @@ table tr:nth-child(2n-1) td {
                       <td style = "width:10%">{{$co->codigo}}</td>
                       <td style = "width:30%">{{$co->empresa->nombre}}</td>
                       <td style = "width:30%">{{'Cuota de '.$factura[$i]->concepto}}</td>
-                        <td style = "width:10%"></td>
+                        <td style = "width:10%"> </td>
                         <td style = "width:10%">{{$factura[$i]->cantidad}} </td>
                         <td style = "width:10%">{{$sum}}</td>  
                       </tr>
