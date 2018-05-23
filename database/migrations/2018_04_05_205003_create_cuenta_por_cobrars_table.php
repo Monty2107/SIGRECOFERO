@@ -17,6 +17,7 @@ class CreateCuentaPorCobrarsTable extends Migration
             $table->increments('id');
             $table->string('mes');
             $table->integer('ano');
+            $table->text('concepto');
             $table->integer('id_Fecha')->unsigned();
             $table->foreign('id_Fecha')->references('id')->on('fechas');
             $table->timestamps();

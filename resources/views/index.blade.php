@@ -1,7 +1,7 @@
 @extends('welcome')
 
 @section('content')
-    <label class="label-warning">Ultima Actualizacion: 18/Mayo/2018</label><br>
+    <label class="label-warning">Ultima Actualizacion: 22/Mayo/2018</label><br>
 
   
   <div class="row">

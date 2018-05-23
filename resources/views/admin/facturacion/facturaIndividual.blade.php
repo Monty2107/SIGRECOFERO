@@ -5,20 +5,19 @@
 ?>
 <html>
 <head>
-<title>Factura Individual</title>
+<title>PHP to Dot Matrix Printer</title>
 
 <style>
 @font-face { 
-font-family: kitfont; 
-src: url(“font-matricial/font/1979_dot_matrix.eot”);
-src: url(“font-matricial/font/1979_dot_matrix.eot”) format(“embedded-opentype”),
-url(“font-matricial/font/1979_dot_matrix.woff”) format(“woff”),
-url(“font-matricial/font/1979_dot_matrix.ttf”) format(“truetype”),
-url(“font-matricial/font/1979_dot_matrix.svg”) format(“svg”); } 
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
 
 .customFont { /*  <div class="customFont" /> */
-font-style: kitfont;
-font-size:10;
+font-style: calibris;
+font-size:14;
+font-weight: 100;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
 }
 #mainDiv {
 height: 324px; /* height of receipt 4.5 inches*/
@@ -39,22 +38,22 @@ z-index: -1; /*image */
 }
 
    #arpno {
-top: 60px;
+top: 100px;
 left: 10px;
 position:absolute;
 }
 #payee {
-top: 60px;
+top: 100px;
 left: 200px;
 position:absolute;
 }
 #credit {
-top: 60px;
+top: 100px;
 right: 30px; /*   distance from right */
 position:absolute;
 }
 #paydate {
-top: 107px;
+top: 127px;
 right: 120px;
 position:absolute;
 }
@@ -62,169 +61,170 @@ position:absolute;
 
 </head>
 <?php  $r='0'; ?>
-                       
+                        
 <?php 
         
-        $letras = NumeroALetras::convertir($facturas->cantidad, 'dolares', 'centavos');
-        $nombre = \SIGRECOFERO\empresa::find($facturas->id_Condominio);
-        $mes = \SIGRECOFERO\estado::find($facturas->id_Estado);  
-        $local = \SIGRECOFERO\condominio::find($facturas->id_Condominio);  
+        $letras = NumeroALetras::convertir($f->cantidad, 'dolares','centavos');
+        $nombre = \SIGRECOFERO\empresa::find($f->id_Condominio);
+        $mes = \SIGRECOFERO\estado::find($f->id_Estado);  
+        $local = \SIGRECOFERO\condominio::find($f->id_Condominio);  
         $carbon = new \Carbon\carbon(); 
         ?>            
         <?php 
-        if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '1' && $r=='0'){
+        if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '1' && $r=='0'){
         if(!is_null($nombre)){
             $r='1';
         ?>
         <body> 
             <div class="col-md-12">
                     <div class="box-header with-border">
-        <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-        <div style="position: absolute;left: 175px; top: 60px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-        <div style="position: absolute;left: 175px; top: 165px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+        <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:18; " class="customFont">{{$f->cantidad}}</div>
+        <div style="position: absolute;left: 175px; top: 100px; z-index: 1; text-transform: uppercase; " class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+        <div style="position: absolute;left: 175px; top: 170px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
        
+        <div style="position: absolute;left: 170px; top: {{'224'}}px; z-index: 1; text-transform: uppercase; font-size:16; " class="customFont">{{$letras}}.</div>
+        <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</div>
+        <div style="position: absolute;left: 150px; top: {{'284'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
 
-        <div style="position: absolute;left: 170px; top: {{'220'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-        <div style="position: absolute;left: 150px; top: {{'250'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</p></div>
-         <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-         <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+         <div style="position: absolute;left: 400px; top: {{'384'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
         <?php 
         }
-    }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '0' && $r=='1'){
+    }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '0' && $r=='1'){
         if(!is_null($nombre)){
             $r='0';
         ?>  
                
-               <div style="position: absolute;left: 650px; top: 690px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-               <div style="position: absolute;left: 175px; top: 640px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-               <div style="position: absolute;left: 175px; top: 735px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+               <div style="position: absolute;left: 650px; top: {{'710'}}px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+               <div style="position: absolute;left: 175px; top: 680px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+               <div style="position: absolute;left: 175px; top: 742px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
                       
                
-               <div style="position: absolute;left: 170px; top: {{'795'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-               <div style="position: absolute;left: 150px; top: {{'835'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</p></div>
-               <div style="position: absolute;left: 150px; top: {{'853'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-               <div style="position: absolute;left: 450px; top: {{'965'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+               <div style="position: absolute;left: 170px; top: {{'799'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+               <div style="position: absolute;left: 150px; top: {{'852'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</div>
+               <div style="position: absolute;left: 150px; top: {{'870'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+               <div style="position: absolute;left: 400px; top: {{'965'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
       </div>
     </div>
       </body>
 
         <?php }
-        }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '1' && $r=='1'){
+        }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '1' && $r=='1'){
             if(!is_null($nombre)){
             $r='0';
              ?>
              
-        <div style="position: absolute;left: 650px; top: 690px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-        <div style="position: absolute;left: 175px; top: 640px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-        <div style="position: absolute;left: 175px; top: 735px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+        <div style="position: absolute;left: 650px; top: {{'710'}}px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+        <div style="position: absolute;left: 175px; top: 680px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+        <div style="position: absolute;left: 175px; top: 742px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
                
         
-        <div style="position: absolute;left: 170px; top: {{'795'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-        <div style="position: absolute;left: 150px; top: {{'835'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</p></div>
-        <div style="position: absolute;left: 150px; top: {{'853'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-        <div style="position: absolute;left: 450px; top: {{'965'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+        <div style="position: absolute;left: 170px; top: {{'799'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+        <div style="position: absolute;left: 150px; top: {{'852'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</div>
+        <div style="position: absolute;left: 150px; top: {{'870'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+        <div style="position: absolute;left: 400px; top: {{'965'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
       </div>
     </div>
       </body>
 
         
         <?php }
-        }else if($facturas->concepto == 'Administrativo' && $facturas->id_Condominio % 2 == '0' && $r=='0'){ 
+        }else if($f->concepto == 'Administrativo' && $f->id_Condominio % 2 == '0' && $r=='0'){ 
             if(!is_null($nombre)){
             $r='1';
             ?>
             <body> 
                 <div class="col-md-12">
                         <div class="box-header with-border">
-            <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-            <div style="position: absolute;left: 175px; top: 60px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-            <div style="position: absolute;left: 175px; top: 165px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+            <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+            <div style="position: absolute;left: 175px; top: 100px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+            <div style="position: absolute;left: 175px; top: 170px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
            
     
-            <div style="position: absolute;left: 170px; top: {{'220'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-            <div style="position: absolute;left: 150px; top: {{'250'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</p></div>
-            <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-            <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+            <div style="position: absolute;left: 170px; top: {{'224'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+            <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA ADMINISTRATIVA CORRESPONDIENTE AL MES'}}</div>
+            <div style="position: absolute;left: 150px; top: {{'284'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+            <div style="position: absolute;left: 400px; top: {{'384'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
             
         <?php }
         }
         ?>
             
         <?php 
-        if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '1' && $r=='0'){
+        if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '1' && $r=='0'){
         if(!is_null($nombre)){
             $r='1';
         ?>
         <body> 
             <div class="col-md-12">
                     <div class="box-header with-border">
-        <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-        <div style="position: absolute;left: 175px; top: 60px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-        <div style="position: absolute;left: 175px; top: 165px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+        <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+        <div style="position: absolute;left: 175px; top: 100px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+        <div style="position: absolute;left: 175px; top: 170px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
        
 
-        <div style="position: absolute;left: 170px; top: {{'220'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-        <div style="position: absolute;left: 150px; top: {{'250'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</p></div>
-         <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-        <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+        <div style="position: absolute;left: 170px; top: {{'224'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+        <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</div>
+         <div style="position: absolute;left: 150px; top: {{'284'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+        <div style="position: absolute;left: 400px; top: {{'384'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
         <?php 
         }
-    }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '0' && $r=='1'){
+    }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '0' && $r=='1'){
         if(!is_null($nombre)){
             $r='0';
         ?>  
                
-               <div style="position: absolute;left: 650px; top: 690px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-               <div style="position: absolute;left: 175px; top: 640px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-               <div style="position: absolute;left: 175px; top: 735px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+               <div style="position: absolute;left: 650px; top: {{'710'}}px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+               <div style="position: absolute;left: 175px; top: 680px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+               <div style="position: absolute;left: 175px; top: 742px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
                       
                
-               <div style="position: absolute;left: 170px; top: {{'795'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-               <div style="position: absolute;left: 150px; top: {{'835'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</p></div>
-               <div style="position: absolute;left: 150px; top: {{'853'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-               <div style="position: absolute;left: 450px; top: {{'965'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+               <div style="position: absolute;left: 170px; top: {{'799'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+               <div style="position: absolute;left: 150px; top: {{'852'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</div>
+               <div style="position: absolute;left: 150px; top: {{'870'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+               <div style="position: absolute;left: 400px; top: {{'965'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
       </div>
     </div>
       </body>
 
         <?php }
-        }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '1' && $r=='1'){
+        }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '1' && $r=='1'){
             if(!is_null($nombre)){
             $r='0';
              ?>
 
-<div style="position: absolute;left: 650px; top: 690px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-        <div style="position: absolute;left: 175px; top: 640px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-        <div style="position: absolute;left: 175px; top: 735px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+<div style="position: absolute;left: 650px; top: {{'710'}}px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+        <div style="position: absolute;left: 175px; top: 680px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+        <div style="position: absolute;left: 175px; top: 742px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
                
         
-        <div style="position: absolute;left: 170px; top: {{'795'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-        <div style="position: absolute;left: 150px; top: {{'835'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</p></div>
-        <div style="position: absolute;left: 150px; top: {{'853'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-        <div style="position: absolute;left: 450px; top: {{'965'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+        <div style="position: absolute;left: 170px; top: {{'799'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+        <div style="position: absolute;left: 150px; top: {{'852'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</div>
+        <div style="position: absolute;left: 150px; top: {{'870'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+        <div style="position: absolute;left: 400px; top: {{'965'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
       </div>
     </div>
       </body>
         
         <?php }
-        }else if($facturas->concepto == 'Parqueo' && $facturas->id_Condominio % 2 == '0' && $r=='0'){ 
+        }else if($f->concepto == 'Parqueo' && $f->id_Condominio % 2 == '0' && $r=='0'){ 
             if(!is_null($nombre)){
             $r='1';
             ?>
             <body> 
                 <div class="col-md-12">
                         <div class="box-header with-border">
-            <div style="position: absolute;left: 650px; top: 107px; z-index: 1;" class="customFont"><h1>{{$facturas->cantidad}}</h1></div>
-            <div style="position: absolute;left: 175px; top: 60px; z-index: 1;" class="customFont"><h5>{{'CODIGO: '.$local->codigo}}.</h5></div>
-            <div style="position: absolute;left: 175px; top: 165px; z-index: 1;" class="customFont"><p style="font-weight: 100; font-size:16px;" >{{$nombre->nombre}}.</p></div>
+            <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:20;" class="customFont">{{$f->cantidad}}</div>
+            <div style="position: absolute;left: 175px; top: 100px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CODIGO: '.$local->codigo}}.</div>
+            <div style="position: absolute;left: 175px; top: 170px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont">{{$nombre->nombre}}.</div>
            
     
-            <div style="position: absolute;left: 170px; top: {{'220'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$letras}}.</p></div>
-            <div style="position: absolute;left: 150px; top: {{'250'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</p></div>
-            <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</p></div>
-            <div style="position: absolute;left: 450px; top: {{'370'}}px; z-index: 1;" class="customFont"><p style="font-weight: 100;">{{$carbon->format('d/m/Y')}}.</p></div>
+            <div style="position: absolute;left: 170px; top: {{'224'}}px; z-index: 1; text-transform: uppercase; font-size:16;" class="customFont">{{$letras}}.</div>
+            <div style="position: absolute;left: 150px; top: {{'267'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'CUOTA PARQUEO CORRESPONDIENTE AL MES'}}</div>
+            <div style="position: absolute;left: 150px; top: {{'284'}}px; z-index: 1; text-transform: uppercase;" class="customFont">{{'DE: '.$mes->mes.' DEL AÑO : '.$mes->ano.', LOCAL: '.$local->NLocal}}.</div>
+            <div style="position: absolute;left: 400px; top: {{'384'}}px; z-index: 1;" class="customFont">{{$carbon->format('d/m/Y')}}.</div>
             
         <?php }
         }
         ?>
+        
 </html>

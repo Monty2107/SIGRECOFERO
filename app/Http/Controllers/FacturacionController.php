@@ -77,29 +77,44 @@ class FacturacionController extends Controller
         $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
-        // for ($i=0; $i < $countF ; $i++) { 
-        //     $facturas[$i]->emision = 'Emitido';
-        //     $facturas[$i]->save();
-            
-        //    $fati = facturacion::create([
-        //         'NFactura' => '',
-        //         'concepto'=> $facturas[$i]->concepto,
-        //         'cantidad' => $facturas[$i]->cantidad,
-        //         'emision'=>'No Emitido',
-        //         'mes'=>$arrayMes[$jDate],
-        //         'ano'=>$mese->year,
-        //         'estado'=>false,
-        //         'id_Fecha'=>$facturas[$i]->id_Fecha,
-        //         'id_Estado'=>$facturas[$i]->id_Estado,
-        //         'id_Condominio'=>$facturas[$i]->id_Condominio,
-        //         ]);
-        // }
+        $fecha = fecha::create([
+            'dia'=>$date->format('d'),
+            'mes'=>$date->format('m'),
+            'ano'=>$date->format('Y'),
+          ]);
+        for ($i=0; $i < $countF ; $i++) { 
+            $facturas[$i]->emision = 'Emitido';
+            $facturas[$i]->save();
 
-        // cuenta_por_cobrar::create([
-        //     'mes'=>$arrayMes[$m->month],
-        //     'ano'=>$date->format('Y'),
-        //     'id_Fecha'=>$fati->id_Fecha,
-        // ]);
+            $estado = estado::create([
+                'mes'=>$arrayMes[$jDate],
+                'ano'=>$date1->format('Y'),
+                'estado'=>false,
+                'concepto'=>$factura[$i]->concepto,
+                'id_Condominio'=>$facturas[$i]->id_Condominio,
+                'id_Fecha'=>$fecha->id,
+                ]);
+            
+           $fati = facturacion::create([
+                'NFactura' => '',
+                'concepto'=> $facturas[$i]->concepto,
+                'cantidad' => $facturas[$i]->cantidad,
+                'emision'=>'No Emitido',
+                'mes'=>$arrayMes[$jDate],
+                'ano'=>$mese->year,
+                'estado'=>false,
+                'id_Fecha'=>$facturas[$i]->id_Fecha,
+                'id_Estado'=>$estado->id,
+                'id_Condominio'=>$facturas[$i]->id_Condominio,
+                ]);
+        }
+
+        cuenta_por_cobrar::create([
+            'mes'=>$arrayMes[$m->month],
+            'ano'=>$date->format('Y'),
+            'concepto'=>'Todas',
+            'id_Fecha'=>$fati->id_Fecha,
+        ]);
 
         
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
@@ -124,11 +139,25 @@ class FacturacionController extends Controller
         $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
+        $fecha = fecha::create([
+            'dia'=>$date->format('d'),
+            'mes'=>$date->format('m'),
+            'ano'=>$date->format('Y'),
+          ]);
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
             
-            $fati = facturacion::create([
+            $estado = estado::create([
+                'mes'=>$arrayMes[$jDate],
+                'ano'=>$date1->format('Y'),
+                'estado'=>false,
+                'concepto'=>$factura[$i]->concepto,
+                'id_Condominio'=>$facturas[$i]->id_Condominio,
+                'id_Fecha'=>$fecha->id,
+                ]);
+            
+           $fati = facturacion::create([
                 'NFactura' => '',
                 'concepto'=> $facturas[$i]->concepto,
                 'cantidad' => $facturas[$i]->cantidad,
@@ -137,7 +166,7 @@ class FacturacionController extends Controller
                 'ano'=>$mese->year,
                 'estado'=>false,
                 'id_Fecha'=>$facturas[$i]->id_Fecha,
-                'id_Estado'=>$facturas[$i]->id_Estado,
+                'id_Estado'=>$estado->id,
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
         }
@@ -145,6 +174,7 @@ class FacturacionController extends Controller
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
+            'concepto'=>'Administracion',
             'id_Fecha'=>$fati->id_Fecha,
         ]);
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
@@ -170,11 +200,25 @@ class FacturacionController extends Controller
         $mese=$date1->addMonth(2);
         $countF = count($facturas);
         $jDate = ($mese->month +'1')-'1';
+        $fecha = fecha::create([
+            'dia'=>$date->format('d'),
+            'mes'=>$date->format('m'),
+            'ano'=>$date->format('Y'),
+          ]);
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
             
-            $fati = facturacion::create([
+            $estado = estado::create([
+                'mes'=>$arrayMes[$jDate],
+                'ano'=>$date1->format('Y'),
+                'estado'=>false,
+                'concepto'=>$factura[$i]->concepto,
+                'id_Condominio'=>$facturas[$i]->id_Condominio,
+                'id_Fecha'=>$fecha->id,
+                ]);
+            
+           $fati = facturacion::create([
                 'NFactura' => '',
                 'concepto'=> $facturas[$i]->concepto,
                 'cantidad' => $facturas[$i]->cantidad,
@@ -183,13 +227,14 @@ class FacturacionController extends Controller
                 'ano'=>$mese->year,
                 'estado'=>false,
                 'id_Fecha'=>$facturas[$i]->id_Fecha,
-                'id_Estado'=>$facturas[$i]->id_Estado,
+                'id_Estado'=>$estado->id,
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
         }
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
+            'concepto'=>'Parqueo',
             'id_Fecha'=>$fati->id_Fecha,
         ]); 
 
@@ -214,6 +259,11 @@ class FacturacionController extends Controller
         $facturas = facturacion::where('mes','=',$arrayMes[$m->month])->where('concepto','=','Otros')->where('emision','=','No Emitido')->get();
         // dd($facturas);
         $countF = count($facturas);
+        $fecha = fecha::create([
+            'dia'=>$date->format('d'),
+            'mes'=>$date->format('m'),
+            'ano'=>$date->format('Y'),
+          ]);
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
@@ -222,6 +272,7 @@ class FacturacionController extends Controller
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
+            'concepto'=>'Otros',
             'id_Fecha'=>$facturas[0]->id_Fecha,
         ]);
 

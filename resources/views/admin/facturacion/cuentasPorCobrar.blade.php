@@ -112,7 +112,11 @@ table tr:nth-child(2n-1) td {
              ?>
              @foreach($condominio1 as $c)
              <?php
-               $factu = \SIGRECOFERO\facturacion::where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             if($cuenta->concepto == 'Todas'){
+               $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }else{
+              $factu = \SIGRECOFERO\facturacion::where('concepto','=',$cuenta->concepto)->where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }
                $count1 = count($factu);
                
                for ($i=0; $i < $count1 ; $i++) { 
@@ -158,11 +162,18 @@ table tr:nth-child(2n-1) td {
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br>
+        
+        
       </div><!-- /.box-header -->
+    </body>
+    <body>
       <div class="box-body">
-        <div style="position: absolute;left: 270px; top: 450px; z-index: 1;"><h3>SEGREGACION POR CLIENTE</h3></div>
-        <div style="position: absolute;left: 20px; top: 490px; z-index: 1;"><h3>1102  CUENTAS Y DOCUMENTOS POR</h3></div>
-        <div style="position: absolute;left: 50px; top: 520px; z-index: 1;">11020114 CUOTAS ADMINISTRACION</div>
+        <div style="position: absolute;left: 270px;  z-index: 1;"><h3>SEGREGACION POR CLIENTE</h3></div>
+        <br><br><br>
+        <div style="position: absolute;left: 20px;  z-index: 1;"><h3>1102  CUENTAS Y DOCUMENTOS POR</h3></div>
+        <br><br>
+        <div style="position: absolute;left: 50px;  z-index: 1;">11020114 CUOTAS ADMINISTRACION</div>
+        <br><br><br><br>
         <table class="table-wrapper" >  
            <thead>
             <tr>
@@ -186,7 +197,11 @@ table tr:nth-child(2n-1) td {
           <tbody>
                
             <?php 
-            $factura = \SIGRECOFERO\facturacion::where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$co->id)->get();
+            if($cuenta->concepto == 'Todas'){
+               $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }else{
+              $factu = \SIGRECOFERO\facturacion::where('concepto','=',$cuenta->concepto)->where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }
             $count = count($factura);
             
             for ($i=0; $i < $count ; $i++) { 
@@ -219,9 +234,7 @@ table tr:nth-child(2n-1) td {
            
         </tbody>
         @endforeach
-        <div>
-        <div style="position: absolute;left: 50px; z-index: 1;">11020115  CUOTAS PARQUEO</div>
-        </div>
+        
       </table>
       <footer>
     <table>
@@ -241,7 +254,10 @@ table tr:nth-child(2n-1) td {
   </footer>
      </div><!-- /.box-body -->
     </div><!-- /.box -->
-
+    
+    <div>
+      <div style="position: absolute;left: 50px; z-index: 1;">11020115  CUOTAS PARQUEO</div>
+      </div>
     <br><br>
     <div class="box-body">
             <table class="table-wrapper" >  
@@ -265,7 +281,11 @@ table tr:nth-child(2n-1) td {
             <tbody>
                  
               <?php 
-              $factura = \SIGRECOFERO\facturacion::where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$co->id)->get();
+              if($cuenta->concepto == 'Todas'){
+               $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }else{
+              $factu = \SIGRECOFERO\facturacion::where('concepto','=',$cuenta->concepto)->where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }
               $count = count($factura);
               
               for ($i=0; $i < $count ; $i++) { 
@@ -301,10 +321,7 @@ table tr:nth-child(2n-1) td {
           </tbody>
           @endforeach
         <div>
-        <div style="position: absolute;left: 20px; z-index: 1;"><h3>2204  INGRESOS COBRADOS POR</h3></div><br><br>
-            <div style="position: absolute;left: 50px;  z-index: 1;">22040104 INGRESOS DIFERIDOS CUOTAS DE ADMINISTRACION</div>
-
-          </div>
+        
           </table>
           <footer>
         <table>
@@ -323,6 +340,10 @@ table tr:nth-child(2n-1) td {
         </table>
       </footer>
          </div><!-- /.box-body -->
+         <div style="position: absolute;left: 20px; z-index: 1;"><h3>2204  INGRESOS COBRADOS POR</h3></div><br><br>
+            <div style="position: absolute;left: 50px;  z-index: 1;">22040104 INGRESOS DIFERIDOS CUOTAS DE ADMINISTRACION</div>
+
+          </div>
          <br><br>
          <br>
         <div class="box-body">
@@ -343,13 +364,18 @@ table tr:nth-child(2n-1) td {
                   $n = 1;
                   $j=1;
                   $sum = 0;
+                  $tup = 0;
                       ?>
               @foreach($condominio as $co)
                   <tbody>
                        
                     <?php 
-                    $factura = \SIGRECOFERO\facturacion::where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$co->id)->get();
-                    $count = count($factura);
+                    if($cuenta->concepto == 'Todas'){
+               $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }else{
+              $factu = \SIGRECOFERO\facturacion::where('concepto','=',$cuenta->concepto)->where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }
+                   $count = count($factura);
                     
                     for ($i=0; $i < $count ; $i++) { 
                         # code...       
@@ -382,9 +408,7 @@ table tr:nth-child(2n-1) td {
                    
                 </tbody>
                 @endforeach
-                <div>
-                <div style="position: absolute;left: 50px;  z-index: 1;">22040105  INGRESOS DIFERIDOS PARQUEO</div>
-                </div>
+                
               </table>
               <footer>
             <table>
@@ -403,7 +427,9 @@ table tr:nth-child(2n-1) td {
             </table>
           </footer>
              </div><!-- /.box-body -->
-        
+             <div>
+              <div style="position: absolute;left: 50px;  z-index: 1;">22040105  INGRESOS DIFERIDOS PARQUEO</div>
+              </div>
             <br><br>
             <div class="box-body">
                     <table class="table-wrapper" >  
@@ -428,7 +454,11 @@ table tr:nth-child(2n-1) td {
                     <tbody>
                          
                       <?php 
-                      $factura = \SIGRECOFERO\facturacion::where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$co->id)->get();
+                      if($cuenta->concepto == 'Todas'){
+               $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }else{
+              $factu = \SIGRECOFERO\facturacion::where('concepto','=',$cuenta->concepto)->where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
+             }
                       $count = count($factura);
                       
                       for ($i=0; $i < $count ; $i++) { 

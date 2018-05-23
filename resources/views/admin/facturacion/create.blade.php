@@ -36,6 +36,7 @@
       $val2 = SIGRECOFERO\facturacion::where('emision','=','No Emitido')->where('concepto','=','Parqueo')->get()->last();
 
 
+
      ?>
 
       <div class="box-body">
@@ -65,7 +66,7 @@
     </div>
       <div class="box-body">
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){?>
-          @if($val1->mes == $arrayMes[$m->month] || $val2->mes == $arrayMes[$m->month] )
+          @if($val1->mes == $arrayMes[($m->month+1)-1] || $val2->mes == $arrayMes[($m->month+1)-1] )
         <div class="form-group">
             
             <button type="button" class="form-control btn btn-success" data-toggle="modal" data-target="#modal-infoAll">
