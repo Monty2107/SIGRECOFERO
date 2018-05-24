@@ -99,13 +99,13 @@ table tr:nth-child(2n-1) td {
         <div style="position: absolute;left: 20px; top: 160px; z-index: 1;"><h3>Codigo:</h3></div>
         <div style="position: absolute;left: 200px; top: 160px; index: 1;"><h3>{{$condomine->codigo}} </h3></div>
         <div style="position: absolute;left: 20px; top: 180px; z-index: 1;"><h3>Nombre Del Condomine:</h3></div>
-        <div style="position: absolute;left: 200px; top: 180px; index: 1;"><h3>{{$condomine->nombre}} </h3></div>
+        <div style="position: absolute;left: 200px; top: 180px; index: 1;"><h3>{{$condomine->empresa->nombre}} </h3></div>
         <div style="position: absolute;left: 20px; top: 200px; index: 1;"><h3>Local N°:</h3></div>
         <div style="position: absolute;left: 200px; top: 200px; index: 1;"><h3>{{$condomine->NLocal}} </h3></div>
         <div style="position: absolute;left: 20px; top: 220px; z-index: 1;"><h3>Telefono Fijo: </h3></div>
         <div style="position: absolute;left: 200px; top: 220px; index: 1;"><h3>{{$condomine->empresa->telefonoFijo}} </h3></div>
         <div style="position: absolute;left: 20px; top: 240px; z-index: 1;"><h3>Contacto: </h3></div>
-        <div style="position: absolute;left: 200px; top: 240px; index: 1;"><h3> {{$condomine->empresa->nombre}} </h3></div>
+        <div style="position: absolute;left: 200px; top: 240px; index: 1;"><h3> {{$condomine->nombre}} </h3></div>
         
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <br><br><br><br><br><br><br>

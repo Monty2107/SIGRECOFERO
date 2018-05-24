@@ -53,7 +53,7 @@
             <!-- phone mask -->
             <div class="form-group">
               <label >Cargo: </label>
-                {!! Form::select('cargo',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,['class'=>'form-control'])!!}
+                {!! Form::select('cargo',['Administracion'=>'Administracion','Financiero'=>'Financiero'],null,['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">

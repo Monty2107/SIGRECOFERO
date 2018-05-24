@@ -29,7 +29,7 @@
           <tr>
               <td>{{$r++}}</td>
               <td>{{$cb->codigo}}</td>
-              <td>{{$cb->empresa->nombre}}</td>
+              <td>{{$cb->nombre}}</td>
               <td>{{$cb->NLocal}}</td>
               <td width="250px">
                 <a class="btn btn-success btn-rounded" href="{{route('condominio.show',$cb->id)}}">Ver</a>

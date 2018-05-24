@@ -25,7 +25,8 @@ class CondomineRequest extends FormRequest
     {
         
         return [
-            'nombre'=> 'required|string|min:4|max:120',
+            'nombreCondominio'=> 'required|string|min:4|max:120',
+            'nombreContacto'=> 'required|string|min:4|max:120',
             'correo'=> 'required|min:4|max:120',
             'codigo'=>'required|min:3',
             'opciones'=>'required|min:1|array',

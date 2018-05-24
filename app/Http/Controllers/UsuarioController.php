@@ -52,7 +52,6 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        dd('yupi');
         condominio::create([
             'name'=>$request->nombre,
             'email'=>$request->correo,

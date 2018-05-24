@@ -44,9 +44,13 @@
 
           <div class="box-body">
             <div class="form-group">
-              <label>Nombre del Encargado: </label>
-              {!! Form::text('nombre',$emp->empresa->nombre,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              <label>Nombre del Condomine: </label>
+              {!! Form::text('nombreCondominio',$emp->empresa->nombre,['name'=>'nombreCondominio','id'=>'nombreCondominio','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
             </div>
+            <div class="form-group">
+                <label>Nombre del Contacto: </label>
+                {!! Form::text('nombreContacto',$emp->nombre,['name'=>'nombreContacto','id'=>'nombreContacto','class'=>'form-control','placeholder'=>'Nombre del Contacto']) !!}
+              </div>
             <div class="form-group">
               <label >Correo: </label>
               {!! Form::email('correo',$emp->empresa->correo,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
@@ -64,6 +68,10 @@
               <label >Telefono Movil: </label>
                 {!! Form::text('telefonoMovil',$emp->empresa->telefonoMovil,['name'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999'])!!}
                 </div>
+                <div class="form-group">
+                    <label>Observaciones: </label>
+                    {!! Form::textarea('observaciones',$emp->observaciones,['name'=>'observaciones','id'=>'observaciones','class'=>'form-control','placeholder'=>'Ingrese las Observaciones si en caso lo hubiese..']) !!}
+                  </div>
               <!-- /.input group -->
             </div>
             <!-- /.form group -->

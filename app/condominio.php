@@ -9,7 +9,7 @@ class condominio extends Model
   protected $table = 'condominios';
 
   protected $fillable =[
-    'codigo','NLocal','id_Empresa'
+    'codigo','NLocal','nombre','observaciones','id_Empresa'
   ];
 
   public function empresa(){

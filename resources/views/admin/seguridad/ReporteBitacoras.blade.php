@@ -34,7 +34,7 @@ body {
   }
 table {
     border-collapse: collapse;
-    width: 95%;
+    width: 100%;
 }
 
 
@@ -57,7 +57,7 @@ th {
 }
 
 th, td {
-    padding: 8px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #FAFBFB;
 }
@@ -109,8 +109,8 @@ table tr:nth-child(2n-1) td {
               <th style="color: white; font-weight: bold;">Fecha</th>
               <th style="color: white; font-weight: bold;">Hora</th>
               <th style="color: white; font-weight: bold;">Descripción</th>
-              <th style="color: white; font-weight: bold;">Usuario<th>
-                  <th style="color: white; font-weight: bold;">Cargo<th>
+              <th style="color: white; font-weight: bold;">Usuario</th>
+                  <th style="color: white; font-weight: bold;">Cargo</th>
             </tr>
           </thead>
           <tbody>
@@ -131,7 +131,7 @@ table tr:nth-child(2n-1) td {
               <td style = "width:20%">{{$fechaOrdenada}}</td>
               <td style = "width:20%">{{$hora}}</td>
               <td style = "width:30%">{{$bita->comentario_Bit}}</td>
-              <td style = "width:20%">{{$usu->name}}</td>
+              <td style = "width:30%">{{$usu->name}}</td>
               <td style = "width:20%">{{$usu->cargo}}</td>
             </tr>
             <?php $n++; ?>

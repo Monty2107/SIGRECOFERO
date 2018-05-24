@@ -289,9 +289,11 @@
               <!-- Menu Body -->
               <!-- Menu Footer-->
               <li class="user-footer">
+                  <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Financiero" ){ ?>
                 <div class="pull-left">
                   <a href="<?php echo e(asset('admin/Perfil')); ?>" class="btn btn-default btn-flat">Perfil</a>
                 </div>
+                <?php } ?>
                 <div class="pull-right">
                   <a href="<?php echo e(url('/logout')); ?>" 
                   onclick="event.preventDefault();

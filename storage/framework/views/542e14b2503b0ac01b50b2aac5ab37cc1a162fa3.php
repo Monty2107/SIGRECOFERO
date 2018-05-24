@@ -54,7 +54,7 @@
             <!-- phone mask -->
             <div class="form-group">
               <label >Cargo: </label>
-                <?php echo Form::select('cargo',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,['class'=>'form-control']); ?>
+                <?php echo Form::select('cargo',['Administracion'=>'Administracion','Financiero'=>'Financiero'],null,['class'=>'form-control']); ?>
 
                 </div>
 

@@ -39,9 +39,13 @@
 
           <div class="box-body">
             <div class="form-group">
-              <label>Nombre del Encargado: </label>
-              {!! Form::text('nombre',null,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              <label>Nombre del Condominio: </label>
+              {!! Form::text('nombreCondominio',null,['name'=>'nombreCondominio','id'=>'nombreCondominio','class'=>'form-control','placeholder'=>'Nombre del Condomine']) !!}
             </div>
+            <div class="form-group">
+                <label>Nombre del Contacto: </label>
+                {!! Form::text('nombreContacto',null,['name'=>'nombreContacto','id'=>'nombreContacto','class'=>'form-control','placeholder'=>'Nombre del Contacto']) !!}
+              </div>
             <div class="form-group">
               <label >Correo: </label>
               {!! Form::email('correo',null,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
@@ -60,17 +64,15 @@
                 {!! Form::text('telefonoMovil',null,['id'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999'])!!}
                 </div>
               <!-- /.input group -->
-            </div>
-            <div class="form-group">
-              <label>Selecione Las Opciones para Generar Las Cuotas: </label>
-              <br>
-              {{ Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,
-              ['class'=>'form-control','multiple'=>'true'])}}
-              <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
-            </div>
+              <div class="form-group">
+                  <label>Observaciones: </label>
+                  {!! Form::textarea('observaciones',null,['name'=>'observaciones','id'=>'observaciones','class'=>'form-control','placeholder'=>'Ingrese las Observaciones si en caso lo hubiese..']) !!}
+                </div>
+            
             <!-- /.form group -->
           <!-- /.box-body -->
       </div>
+    </div>
     </div>
     <!--/.col (right) -->
     <div class="col-md-6">
@@ -102,24 +104,33 @@
               <label >Año De Iniciacion de Facturacion: </label>
               {!! Form::text('facturacion',null,['name'=>'facturacion','id'=>'facturacion','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}']) !!}
             </div>
+            <div class="form-group">
+                <label>Selecione Las Opciones para Generar Las Cuotas: </label>
+                <br>
+                {{ Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,
+                ['class'=>'form-control','multiple'=>'true'])}}
+                <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
+              </div>
 
               <!-- /.input group -->
               <!-- /.input group -->
             </div>
           </div>
           <!-- /.box-body -->
-    <center>
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Acciones</h3>
-          </div>
-        <button type="submit" class="btn btn-primary">Aceptar</button>
-        <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscar') !!}">Cancelar</a>
-        <br>
-
-      </div>
-    </center>
+          <center>
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Acciones</h3>
+                </div>
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+              <a type="submit" class="btn btn-primary" href="{!! asset('admin/buscar') !!}">Cancelar</a>
+              <br>
+        
+            </div>
+          </center>
   </div>
+
+ 
 </div>
 
   {!!Form::close()!!}

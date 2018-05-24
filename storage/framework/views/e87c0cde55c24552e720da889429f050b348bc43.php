@@ -36,10 +36,15 @@
 
           <div class="box-body">
             <div class="form-group">
-              <label>Nombre del Encargado: </label>
-              <?php echo Form::text('nombre',null,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']); ?>
+              <label>Nombre del Condominio: </label>
+              <?php echo Form::text('nombreCondominio',null,['name'=>'nombreCondominio','id'=>'nombreCondominio','class'=>'form-control','placeholder'=>'Nombre del Condomine']); ?>
 
             </div>
+            <div class="form-group">
+                <label>Nombre del Contacto: </label>
+                <?php echo Form::text('nombreContacto',null,['name'=>'nombreContacto','id'=>'nombreContacto','class'=>'form-control','placeholder'=>'Nombre del Contacto']); ?>
+
+              </div>
             <div class="form-group">
               <label >Correo: </label>
               <?php echo Form::email('correo',null,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']); ?>
@@ -61,18 +66,16 @@
 
                 </div>
               <!-- /.input group -->
-            </div>
-            <div class="form-group">
-              <label>Selecione Las Opciones para Generar Las Cuotas: </label>
-              <br>
-              <?php echo e(Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,
-              ['class'=>'form-control','multiple'=>'true'])); ?>
+              <div class="form-group">
+                  <label>Observaciones: </label>
+                  <?php echo Form::textarea('observaciones',null,['name'=>'observaciones','id'=>'observaciones','class'=>'form-control','placeholder'=>'Ingrese las Observaciones si en caso lo hubiese..']); ?>
 
-              <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
-            </div>
+                </div>
+            
             <!-- /.form group -->
           <!-- /.box-body -->
       </div>
+    </div>
     </div>
     <!--/.col (right) -->
     <div class="col-md-6">
@@ -109,24 +112,34 @@
               <?php echo Form::text('facturacion',null,['name'=>'facturacion','id'=>'facturacion','class'=>'form-control','placeholder'=>'9999','pattern'=>'[0-9]{4}']); ?>
 
             </div>
+            <div class="form-group">
+                <label>Selecione Las Opciones para Generar Las Cuotas: </label>
+                <br>
+                <?php echo e(Form::select('opciones[]',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,
+                ['class'=>'form-control','multiple'=>'true'])); ?>
+
+                <h6>Mantenga Presionado la tecla: Crtl o Control, y asi seleccione las Opciones, dando clic en ellos</h6>
+              </div>
 
               <!-- /.input group -->
               <!-- /.input group -->
             </div>
           </div>
           <!-- /.box-body -->
-    <center>
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Acciones</h3>
-          </div>
-        <button type="submit" class="btn btn-primary">Aceptar</button>
-        <a type="submit" class="btn btn-primary" href="<?php echo asset('admin/buscar'); ?>">Cancelar</a>
-        <br>
-
-      </div>
-    </center>
+          <center>
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Acciones</h3>
+                </div>
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+              <a type="submit" class="btn btn-primary" href="<?php echo asset('admin/buscar'); ?>">Cancelar</a>
+              <br>
+        
+            </div>
+          </center>
   </div>
+
+ 
 </div>
 
   <?php echo Form::close(); ?>

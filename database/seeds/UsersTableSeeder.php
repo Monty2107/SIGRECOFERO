@@ -14,19 +14,19 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Financiera Nombre',
             'email' => 'financiero@gmail.com',
-            'password' => bcrypt('finan0721'),
+            'password' => bcrypt('finan0721'),//ih4DdtLkq6
             'cargo'=>'Financiero'
         ]);
         DB::table('users')->insert([
             'name' => 'Administracion Nombre',
             'email' => 'administrador@gmail.com',
-            'password' => bcrypt('admin2107'),
+            'password' => bcrypt('admin2107'),//JkBR5dkTLQ
             'cargo'=>'Administracion'
         ]);
         DB::table('users')->insert([
-            'name' => str_random(10),
+            'name' => 'Benjamin Monterrosa',
             'email' => 'programador@gmail.com',
-            'password' => bcrypt('root12345'),
+            'password' => bcrypt('root12345'),//lW0SmtOGDs,str_random(10)
             'cargo'=>'Programador'
         ]);
     }

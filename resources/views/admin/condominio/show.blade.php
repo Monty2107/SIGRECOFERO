@@ -30,9 +30,13 @@
 
           <div class="box-body">
             <div class="form-group">
-              <label>Nombre del Encargado: </label>
-              {!! Form::text('nombre',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado']) !!}
+              <label>Nombre del Condominio: </label>
+              {!! Form::text('nombreCondominio',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado']) !!}
             </div>
+            <div class="form-group">
+                <label>Nombre del Contacto: </label>
+                {!! Form::text('nombreContacto',$emp->nombre,['disabled','name'=>'nombreContacto','id'=>'nombreContacto','class'=>'form-control','placeholder'=>'Nombre del Contacto']) !!}
+              </div>
             <div class="form-group">
               <label >Correo: </label>
               {!! Form::email('correo',$emp->empresa->correo,['disabled','id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@ymail.com']) !!}
@@ -50,6 +54,10 @@
               <label >Telefono Movil: </label>
                 {!! Form::text('telefonoMovil',$emp->empresa->telefonoMovil,['disabled','name'=>'telefonoMovil','class'=>'form-control','id'=>'telefonoMovil', 'placeholder'=>'(999) 9999-9999', 'pattern'=>'^\([0-9]{3}\)\s[0-9]{4}-[0-9]{4}$'])!!}
                 </div>
+                <div class="form-group">
+                    <label>Observaciones: </label>
+                    {!! Form::textarea('observaciones',$emp->observaciones,['disabled','name'=>'observaciones','id'=>'observaciones','class'=>'form-control','placeholder'=>'Ingrese las Observaciones si en caso lo hubiese..']) !!}
+                  </div>
               <!-- /.input group -->
             </div>
             <!-- /.form group -->

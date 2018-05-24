@@ -24,7 +24,8 @@ class CondomineUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'=> 'required|string|min:4|max:120',
+            'nombreCondominio'=> 'required|string|min:4|max:120',
+            'nombreContacto'=> 'required|string|min:4|max:120',
             'correo'=> 'required|min:4|max:120',
             'codigo'=>'required|min:3',
             'NLocal'=>'required',

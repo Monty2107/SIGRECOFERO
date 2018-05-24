@@ -37,6 +37,7 @@
                       </div>
                       <div class="col-md-3">
                       </div>
+                      <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Financiero" ){ ?>
                       <div class="col-md-6">
                           <div class="box box-primary">
                             <div class="box-header with-border">
@@ -51,6 +52,7 @@
                           </div>
                           </div>
                       </div>
+                      <?php } ?>
                     <!-- /.input group -->
                   </div>
 

@@ -105,7 +105,7 @@ class CondomineController extends Controller
       // dd(empty($request->cantidadAdmin));
       
       $empresa = empresa::create([
-        'nombre'=>$request->nombre,
+        'nombre'=>$request->nombreCondominio,
         'correo' => $request->correo,
         'telefonoFijo'=>$request->telefonoFijo,
         'telefonoMovil'=>$request->telefonoMovil,
@@ -114,6 +114,8 @@ class CondomineController extends Controller
       condominio::create([
         'codigo'=>$request->codigo,
         'NLocal'=>$request->NLocal,
+        'nombre'=>$request->nombreContacto,
+        'observaciones'=>$request->observaciones,
         'id_Empresa'=>$empresa->id,
       ]);
 
@@ -124,11 +126,7 @@ class CondomineController extends Controller
       $cantMes=count($arrayMes);
       $concepto = count($request->opciones);
 
-        $fecha = fecha::create([
-          'dia'=>$date->format('d'),
-          'mes'=>$date->format('m'),
-          'ano'=>$date->format('Y'),
-        ]);
+        
         $m = $date->format('m');
         for ($i=$ano; $i <= $date->year ; $i++) {
 
@@ -136,6 +134,20 @@ class CondomineController extends Controller
           for ($k=1; $k <= $concepto ; $k++) {
             $l=$k-1;
           for ($j=1; $j <=$cantMes ; $j++) {
+            if($j < 10){
+              $fecha = fecha::create([
+                'dia'=>$date->format('d'),
+                'mes'=>'0'.$j,
+                'ano'=>$date->format('Y'),
+              ]);
+            }else{
+              $fecha = fecha::create([
+                'dia'=>$date->format('d'),
+                'mes'=>$j,
+                'ano'=>$date->format('Y'),
+              ]);
+            }
+            
             if ($arrayMes[$m+1] == $arrayMes[$j] && $ano == $date->year) {
               
               $estado = estado::create([
@@ -347,7 +359,7 @@ class CondomineController extends Controller
     public function update(CondomineUpdateRequest $request, $id)
     {
       $empresa = empresa::find($id);
-      $empresa->nombre = $request->nombre;
+      $empresa->nombre = $request->nombreCondominio;
       $empresa->correo = $request->correo;
       $empresa->telefonoFijo = $request->telefonoFijo;
       $empresa->telefonoMovil = $request->telefonoMovil;
@@ -356,6 +368,8 @@ class CondomineController extends Controller
       $condominio = condominio::find($id);
       $condominio->codigo = $request->codigo;
       $condominio->NLocal = $request->NLocal;
+      $condominio->nombre = $request->nombreContacto;
+      $condominio->observaciones = $request->observaciones;
       $condominio->save();
 
       if(!empty($request->cantidadAdmin)){
@@ -375,14 +389,14 @@ class CondomineController extends Controller
 
      if ($request->factura == 2) {
        # code...
-       bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$empresa->nombre);
-       Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
+       bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$condominio->nombre);
+       Session::flash('message','El Comdomine : '.$condominio->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');
       // return redirect()->back();
       return redirect('/admin/facturacion');
      }else{
-      bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$empresa->nombre);
-      Session::flash('message','El Comdomine : '.$empresa->nombre.' Con Numero de Local: '
+      bitacora::bitacoras('Modificacion','Modifico el Condominio: '.$condominio->nombre);
+      Session::flash('message','El Comdomine : '.$condominio->nombre.' Con Numero de Local: '
       .$condominio->NLocal.' Fue Modificado Correctamente!!');
       // return redirect()->back();
       return redirect('/admin/buscar');
@@ -407,8 +421,8 @@ class CondomineController extends Controller
         $facturacion = facturacion::where('id_Condominio',$empresa->id);
         $facturacion->delete();
         // $facturacion = facturacion::where('id_estado','=',$cont);
-        bitacora::bitacoras('Eliminacion','Elimino el Condominio: '.$empresa->nombre);
-        Session::flash('message','El Condominio: '.$empresa->nombre
+        bitacora::bitacoras('Eliminacion','Elimino el Condominio: '.$condominio->nombre);
+        Session::flash('message','El Condominio: '.$condominio->nombre
         .' Con Numero de Local: '.$condominio->NLocal.' Fue Eliminado Exitosamente!!');
         return redirect('/admin/buscar');
       }else{
