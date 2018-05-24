@@ -7,7 +7,7 @@
  </h1>
  <ol class="breadcrumb">
    <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
- <li class="active">Mi Perfil</li>
+ <li class="active">Nuevo Usuario</li>
  </ol>
 @endsection
 
@@ -21,7 +21,7 @@
         </ul>
       </div>
       @endif
-{!! Form::model($usuario,['route' => ['usuario.update',$usuario->id], 'method' => 'PUT','id'=>'form']) !!}
+{!! Form::open(['route' => 'usuario.store', 'method' => 'POST','id'=>'form']) !!}
 
 
 
@@ -32,17 +32,17 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Perfil De Usuario</h3>
+          <h3 class="box-title">Crear Usuario</h3>
         </div>
           <div class="box-body">
             <div class="form-group">
               <label>Su Nombre: </label>
-              {!! Form::text('nombre',$usuario->name,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Ingrese Su Nombre.....']) !!}
+              {!! Form::text('nombre',null,['name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Ingrese Su Nombre.....']) !!}
             </div>
             
             <div class="form-group">
               <label >Correo: </label>
-              {!! Form::email('correo',$usuario->email,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@mail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
+              {!! Form::email('correo',null,['id'=>'correo','name'=>'correo','class'=>'form-control','placeholder'=>'ejemplo: empresa@mail.com','pattern'=>'[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,3}']) !!}
             </div>
 
             <div class="form-group">
@@ -53,7 +53,7 @@
             <!-- phone mask -->
             <div class="form-group">
               <label >Cargo: </label>
-                {!! Form::text('cargo',$usuario->cargo,['disabled','class'=>'form-control'])!!}
+                {!! Form::select('cargo',['Administrativo'=>'Administrativo','Parqueo'=>'Parqueo'],null,['class'=>'form-control'])!!}
                 </div>
 
                 <div class="form-group">
@@ -64,7 +64,7 @@
                          ?>
                         {!! Form::text('fecha',$date->format('d/m/Y'),['disabled','class'=>'form-control'])!!}
                     </div>
-
+                    
               <!-- /.input group -->
             </div>
             <!-- /.form group -->
@@ -80,7 +80,7 @@
                       <div class="box-header with-border">
                         <h3 class="box-title">Acciones</h3>
                       </div>
-                    <button type="submit" class="btn btn-primary">Cambiar Informacion</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
                     <a type="submit" class="btn btn-primary" href="{!! asset('/') !!}">Cancelar</a>
                     <br>
                     <h6><span class="label label-warning">Tome Muy En Cuenta Que La Proxima Vez Que Inicia Sesion Lo Hara Con Los Datos Con El

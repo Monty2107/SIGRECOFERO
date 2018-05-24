@@ -14,6 +14,7 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\bitacora;
+use PDF;
 use Carbon\Carbon;
 use SIGRECOFERO\Http\Requests\CondomineRequest;
 use SIGRECOFERO\Http\Requests\CondomineUpdateRequest;
@@ -33,9 +34,34 @@ class CondomineController extends Controller
       $condominiobusqueda = condominio::with('empresa')->orderBy('id','desc')->get();
       return view('admin.condominio.buscar')->with('condominiobusqueda',$condominiobusqueda);
     }
+
+    public function reportebuscar(){
+      $condominiobusqueda = condominio::with('empresa')->orderBy('id','desc')->get();
+      return view('admin.condominio.reportebuscar')->with('condominiobusqueda',$condominiobusqueda);
+    }
     public function index()
     {
         return view('index');
+    }
+
+    public function reporte($id){
+
+      $idE = explode('-',$id);
+      if($idE[1]==3){
+
+        $condomine = condominio::find($id[0]);
+        $pdf = PDF::loadView('admin/condominio/estadoCuenta',['condomine' => $condomine]);
+        $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
+        return $pdf->stream();
+
+      }else if($idE[1]==4){
+
+        $condomine = condominio::find($id[0]);
+        $pdf = PDF::loadView('admin/condominio/estadoCuenta',['condomine' => $condomine]);
+        $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
+        return $pdf->download('estado_Cuenta Condomine_'.$condomine->NLocal.'.pdf');
+      }
+
     }
 
     /**
@@ -299,7 +325,7 @@ class CondomineController extends Controller
           return redirect('/');
         }
         
-      }else{
+      }else if($idE[1]==1){
         if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Administracion'  ){
         $condomine = condominio::find($id[0]);
         return view('admin.condominio.edit')->with('condomine',$condomine);

@@ -8,6 +8,7 @@ use Session;
 use Redirect;
 use SIGRECOFERO\User;
 use SIGRECOFERO\bitacora;
+use SIGRECOFERO\Http\Requests\UsuarioRequest;
 
 class UsuarioController extends Controller
 {
@@ -40,7 +41,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.usuario.create');
     }
 
     /**
@@ -49,9 +50,18 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsuarioRequest $request)
     {
-        //
+        dd('yupi');
+        condominio::create([
+            'name'=>$request->nombre,
+            'email'=>$request->correo,
+            'password'=>$empresa->password,
+            'cargo'=>$request->cargo
+          ]);
+          bitacora::bitacoras('Creacion del Usuario','Usuario: '.$usuario->name.' Creado');
+        Session::flash('message',' Usuario: '.$usuario->name.' Con Correo: '.$usuario->email.' ha sido Creado Correctamente!!');
+      return redirect('/');
     }
 
     /**
@@ -62,7 +72,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-
+        
     }
 
     /**
@@ -83,9 +93,11 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(usuarioRequest $request, $id)
+    public function update(UsuarioRequest $request, $id)
     {
-        $usuario = User::find($id);
+        
+
+        $usuario = User::find($id[1]);
         $usuario->name = $request->nombre;
         $usuario->email = $request->correo;
         $usuario->password = $request->password;

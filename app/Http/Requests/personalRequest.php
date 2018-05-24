@@ -4,7 +4,7 @@ namespace SIGRECOFERO\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuarioRequest extends FormRequest
+class personalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,10 +24,7 @@ class UsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'=>'required|min:3|max:120',
-            'correo'=>'required',
-            'password'=>'required|min:5|max:10',
-            
+            //
         ];
     }
 }

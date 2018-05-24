@@ -13,6 +13,23 @@
 
 Auth::routes();
 
+Route::get('/guardarUsuario', function () {
+
+  $para = 'benjamindelgado1994@hotmail.com';
+  $asunto = 'Prueba de SMTP local';
+  $mensaje = 'Mensaje de prueba';
+  $cabeceras = 'From: monterrosadelgado@gmail.com' ."\r\n" .
+  'Reply-To: monterrosadelgado@gmail.com' . "\r\n" .
+  'X-Mailer: PHP/' . phpversion();
+
+  if(mail($para, $asunto, $mensaje, $cabeceras)) {
+    echo 'Correo enviado correctamente';
+  } else {
+    echo 'Error al enviar mensaje';
+  }
+
+});
+
 // Route::get('/', 'HomeController@login');
 Route::get('/', 'HomeController@index');
 
@@ -21,6 +38,8 @@ Route::group(['prefix' => 'admin'],function(){
   // Rutas condomine
   Route::resource('condominio','CondomineController');
   Route::resource('buscar','CondomineController@buscar');
+  Route::resource('reportebuscar','CondomineController@reportebuscar');
+  Route::match(['get','post'],'/estadoCuenta/{id}','CondomineController@reporte');
 
 //Rutas Pagos
 Route::resource('pago','PagosController');

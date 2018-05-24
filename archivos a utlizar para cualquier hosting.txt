@@ -41,3 +41,9 @@ return base_path().'/public_html';
 
 INGRESA A A ZONA PUBLICA, LUEGO EN CARPETA JS, LUEGO CARPETA PERSONAL, ARCHIVO
 DROPDOWN.JS , CAMBIAR DIRECCION QUITAR LO SIGUIENTE: /Personal/SIGRECOFERO/public
+
+
+LIMPIEZA DE CACHE Y TODO ESO
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
