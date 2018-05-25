@@ -1,17 +1,14 @@
-@extends('welcome')
-
-
-@section('posicion')
+<?php $__env->startSection('posicion'); ?>
   <h1>
    Dashboard
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="<?php echo asset('/'); ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Bitacora.</li>
  </ol>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 
 <div class="row">
@@ -26,7 +23,7 @@
       </div>
       <div class="ibox-content">
         <div class="table-responsive">
-          <table id="example" class="table table-striped table-bordered display" cellspacing="100" width="100%">
+          <table id="example" class="table table-striped table-bordered display" cellspacing="100" width="100%"" >
             <thead>
               <tr>
                 <th>Fecha</th>
@@ -50,12 +47,12 @@
 
 
   ?>
-  <td align="rihgt" style = "width:15%"><font size="4" ></font>{{$fechaOrdenada}}</td>
-  <td align="rihgt" style = "width:10%"><font size="4" ></font>{{$hora}}</td>
-  <td align="rihgt" style = "width:20%"><font size="4" ></font>{{$bita->accion_Bit}}</td>
-  <td align="rihgt" style = "width:30%"><font size="4" ></font>{{$bita->comentario_Bit}}</td>
-  <td align="rihgt" style = "width:20%"><font size="4" ></font>{{$usu->name}}</td>
-  <td align="rihgt" style = "width:20%"><font size="4" ></font>{{$usu->cargo}}</td>
+  <td align="rihgt" style = "width:15%"><font size="4" ></font><?php echo e($fechaOrdenada); ?></td>
+  <td align="rihgt" style = "width:10%"><font size="4" ></font><?php echo e($hora); ?></td>
+  <td align="rihgt" style = "width:20%"><font size="4" ></font><?php echo e($bita->accion_Bit); ?></td>
+  <td align="rihgt" style = "width:30%"><font size="4" ></font><?php echo e($bita->comentario_Bit); ?></td>
+  <td align="rihgt" style = "width:20%"><font size="4" ></font><?php echo e($usu->name); ?></td>
+  <td align="rihgt" style = "width:20%"><font size="4" ></font><?php echo e($usu->cargo); ?></td>
 </tr>
 <?php endforeach ?>
                     </tbody>
@@ -76,4 +73,5 @@
   </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('welcome', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

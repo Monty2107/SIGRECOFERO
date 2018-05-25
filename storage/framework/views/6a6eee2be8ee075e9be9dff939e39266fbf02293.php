@@ -51,7 +51,8 @@
           <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
         <li><a href="<?php echo asset('admin/buscarCondomine'); ?>"><i class="fa fa-circle-o"></i>Lista de Condomines</a></li>
         <?php } ?>
-        <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>Reportes</a></li>
+        <li><a href="<?php echo asset('admin/pagoMes'); ?>"><i class="fa fa-circle-o"></i>Ingresos</a></li>
+        <li><a href="<?php echo asset('admin/pagoReporte'); ?>"><i class="fa fa-circle-o"></i>Reportes</a></li>
       </ul>
     </li>
     <li class="treeview">

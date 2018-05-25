@@ -83,7 +83,7 @@ table tr:nth-child(2n-1) td {
             <div style="position: absolute;left: 550px; top: 40px; z-index: 1;">Fecha:   </div>
             <?php $carbon = new \Carbon\Carbon();
             $date = $carbon->now();?>
-        <div style="position: absolute;left: 600px; top: 40px; z-index: 1;">{{$date->format('d-m-Y')}}</div>
+        <div style="position: absolute;left: 600px; top: 40px; z-index: 1;"><?php echo e($date->format('d-m-Y')); ?></div>
         <div style="position: absolute;left: 200px; top: 20px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>CONDOMINIO DE FERIA ROSA</h2></div>
         <div style="position: absolute;left: 240px; top: 40px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>PARTIDAS DE DIARIO</h2></div>
         <HR style="position: absolute;left: 20px; top: 70px; z-index: 1; color:black;" width=100%>
@@ -91,11 +91,11 @@ table tr:nth-child(2n-1) td {
         <div style="position: absolute;left: 180px; top: 90px; z-index: 1;">1</div>
         <div style="position: absolute;left: 20px; top: 115px; z-index: 1;">Fecha de Partida</div>
         <?php $fecha = \SIGRECOFERO\fecha::find($cuenta->id_Fecha)?>
-        <div style="position: absolute;left: 180px; top: 115px; z-index: 1;">{{$fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano}}</div>
+        <div style="position: absolute;left: 180px; top: 115px; z-index: 1;"><?php echo e($fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano); ?></div>
         <div style="position: absolute;left: 20px; top: 135px; z-index: 1;">Tipo de Partida</div>
         <div style="position: absolute;left: 180px; top: 135px; z-index: 1;">DIARIO</div>
         <div style="position: absolute;left: 20px; top: 155px; z-index: 1;">Concepto General</div>
-        <div style="position: absolute;left: 180px; top: 155px; z-index: 1;">REGISTRO DE CUENTAS POR COBRAR DE LOS CONDOMINES {{' '.$cuenta->mes.' '.$cuenta->ano}}</div>
+        <div style="position: absolute;left: 180px; top: 155px; z-index: 1;">REGISTRO DE CUENTAS POR COBRAR DE LOS CONDOMINES <?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
         <HR style="position: absolute;left: 20px; top: 170px; z-index: 1; color:black;" width=100%>
             <div style="position: absolute;left: 20px; top: 180px; z-index: 1; font-weight: bold;">CUENTA CONTABLE</div>
             <div style="position: absolute;left: 280px; top: 180px; z-index: 1; font-weight: bold;">CONCEPTO</div>
@@ -110,7 +110,7 @@ table tr:nth-child(2n-1) td {
              $sum = 0;
              $sum1 = 0;
              ?>
-             @foreach($condominio1 as $c)
+             <?php $__currentLoopData = $condominio1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
              <?php
              if($cuenta->concepto == 'Todas'){
                $factu = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('mes','=',$cuenta->mes)->where('ano','=',$cuenta->ano)->where('id_Condominio','=',$c->id)->get();
@@ -130,30 +130,30 @@ table tr:nth-child(2n-1) td {
                    }
                }       
                ?>
-               @endforeach
+               <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
             <div style="position: absolute;left: 20px; top: 210px; z-index: 1; font-weight: bold;">1102  CUENTAS Y DOCUMENTOS POR</div>
-            <div style="position: absolute;left: 600px; top: 210px; z-index: 1; font-weight: bold;">{{$sum + $sum1}} </div>
+            <div style="position: absolute;left: 600px; top: 210px; z-index: 1; font-weight: bold;"><?php echo e($sum + $sum1); ?> </div>
             <div style="position: absolute;left: 20px; top: 230px; z-index: 1; font-size:7.5;">11020114 CUOTAS ADMINISTRACION</div>
-            <div style="position: absolute;left: 280px; top: 230px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES{{' '.$cuenta->mes.' '.$cuenta->ano}}</div>
+            <div style="position: absolute;left: 280px; top: 230px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES<?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
            
-            <div style="position: absolute;left: 525px; top: 230px; z-index: 1; font-size:7.5;">{{$sum}}</div>
+            <div style="position: absolute;left: 525px; top: 230px; z-index: 1; font-size:7.5;"><?php echo e($sum); ?></div>
             <div style="position: absolute;left: 20px; top: 270px; z-index: 1; font-size:7.5;">11020115 CUOTAS PARQUEO</div>
-            <div style="position: absolute;left: 280px; top: 270px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES{{' '.$cuenta->mes.' '.$cuenta->ano}}</div>
-            <div style="position: absolute;left: 525px; top: 270px; z-index: 1; font-size:7.5;">{{$sum1}}</div>
+            <div style="position: absolute;left: 280px; top: 270px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES<?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
+            <div style="position: absolute;left: 525px; top: 270px; z-index: 1; font-size:7.5;"><?php echo e($sum1); ?></div>
             <HR style="position: absolute;left: 20px; top: 290px; z-index: 1; color:black;" width=100%>
 
                 <div style="position: absolute;left: 20px; top: 310px; z-index: 1; font-weight: bold;">2204  INGRESOS COBRADOS POR</div>
-            <div style="position: absolute;left: 655px; top: 310px; z-index: 1; font-weight: bold;">{{$sum + $sum1}} </div>
+            <div style="position: absolute;left: 655px; top: 310px; z-index: 1; font-weight: bold;"><?php echo e($sum + $sum1); ?> </div>
             <div style="position: absolute;left: 20px; top: 330px; z-index: 1; font-size:6;">22040104 INGRESOS DIFERIDOS CUOTAS DE ADMINISTRACION</div>
-            <div style="position: absolute;left: 280px; top: 330px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES{{' '.$cuenta->mes.' '.$cuenta->ano}}</div>
+            <div style="position: absolute;left: 280px; top: 330px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES<?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
            
-            <div style="position: absolute;left: 525px; top: 330px; z-index: 1; font-size:7.5;">{{$sum}}</div>
+            <div style="position: absolute;left: 525px; top: 330px; z-index: 1; font-size:7.5;"><?php echo e($sum); ?></div>
             <div style="position: absolute;left: 20px; top: 370px; z-index: 1; font-size:7.5;">11020115 INGRESOS DIFERIDOS PARQUEO</div>
-            <div style="position: absolute;left: 280px; top: 370px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES{{' '.$cuenta->mes.' '.$cuenta->ano}}</div>
-            <div style="position: absolute;left: 525px; top: 370px; z-index: 1; font-size:7.5;">{{$sum1}}</div>
+            <div style="position: absolute;left: 280px; top: 370px; z-index: 1; font-size:7.5;">REGISTRO DE CUENTAS POR COBRAR <br> DE LOS CONDOMINES<?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
+            <div style="position: absolute;left: 525px; top: 370px; z-index: 1; font-size:7.5;"><?php echo e($sum1); ?></div>
             <HR style="position: absolute;left: 580px; top: 390px; z-index: 1; color:black;" width=18%>
-                <div style="position: absolute;left: 600px; top: 400px; z-index: 1; font-weight: bold;">{{$sum + $sum1}} </div>
-                <div style="position: absolute;left: 655px; top: 400px; z-index: 1; font-weight: bold;">{{$sum + $sum1}} </div>
+                <div style="position: absolute;left: 600px; top: 400px; z-index: 1; font-weight: bold;"><?php echo e($sum + $sum1); ?> </div>
+                <div style="position: absolute;left: 655px; top: 400px; z-index: 1; font-weight: bold;"><?php echo e($sum + $sum1); ?> </div>
             <div style="position: absolute;left: 400px; top: 400px; z-index: 1; font-size:7.5;">TOTAL DE CARGOS Y ABONOS</div>
     
 
@@ -193,7 +193,7 @@ table tr:nth-child(2n-1) td {
           $sum = 0;
           $tip = 400;
               ?>
-      @foreach($condominio as $co)
+      <?php $__currentLoopData = $condominio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $co): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
           <tbody>
                
             <?php 
@@ -207,7 +207,7 @@ table tr:nth-child(2n-1) td {
             for ($i=0; $i < $count ; $i++) { 
                 # code...       
             ?>
-            @if($factura[$i]->concepto == 'Administrativo')
+            <?php if($factura[$i]->concepto == 'Administrativo'): ?>
             <?php 
             $val = $factura[$i]->cantidad;
             $sum = $val * $j;
@@ -221,19 +221,19 @@ table tr:nth-child(2n-1) td {
             }
             ?>
             <tr>          
-            <td style = "width:10%">{{$n++}}</td> 
-            <td style = "width:10%">{{$co->codigo}}</td>
-            <td style = "width:30%">{{$co->empresa->nombre}}</td>
-            <td style = "width:30%">{{'Cuota '.$factura[$i]->concepto}}</td>
-              <td style = "width:10%">{{$factura[$i]->cantidad}} </td>
+            <td style = "width:10%"><?php echo e($n++); ?></td> 
+            <td style = "width:10%"><?php echo e($co->codigo); ?></td>
+            <td style = "width:30%"><?php echo e($co->empresa->nombre); ?></td>
+            <td style = "width:30%"><?php echo e('Cuota '.$factura[$i]->concepto); ?></td>
+              <td style = "width:10%"><?php echo e($factura[$i]->cantidad); ?> </td>
               <td style = "width:10%"> </td>
-              <td style = "width:10%">{{$sum}}</td>  
+              <td style = "width:10%"><?php echo e($sum); ?></td>  
             </tr>
-            @endif
+            <?php endif; ?>
             <?php             } ?>
            
         </tbody>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
         
       </table>
       <footer>
@@ -277,7 +277,7 @@ table tr:nth-child(2n-1) td {
               $n = 1;
               $j=1;
                   ?>
-            @foreach($condominio as $co)
+            <?php $__currentLoopData = $condominio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $co): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tbody>
                  
               <?php 
@@ -291,7 +291,7 @@ table tr:nth-child(2n-1) td {
               for ($i=0; $i < $count ; $i++) { 
                   # code...       
               ?>
-              @if($factura[$i]->concepto == 'Parqueo')
+              <?php if($factura[$i]->concepto == 'Parqueo'): ?>
               <?php 
               $val = $factura[$i]->cantidad;
               $sum = $val + $sum;
@@ -307,19 +307,19 @@ table tr:nth-child(2n-1) td {
               
               <tr> 
                         
-              <td style = "width:10%">{{$n++}}</td> 
-              <td style = "width:10%">{{$co->codigo}}</td>
-              <td style = "width:30%">{{$co->empresa->nombre}}</td>
-              <td style = "width:30%">{{'Cuota de '.$factura[$i]->concepto}}</td>
-                <td style = "width:10%">{{$factura[$i]->cantidad}}</td>
+              <td style = "width:10%"><?php echo e($n++); ?></td> 
+              <td style = "width:10%"><?php echo e($co->codigo); ?></td>
+              <td style = "width:30%"><?php echo e($co->empresa->nombre); ?></td>
+              <td style = "width:30%"><?php echo e('Cuota de '.$factura[$i]->concepto); ?></td>
+                <td style = "width:10%"><?php echo e($factura[$i]->cantidad); ?></td>
                 <td style = "width:10%"> </td>
-                <td style = "width:10%">{{$sum}}</td>  
+                <td style = "width:10%"><?php echo e($sum); ?></td>  
               </tr>
-              @endif
+              <?php endif; ?>
               <?php             } ?>
              
           </tbody>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
         <div>
         
           </table>
@@ -366,7 +366,7 @@ table tr:nth-child(2n-1) td {
                   $sum = 0;
                   $tup = 0;
                       ?>
-              @foreach($condominio as $co)
+              <?php $__currentLoopData = $condominio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $co): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                   <tbody>
                        
                     <?php 
@@ -380,7 +380,7 @@ table tr:nth-child(2n-1) td {
                     for ($i=0; $i < $count ; $i++) { 
                         # code...       
                     ?>
-                    @if($factura[$i]->concepto == 'Administrativo')
+                    <?php if($factura[$i]->concepto == 'Administrativo'): ?>
                     <?php 
                     $val = $factura[$i]->cantidad;
                     $sum = $val * $j;
@@ -395,19 +395,19 @@ table tr:nth-child(2n-1) td {
 
                     ?>
                     <tr>          
-                    <td style = "width:10%">{{$n++}}</td> 
-                    <td style = "width:10%">{{$co->codigo}}</td>
-                    <td style = "width:30%">{{$co->empresa->nombre}}</td>
-                    <td style = "width:30%">{{'Cuota '.$factura[$i]->concepto}}</td>
+                    <td style = "width:10%"><?php echo e($n++); ?></td> 
+                    <td style = "width:10%"><?php echo e($co->codigo); ?></td>
+                    <td style = "width:30%"><?php echo e($co->empresa->nombre); ?></td>
+                    <td style = "width:30%"><?php echo e('Cuota '.$factura[$i]->concepto); ?></td>
                       <td style = "width:10%"> </td>
-                      <td style = "width:10%">{{$factura[$i]->cantidad}}</td>
-                      <td style = "width:10%">{{$sum}}</td>  
+                      <td style = "width:10%"><?php echo e($factura[$i]->cantidad); ?></td>
+                      <td style = "width:10%"><?php echo e($sum); ?></td>  
                     </tr>
-                    @endif
+                    <?php endif; ?>
                     <?php             } ?>
                    
                 </tbody>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                 
               </table>
               <footer>
@@ -450,7 +450,7 @@ table tr:nth-child(2n-1) td {
                       $j=1;
                       $tup = 0;
                           ?>
-                    @foreach($condominio as $co)
+                    <?php $__currentLoopData = $condominio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $co): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                     <tbody>
                          
                       <?php 
@@ -464,7 +464,7 @@ table tr:nth-child(2n-1) td {
                       for ($i=0; $i < $count ; $i++) { 
                           # code...       
                       ?>
-                      @if($factura[$i]->concepto == 'Parqueo')
+                      <?php if($factura[$i]->concepto == 'Parqueo'): ?>
                       <?php 
                       $val = $factura[$i]->cantidad;
                       $sum = $val + $sum;
@@ -474,19 +474,19 @@ table tr:nth-child(2n-1) td {
                       
                       <tr> 
                                 
-                      <td style = "width:10%">{{$n++}}</td> 
-                      <td style = "width:10%">{{$co->codigo}}</td>
-                      <td style = "width:30%">{{$co->empresa->nombre}}</td>
-                      <td style = "width:30%">{{'Cuota de '.$factura[$i]->concepto}}</td>
+                      <td style = "width:10%"><?php echo e($n++); ?></td> 
+                      <td style = "width:10%"><?php echo e($co->codigo); ?></td>
+                      <td style = "width:30%"><?php echo e($co->empresa->nombre); ?></td>
+                      <td style = "width:30%"><?php echo e('Cuota de '.$factura[$i]->concepto); ?></td>
                         <td style = "width:10%"> </td>
-                        <td style = "width:10%">{{$factura[$i]->cantidad}} </td>
-                        <td style = "width:10%">{{$sum}}</td>  
+                        <td style = "width:10%"><?php echo e($factura[$i]->cantidad); ?> </td>
+                        <td style = "width:10%"><?php echo e($sum); ?></td>  
                       </tr>
-                      @endif
+                      <?php endif; ?>
                       <?php             } ?>
                      
                   </tbody>
-                  @endforeach
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                 <div>        
                   </div>
                   </table>

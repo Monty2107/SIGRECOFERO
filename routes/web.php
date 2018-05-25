@@ -44,8 +44,10 @@ Route::group(['prefix' => 'admin'],function(){
 //Rutas Pagos
 Route::resource('pago','PagosController');
 Route::resource('pagoMes','PagoMesController');
+Route::resource('pagoReporte','PagoMesController@create');
 Route::resource('nuevopago','NuevoPagoController');
 Route::resource('buscarCondomine','PagosController@buscar');
+Route::resource('reporteIngreso','PagoMesController@show');
 
 //Rutas Facturacion
 Route::resource('facturacion','FacturacionController');

@@ -82,7 +82,7 @@ table tr:nth-child(2n-1) td {
         <div style="position: absolute;left: 300px; top: 20px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>Condominios Feria Rosa</h2></div>
         <HR style="position: absolute;left: 270px; top: 50px; z-index: 1; color:black;" width=35%>
         <div style="position: absolute;left: 300px; top: 80px; z-index: 1; font-style: italic; font-weight: bold;">Alameda Manuel Enrique Araujo  </div>
-        <div style="position: absolute;left: 260px; top: 90px; z-index: 1;"><h4>Condominio Feria Rosa Local B-133 San Salvador.</h4></div>
+        <div style="position: absolute;left: 260px; top: 90px; z-index: 1;"><h4>Condominio Feria Rosa Local B-133 San Salvador</h4></div>
         <div style="position: absolute;left: 330px; top: 110px; z-index: 1;"><h4>Telefono: 2243-3705 </h4></div>
         
 
@@ -128,16 +128,16 @@ table tr:nth-child(2n-1) td {
              ?>
 
               <tr>
-              <td style = "width:10%">{{$n}}</td> 
-              <td style = "width:20%">{{$fechaOrdenada}}</td>
-              <td style = "width:20%">{{$hora}}</td>
-              <td style = "width:30%">{{$bita->comentario_Bit}}</td>
-              <td style = "width:30%">{{$usu->name}}</td>
-              <td style = "width:20%">{{$usu->cargo}}</td>
+              <td style = "width:10%"><?php echo e($n); ?></td> 
+              <td style = "width:20%"><?php echo e($fechaOrdenada); ?></td>
+              <td style = "width:20%"><?php echo e($hora); ?></td>
+              <td style = "width:30%"><?php echo e($bita->comentario_Bit); ?></td>
+              <td style = "width:30%"><?php echo e($usu->name); ?></td>
+              <td style = "width:20%"><?php echo e($usu->cargo); ?></td>
             </tr>
             <?php $n++; ?>
 
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
         </tbody>
       </table>
       <footer>

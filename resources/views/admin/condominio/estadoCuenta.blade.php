@@ -80,9 +80,9 @@ table tr:nth-child(2n-1) td {
         <HR style="position: absolute;left: 270px; top: 30px; z-index: 1; color:black;" width=35%>
         <div style="position: absolute;left: 300px; top: 20px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>Condominios Feria Rosa</h2></div>
         <HR style="position: absolute;left: 270px; top: 50px; z-index: 1; color:black;" width=35%>
-        <div style="position: absolute;left: 260px; top: 80px; z-index: 1; font-style: italic; font-weight: bold;"> </div>
-        <div style="position: absolute;left: 360px; top: 110px; z-index: 1;"><h4> </h4></div>
-        <div style="position: absolute;left: 420px; top: 90px; z-index: 1;"><h4>Telefono: 2243-3705 </h4></div>
+          <div style="position: absolute;left: 300px; top: 80px; z-index: 1; font-style: italic; font-weight: bold;">Alameda Manuel Enrique Araujo  </div>
+          <div style="position: absolute;left: 260px; top: 90px; z-index: 1;"><h4>Condominio Feria Rosa Local B-133 San Salvador.</h4></div>
+          <div style="position: absolute;left: 330px; top: 110px; z-index: 1;"><h4>Telefono: 2243-3705 </h4></div>
         
 
 

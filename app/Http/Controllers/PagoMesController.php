@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\estado;
+use SIGRECOFERO\ingreso_diario;
+use PDF;
 
 class PagoMesController extends Controller
 {
@@ -20,7 +22,8 @@ class PagoMesController extends Controller
 }
     public function index()
     {
-        //
+        $ingreso_diario = ingreso_diario::all();
+        return view('admin.pago.viewLiquidacion')->with('ingreso_diario',$ingreso_diario);
     }
 
     /**
@@ -30,7 +33,8 @@ class PagoMesController extends Controller
      */
     public function create()
     {
-        //
+        $ingreso_diario = ingreso_diario::all();
+        return view('admin.pago.viewReporte')->with('ingreso_diario',$ingreso_diario);
     }
 
     /**
@@ -52,7 +56,27 @@ class PagoMesController extends Controller
      */
     public function show($id)
     {
-        //
+        $idE = explode('-',$id);
+            $ingreso_diario = ingreso_diario::find($idE[0]);
+            $dato = explode(" ",(String)$ingreso_diario->created_at);
+            $fecha = $dato[0];
+            $hora = $dato[1];
+            $datoFecha = explode("-",(String)$fecha);
+            $fechaOrdenadas = $datoFecha[2]."-".$datoFecha[1]."-".$datoFecha[0];
+            
+
+        if($idE[1] == 1){
+        
+            $pdf = PDF::loadView('admin/pago/liquidacionPagos',['fechaOrdenadas' => $fechaOrdenadas]);
+            $pdf->setpaper("A4", "landscape");// vertical: portrait, horinzontal: landscape
+            return $pdf->stream();
+
+        }else{
+            bitacora::bitacoras('Descargar','descargo documento de liquidacion de pago diario');
+            $pdf = PDF::loadView('admin/pago/liquidacionPagos',['fechaOrdenadas' => $fechaOrdenadas]);
+            $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
+            return $pdf->download('liquidacion_'.$fechaOrdenadas.'.pdf');
+        }
     }
 
     /**
