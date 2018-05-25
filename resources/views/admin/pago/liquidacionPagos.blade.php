@@ -119,7 +119,9 @@ table tr:nth-child(2n-1) td {
             </tr>
           </thead>
           <tbody>
-            <?php $n=1; ?>
+            <?php $n=1;
+            $sum = 0;
+             ?>
             @foreach($ingreso_diario as $ingreso)
               
             <?php
@@ -142,14 +144,21 @@ table tr:nth-child(2n-1) td {
               <td>{{$condomine->NLocal}}</td>
               <td>{{'$ '.$f->cantidad}}</td>
               <td>{{$ingreso->formaPago}}</td>
-              @if(is_null($ingreso->NBanco))
-              <td>{{$ingreso->NBanco.' Cheque N° '.$ingreso->NCheque}}</td>
-              @endif
+              <?php 
+              $val = \SIGRECOFERO\ingreso_diario::where('id_Fecha','=',$f->id_Fecha)->get();
+              
+              if(!empty($val[0]->NBanco)){
+              ?>
+              <td>{{$val[0]->NBanco.',Cheque N°:'.$val[0]->NCheque}}</td>
+              <?php }else{ ?>
+                <td> </td>
+              <?php }?>
             </tr>
+            <?php $sum = $sum + $f->cantidad?>
             @endforeach
             @endif
           @endforeach
-
+          
         </tbody>
       </table>
       <footer>
@@ -169,7 +178,33 @@ table tr:nth-child(2n-1) td {
     </table>
   </footer>
      </div><!-- /.box-body -->
+     
+     
     </div><!-- /.box -->
   </div>
+  <br>
+  <div>
+    <div style="position: absolute;left: 50px; z-index: 1;">REMESA N°: </div>
+    </div>
+    <div>
+    <div style="position: absolute;left: 630px; z-index: 1;">TOTAL: </div>
+      </div>
+      <div>
+        <div style="position: absolute;left: 700px; z-index: 1;">$ {{$sum}} </div>
+          </div>
+      <div>
+        <div style="position: absolute;left: 800px; z-index: 1;">CUENTA N°: </div>
+          </div>
+          <br><br><br><br>
+          <div>
+            <div style="position: absolute;left: 100px; z-index: 1;">ELABORO: </div>
+              </div>
+              <div>
+              <div style="position: absolute;left: 170px; z-index: 1; text-transform: uppercase;">{{Auth::User()->name}}</div>
+                  </div>
+              <div>
+                <div style="position: absolute;left: 550px; z-index: 1;">RECIBIDO POR: </div>
+                  </div>
+                  
 </body>
 </html>

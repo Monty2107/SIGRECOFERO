@@ -34,7 +34,7 @@
               <td width="380px">
                 <?php if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador' ){?>
                 <a class="btn btn-info btn-rounded" href="{{asset('admin/estadoCuenta/'.$cb->id.'-'.'3')}}" target="_blank">Ver Estado de Cuenta</a>
-                <a class="btn btn-success btn-rounded" href="{{asset('admin/estadoCuenta/'.$cb->id.'-'.'4')}}">Descargar Estado de Cuenta</a>
+                <a class="btn btn-success btn-rounded" href="{{asset('admin/estadoCuenta/'.$cb->id.'-'.'4')}}" target="_blank">Descargar Estado de Cuenta</a>
                 <?php } ?>
               </td>
           </tr>

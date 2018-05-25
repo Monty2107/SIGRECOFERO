@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use SIGRECOFERO\condominio;
 use SIGRECOFERO\estado;
 use SIGRECOFERO\ingreso_diario;
+use SIGRECOFERO\bitacora;
 use PDF;
 
 class PagoMesController extends Controller
@@ -74,7 +75,7 @@ class PagoMesController extends Controller
         }else{
             bitacora::bitacoras('Descargar','descargo documento de liquidacion de pago diario');
             $pdf = PDF::loadView('admin/pago/liquidacionPagos',['fechaOrdenadas' => $fechaOrdenadas]);
-            $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
+            $pdf->setpaper("A4", "landscape");// vertical: portrait, horinzontal: landscape
             return $pdf->download('liquidacion_'.$fechaOrdenadas.'.pdf');
         }
     }

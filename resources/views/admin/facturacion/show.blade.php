@@ -57,6 +57,17 @@
                     $estadoOtros = SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Otros')->get()->first();
                     $estadoAnulada = SIGRECOFERO\facturacion::where('emision','=','Anulado')->get()->first();
                     $estadoAnuladaImprimir = SIGRECOFERO\facturacion::where('emision','=','Anulado He Imprimir')->get()->first();
+
+                    $facturacion = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Administrativo')->where('id_Condominio','=',$condominio->id)->get();
+                    $facturacion1 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Parqueo')->where('id_Condominio','=',$condominio->id)->get();
+                    $facturacion2 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Otros')->where('id_Condominio','=',$condominio->id)->get();       
+                    $facturacion3 = \SIGRECOFERO\facturacion::where('emision','=','Anulado')->orwhere('emision','=','Anulado He Imprimir')->where('id_Condominio','=',$condominio->id)->get();
+                    
+
+                    $conteo=0;
+                    $conteo1=0;
+                    $conteo2=0;
+                    $conteo3=0;
                     
                    ?>
               
@@ -102,22 +113,21 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        <?php $t1=1; 
-        $facturacion = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Administrativo')->where('id_Condominio','=',$condominio->id)->get();
-        ?>
         @foreach($facturacion as $c)
           <tr>
-              <td>{{$t1++}}</td>
+              <td>{{$conteo++}}</td>
               <td>{{$c->mes}}</td>
               <td>{{$c->ano}}</td>
               <td align="center">{{$c->emision}}</td>
               <td>{{$c->concepto}}</td>
+              <td>
               @if ($c->estado == 0)
-              <td><span class="label label-warning">DEBE</span></td>
+              <span class="label label-warning">DEBE</span>
             @endif
             @if ($c->estado == 1)
-              <td><span class="label label-info">PAGADO</span></td>
+              <span class="label label-info">PAGADO</span>
             @endif
+          </td>
               <td width="250px">
                   @if ($c->emision == 'Emitido')
                   <a class="btn btn-danger btn-rounded" href="{{route('facturacion.show',$c->id.'-'.'1'.'-'.$condominio->id)}}">ANULAR FACTURA</a>
@@ -155,22 +165,21 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        <?php $t2=1; 
-        $facturacion1 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Parqueo')->where('id_Condominio','=',$condominio->id)->get();
-        ?>
         @foreach($facturacion1 as $c)
           <tr>
-              <td>{{$t2++}}</td>
+              <td>{{$conteo1++}}</td>
               <td>{{$c->mes}}</td>
               <td>{{$c->ano}}</td>
               <td align="center">{{$c->emision}}</td>
               <td>{{$c->concepto}}</td>
+              <td>
               @if ($c->estado == 0)
-              <td><span class="label label-warning">DEBE</span></td>
+              <span class="label label-warning">DEBE</span>
             @endif
             @if ($c->estado == 1)
-              <td><span class="label label-info">PAGADO</span></td>
+              <span class="label label-info">PAGADO</span>
             @endif
+          </td>
             <td width="250px">
                 @if ($c->emision == 'Emitido')
                 <a class="btn btn-danger btn-rounded" href="{{route('facturacion.show',$c->id.'-'.'1'.'-'.$condominio->id)}}">ANULAR FACTURA</a>
@@ -208,12 +217,9 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        <?php $t3=1; 
-        $facturacion2 = \SIGRECOFERO\facturacion::where('emision','=','Emitido')->where('concepto','=','Otros')->where('id_Condominio','=',$condominio->id)->get();       
-        ?>
         @foreach($facturacion2 as $c)
           <tr>
-              <td>{{$t3++}}</td>
+              <td>{{$conteo2++}}</td>
               <td>{{$c->mes}}</td>
               <td>{{$c->ano}}</td>
               <td align="center">{{$c->emision}}</td>
@@ -264,13 +270,10 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        <?php $t4=1; 
-        $facturacion3 = \SIGRECOFERO\facturacion::where('emision','=','Anulado')->orwhere('emision','=','Anulado He Imprimir')->where('id_Condominio','=',$condominio->id)->get();
-        ?>
         @foreach($facturacion3 as $f)
         <?php $permiso = explode('-',$f->permiso); ?>
           <tr>
-              <td>{{$t4++}}</td>
+              <td>{{$conteo3++}}</td>
               <td>{{$f->mes}}</td>
               <td>{{$f->ano}}</td>
               <td>{{$f->emision}}</td>

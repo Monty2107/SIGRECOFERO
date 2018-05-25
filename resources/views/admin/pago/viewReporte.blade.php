@@ -55,7 +55,7 @@ if($fechaOrdenada != $fechaVal){
   <td align="rihgt" style = "width:15%"><font size="4" ></font>{{$fechaOrdenada}}</td>
   <td align="rihgt" style = "width:20%">
         <a type="button" href="{{asset('admin/reporteIngreso').'/'.$ingreso->id.'-'.'1'}}" class="btn btn-info responsive" target="_blank">Ver Reporte</a>
-        <a type="button" href="{{asset('admin/reporteIngreso').'/'.$ingreso->id.'-'.'2'}}" class="btn btn-success responsive">Descargar Reporte</a>
+        <a type="button" href="{{asset('admin/reporteIngreso').'/'.$ingreso->id.'-'.'2'}}" class="btn btn-success responsive" target="_blank">Descargar Reporte</a>
   </td>
 </tr>
 <?php 

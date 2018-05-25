@@ -95,7 +95,7 @@ table tr:nth-child(2n-1) td {
         <div style="position: absolute;left: 20px; top: 135px; z-index: 1;">Tipo de Partida</div>
         <div style="position: absolute;left: 180px; top: 135px; z-index: 1;">DIARIO</div>
         <div style="position: absolute;left: 20px; top: 155px; z-index: 1;">Concepto General</div>
-        <div style="position: absolute;left: 180px; top: 155px; z-index: 1;">REGISTRO DE CUENTAS POR COBRAR DE LOS CONDOMINES <?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
+        <div style="position: absolute;left: 180px; top: 155px; z-index: 1; text-transform: uppercase;">REGISTRO DE CUENTAS POR COBRAR DE LOS CONDOMINES <?php echo e(' '.$cuenta->mes.' '.$cuenta->ano); ?></div>
         <HR style="position: absolute;left: 20px; top: 170px; z-index: 1; color:black;" width=100%>
             <div style="position: absolute;left: 20px; top: 180px; z-index: 1; font-weight: bold;">CUENTA CONTABLE</div>
             <div style="position: absolute;left: 280px; top: 180px; z-index: 1; font-weight: bold;">CONCEPTO</div>

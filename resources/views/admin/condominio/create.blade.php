@@ -88,7 +88,7 @@
             </div>
             <div class="form-group">
               <label >N° de Local a Emitir la Factura: </label>
-              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
+              {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-I]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra I']) !!}
             </div>
             <div class="form-group">
                 <label >Cantidad a Pagar en Factura Administrativa: </label>

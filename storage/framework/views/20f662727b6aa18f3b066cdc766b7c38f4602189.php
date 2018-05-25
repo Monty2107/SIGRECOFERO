@@ -23,7 +23,7 @@
       </div>
       <div class="ibox-content">
         <div class="table-responsive">
-          <table id="example" class="table table-striped table-bordered display" cellspacing="100" width="100%"" >
+          <table id="example" class="table table-striped table-bordered display" cellspacing="100" width="100%">
             <thead>
               <tr>
                 <th>Fecha</th>
