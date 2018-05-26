@@ -14,6 +14,7 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\bitacora;
+use SIGRECOFERO\AntiguedadSaldo;
 use PDF;
 use Carbon\Carbon;
 use SIGRECOFERO\Http\Requests\CondomineRequest;
@@ -174,6 +175,9 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
+
+                      
+
                   }else{
                     
                     facturacion::create([
@@ -247,6 +251,15 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
+
+                      $antiguedad = AntiguedadSaldo::create([
+                        'estado'=>'Deudas',
+                        'cantidad'=>50,
+                        'concepto'=>$request->opciones[$l],
+                        'id_Condominio'=>$empresa->id,
+                        'id_Fecha'=>$fecha->id,
+                        ]);
+
                   }else{
                     
                     facturacion::create([
@@ -261,6 +274,14 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
+
+                      $antiguedad = AntiguedadSaldo::create([
+                        'estado'=>'Deudas',
+                        'cantidad'=>$request->cantidadAdmin,
+                        'concepto'=>$request->opciones[$l],
+                        'id_Condominio'=>$empresa->id,
+                        'id_Fecha'=>$fecha->id,
+                        ]);
                   }
                   
                 }else if($request->opciones[$l] == 'Parqueo'){
@@ -277,6 +298,15 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
+
+                      $antiguedad = AntiguedadSaldo::create([
+                        'estado'=>'Deudas',
+                        'cantidad'=> 15,
+                        'concepto'=>$request->opciones[$l],
+                        'id_Condominio'=>$empresa->id,
+                        'id_Fecha'=>$fecha->id,
+                        ]);
+
                   }else{
                     facturacion::create([
                       'NFactura' => '',
@@ -290,6 +320,14 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
+
+                      $antiguedad = AntiguedadSaldo::create([
+                        'estado'=>'Deudas',
+                        'cantidad'=>$request->cantidadAdmin,
+                        'concepto'=>$request->opciones[$l],
+                        'id_Condominio'=>$empresa->id,
+                        'id_Fecha'=>$fecha->id,
+                        ]);
                   }
                   
                 }                

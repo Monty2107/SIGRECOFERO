@@ -16,7 +16,7 @@ class CreateCondominiosTable extends Migration
         Schema::create('condominios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo')->unique();
-            $table->string('NLocal');
+            $table->string('NLocal')->unique();
             $table->string('nombre');
             $table->text('observaciones')->nullable();
             $table->integer('id_Empresa')->unsigned();

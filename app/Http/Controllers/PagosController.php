@@ -12,6 +12,7 @@ use SIGRECOFERO\fecha;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\bitacora;
+use SIGRECOFERO\AntiguedadSaldo;
 use SIGRECOFERO\Http\Requests\PagoRequest;
 class PagosController extends Controller
 {
@@ -212,6 +213,15 @@ class PagosController extends Controller
           $cambio->estado = true;//esta pagando
           $cambio->id_Fecha = $fecha->id;
           $cambio->save();
+
+          $total = $guardoingreso->cantidad / $count;
+          $antiguedad = AntiguedadSaldo::create([
+            'estado'=>'Pagos',
+            'cantidad'=> $total,
+            'concepto'=>$guardoingreso->concepto,
+            'id_Condominio'=>$guardoingreso->id_Condominio,
+            'id_Fecha'=>$fecha->id,
+            ]);
         }
         $nombreCondomine = empresa::find($id);
         if($cambio->concepto == 'Parqueo'){
@@ -258,6 +268,15 @@ class PagosController extends Controller
           $facturacion->id_Fecha = $fecha->id;
           $facturacion->estado = true;//esta pagado
           $facturacion->save();
+
+          $antiguedad = AntiguedadSaldo::create([
+            'estado'=>'Pagos',
+            'cantidad'=>$ingreso->cantidad,
+            'concepto'=>$ingreso->concepto,
+            'id_Condominio'=>$ingreso->id_Condominio,
+            'id_Fecha'=>$fecha->id,
+            ]);
+
           $idCondo = $request->id_Condominio;
           $nombreCondomine = empresa::find($idCondo);
           if($request->radioConcepto == 'Otros'){

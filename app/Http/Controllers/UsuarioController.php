@@ -9,6 +9,7 @@ use Redirect;
 use SIGRECOFERO\User;
 use SIGRECOFERO\bitacora;
 use SIGRECOFERO\Http\Requests\UsuarioRequest;
+use SIGRECOFERO\Http\Requests\personalRequest;
 
 class UsuarioController extends Controller
 {
@@ -50,14 +51,15 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsuarioRequest $request)
+    public function store(personalRequest $request)
     {
-        condominio::create([
+        User::create([
             'name'=>$request->nombre,
             'email'=>$request->correo,
-            'password'=>$empresa->password,
-            'cargo'=>$request->cargo
+            'password'=>bcrypt($request->password),
+            'cargo'=>$request->cargo,
           ]);
+          $usuario= User::all()->last();
           bitacora::bitacoras('Creacion del Usuario','Usuario: '.$usuario->name.' Creado');
         Session::flash('message',' Usuario: '.$usuario->name.' Con Correo: '.$usuario->email.' ha sido Creado Correctamente!!');
       return redirect('/');

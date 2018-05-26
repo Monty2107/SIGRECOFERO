@@ -13,6 +13,7 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\bitacora;
+use SIGRECOFERO\AntiguedadSaldo;
 use SIGRECOFERO\Http\Requests\NuevoPagoRequest;
 
 class NuevoPagoController extends Controller
@@ -146,6 +147,15 @@ class NuevoPagoController extends Controller
                               'id_Fecha'=>$fecha->id,
                               'id_Estado'=>$estado->id,
                               ]);
+
+                              $antiguedad = AntiguedadSaldo::create([
+                                'estado'=>'Deudas',
+                                'cantidad'=>$request->cantidad,
+                                'concepto'=>'Otros',
+                                'id_Condominio'=>$id,
+                                'id_Fecha'=>$fecha->id,
+                                ]);
+
                     }else if( $i.$j == $validacion){
                         $estado = estado::create([
                             'mes'=>$arrayMes[$j],
@@ -168,6 +178,8 @@ class NuevoPagoController extends Controller
                                 'id_Fecha'=>$fecha->id,
                                 'id_Estado'=>$estado->id,
                                 ]);
+
+                                
                     } 
                     if($j==12){
                         $mesI=1;
@@ -198,6 +210,15 @@ class NuevoPagoController extends Controller
                               'id_Estado'=>$estado->id,
                               'id_Condominio'=>$id,
                               ]);
+
+                              $antiguedad = AntiguedadSaldo::create([
+                                'estado'=>'Deudas',
+                                'cantidad'=>$request->cantidad,
+                                'concepto'=>'Otros',
+                                'id_Condominio'=>$id,
+                                'id_Fecha'=>$fecha->id,
+                                ]);
+
                     }else if($i.$j > $validacion3 && $i.$j <= $validacion){
                         $estado = estado::create([
                             'mes'=>$arrayMes[$j],

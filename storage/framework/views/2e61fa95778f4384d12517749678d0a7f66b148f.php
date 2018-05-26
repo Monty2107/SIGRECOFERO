@@ -1,17 +1,17 @@
-@extends('welcome')
-@section('posicion')
+<?php $__env->startSection('posicion'); ?>
   <h1>
    Dashboard
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="<?php echo asset('/'); ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Historial De Pagos Mensuales y Anuales</li>
  </ol>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
-  {!! Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']) !!}
+<?php $__env->startSection('content'); ?>
+  <?php echo Form::model($condomine,['route' => ['condominio.update',$condomine->id], 'method' => 'PUT','id'=>'form']); ?>
+
   <div class="row">
     <!-- left column -->
     <div class="col-md-6">
@@ -39,23 +39,27 @@
           <div class="box-body">
             <div class="form-group">
               <label>Nombre del Condomine: </label>
-              {!! Form::text('nombre',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              <?php echo Form::text('nombre',$emp->empresa->nombre,['disabled','name'=>'nombre','id'=>'nombre','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']); ?>
+
             </div>
             <label>Selecione el Concepto Para Ver Su Historial: </label><br>
-            @if(!$estadoAdmin->isEmpty())
-            {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <?php if(!$estadoAdmin->isEmpty()): ?>
+            <?php echo e(Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla(this.value);'])); ?>
+
             <label>Historial en Cuotas Administrativa </label> &nbsp;&nbsp;&nbsp;
-            @endif
+            <?php endif; ?>
 
-            @if(!$estadoParqueo->isEmpty())
-            {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <?php if(!$estadoParqueo->isEmpty()): ?>
+            <?php echo e(Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla(this.value);'])); ?>
+
             <label>Historial en Cuotas de Parqueo </label>
-            @endif
+            <?php endif; ?>
 
-            @if(!$estadoOtros->isEmpty())
-            {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla(this.value);'])}}
+            <?php if(!$estadoOtros->isEmpty()): ?>
+            <?php echo e(Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla(this.value);'])); ?>
+
             <label>Historial de Otras Cuotas </label>
-            @endif
+            <?php endif; ?>
             </div>
       </div>
     </div>
@@ -67,7 +71,8 @@
           <div class="box-body">
             <div class="form-group">
               <label>N° De Local:  </label>
-              {!! Form::text('NLocal',$condomine->Nlocal,['disabled','name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']) !!}
+              <?php echo Form::text('NLocal',$condomine->Nlocal,['disabled','name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'Nombre del Encargado del Condomine']); ?>
+
             </div>
             </div>
       </div>
@@ -89,31 +94,31 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        @foreach($estadoOtros as $cb)
+        <?php $__currentLoopData = $estadoOtros; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cb): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
           <tr>
-            <td>{{$conteo++}}</td>
-            <td>{{$cb->concepto}}</td>
-            <td>{{$cb->descripcion}}</td>
-            @if ($cb->estado == 0)
+            <td><?php echo e($conteo++); ?></td>
+            <td><?php echo e($cb->concepto); ?></td>
+            <td><?php echo e($cb->descripcion); ?></td>
+            <?php if($cb->estado == 0): ?>
               <td><span class="label label-warning">DEBE</span></td>
-            @endif
-            @if ($cb->estado == 1)
+            <?php endif; ?>
+            <?php if($cb->estado == 1): ?>
               <td><span class="label label-info">PAGADO</span></td>
-            @endif
-            <td>{{$cb->mes}}</td>
-            <td>{{$cb->ano}}</td>
-            @if ($cb->estado == 0)
+            <?php endif; ?>
+            <td><?php echo e($cb->mes); ?></td>
+            <td><?php echo e($cb->ano); ?></td>
+            <?php if($cb->estado == 0): ?>
               <td width="250px">
-                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
+                <a class="btn btn-success btn-rounded" href="<?php echo e(route('pagoMes.edit',$cb->id)); ?>">IR A PAGAR</a>
               </td>
-            @endif
-            @if ($cb->estado == 1)
+            <?php endif; ?>
+            <?php if($cb->estado == 1): ?>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('facturacion.show',$condomine->id.'-'.'0')}}">VER FACTURACION</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(route('pago.edit',$condomine->id)); ?>">VER FACTURA</a>
               </td>
-            @endif
+            <?php endif; ?>
           </tr>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
       </tbody>
   </table>
   </div>
@@ -131,30 +136,30 @@
           </tr>
       </thead>
       <tbody class="busqueda">
-        @foreach($estadoAdmin as $cb)
+        <?php $__currentLoopData = $estadoAdmin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cb): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
           <tr>
-            <td>{{$conteo1++}}</td>
-            <td>{{$cb->concepto}}</td>
-            @if ($cb->estado == 0)
+            <td><?php echo e($conteo1++); ?></td>
+            <td><?php echo e($cb->concepto); ?></td>
+            <?php if($cb->estado == 0): ?>
               <td><span class="label label-warning">DEBE</span></td>
-            @endif
-            @if ($cb->estado == 1)
+            <?php endif; ?>
+            <?php if($cb->estado == 1): ?>
               <td><span class="label label-info">PAGADO</span></td>
-            @endif
-            <td>{{$cb->mes}}</td>
-            <td>{{$cb->ano}}</td>
-            @if ($cb->estado == 0)
+            <?php endif; ?>
+            <td><?php echo e($cb->mes); ?></td>
+            <td><?php echo e($cb->ano); ?></td>
+            <?php if($cb->estado == 0): ?>
               <td width="250px">
-                <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
+                <a class="btn btn-success btn-rounded" href="<?php echo e(route('pagoMes.edit',$cb->id)); ?>">IR A PAGAR</a>
               </td>
-            @endif
-            @if ($cb->estado == 1)
+            <?php endif; ?>
+            <?php if($cb->estado == 1): ?>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('facturacion.show',$condomine->id.'-'.'0')}}">VER FACTURACION</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(route('pago.edit',$condomine->id)); ?>">VER FACTURA</a>
               </td>
-            @endif
+            <?php endif; ?>
           </tr>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
       </tbody>
   </table>
 </div>
@@ -172,33 +177,36 @@
         </tr>
     </thead>
     <tbody class="busqueda">
-      @foreach($estadoParqueo as $cb)
+      <?php $__currentLoopData = $estadoParqueo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cb): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <tr>
-          <td>{{$conteo2++}}</td>
-          <td>{{$cb->concepto}}</td>
-          @if ($cb->estado == 0)
+          <td><?php echo e($conteo2++); ?></td>
+          <td><?php echo e($cb->concepto); ?></td>
+          <?php if($cb->estado == 0): ?>
             <td><span class="label label-warning">DEBE</span></td>
-          @endif
-          @if ($cb->estado == 1)
+          <?php endif; ?>
+          <?php if($cb->estado == 1): ?>
             <td><span class="label label-info">PAGADO</span></td>
-          @endif
-          <td>{{$cb->mes}}</td>
-          <td>{{$cb->ano}}</td>
-          @if ($cb->estado == 0)
+          <?php endif; ?>
+          <td><?php echo e($cb->mes); ?></td>
+          <td><?php echo e($cb->ano); ?></td>
+          <?php if($cb->estado == 0): ?>
             <td width="250px">
-              <a class="btn btn-success btn-rounded" href="{{route('pagoMes.edit',$cb->id)}}">IR A PAGAR</a>
+              <a class="btn btn-success btn-rounded" href="<?php echo e(route('pagoMes.edit',$cb->id)); ?>">IR A PAGAR</a>
             </td>
-          @endif
-          @if ($cb->estado == 1)
+          <?php endif; ?>
+          <?php if($cb->estado == 1): ?>
             <td width="250px">
-              <a class="btn btn-info btn-rounded" href="{{route('facturacion.show',$condomine->id.'-'.'0')}}">VER FACTURACION</a>
+              <a class="btn btn-info btn-rounded" href="<?php echo e(route('facturacion.show',$condomine->id.'-'.'0')); ?>">VER FACTURA</a>
             </td>
-          @endif
+          <?php endif; ?>
         </tr>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
     </tbody>
 </table>
 </div>
 
-{{Form::close()}}
-@endsection
+<?php echo e(Form::close()); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('welcome', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

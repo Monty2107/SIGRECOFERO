@@ -25,4 +25,8 @@ class condominio extends Model
   public function facturacion(){
     return $this->BelongsTo('\SIGRECOFERO\condominio', 'id');
   }
+
+  public function AntiguedadSaldo(){
+    return $this->hasMany('\SIGRECOFERO\AntiguedadSaldo', 'id_AntiguedadSaldo');
+  }
 }

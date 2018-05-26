@@ -118,7 +118,28 @@
           }
       }
       </script>
+      <script>
+      function toggles(source) {
+        checkboxes = document.getElementsByName('dinamico');
       
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      
+      }
+    </script>
+    <script>
+      function toggle(source) {
+        checkboxes = document.getElementsByName('dinamicos');
+      
+      if(document.getElementsByName('dinamico').checked = true ){
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = false;
+        }
+        }
+      
+      }
+    </script>
       <script>
           function mostrarC(dato){
               if(dato=="Efectivo"){
@@ -133,11 +154,13 @@
               }
           }
           </script>
+          
             <script>
                 window.Laravel = <?php echo json_encode([
                     'csrfToken' => csrf_token(),
                 ]); ?>
             </script>
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   

@@ -25,7 +25,7 @@ class UsuarioRequest extends FormRequest
     {
         return [
             'nombre'=>'required|min:3|max:120',
-            'correo'=>'required',
+            'correo'=>'required|unique:User',
             'password'=>'required|min:5|max:10',
             
         ];

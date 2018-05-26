@@ -53,6 +53,7 @@
         <?php } ?>
         <li><a href="{!! asset('admin/pagoMes') !!}"><i class="fa fa-circle-o"></i>Ingresos</a></li>
         <li><a href="{!! asset('admin/pagoReporte') !!}"><i class="fa fa-circle-o"></i>Reportes</a></li>
+        
       </ul>
     </li>
     <li class="treeview">
@@ -70,12 +71,14 @@
           <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador" ){ ?>
         <li><a href="{!! asset('admin/facturacion') !!}"><i class="fa fa-circle-o"></i>Emision</a></li>
         <li><a href="{!! asset('admin/facturacionBuscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
-        <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i>Reportes</a></li>
+        
         <?php } ?>
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
           <li><a href="{!! asset('admin/VerFacturacion') !!}"><i class="fa fa-circle-o"></i>Ver Facturacion</a></li>
         <li><a href="{!! asset('admin/cuenta') !!} "><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>
+        <li><a href="{!! asset('admin/saldo_Antiguo') !!}"><i class="fa fa-circle-o"></i>Saldos Antiguos</a></li>
         <?php } ?>
+        
       </ul>
     </li>
 

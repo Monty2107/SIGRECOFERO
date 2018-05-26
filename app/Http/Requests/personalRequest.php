@@ -13,7 +13,7 @@ class personalRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class personalRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre'=>'required|min:3|max:120',
+            'correo'=>'required',
+            'password'=>'required|min:5|max:10',
         ];
     }
 }

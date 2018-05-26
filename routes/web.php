@@ -48,6 +48,7 @@ Route::resource('pagoReporte','PagoMesController@create');
 Route::resource('nuevopago','NuevoPagoController');
 Route::resource('buscarCondomine','PagosController@buscar');
 Route::resource('reporteIngreso','PagoMesController@show');
+Route::resource('saldo_Antiguo','AntiguedadSaldoController');
 
 //Rutas Facturacion
 Route::resource('facturacion','FacturacionController');
