@@ -21,7 +21,7 @@ class PagosController extends Controller
     $this->middleware('auth');
 }
   public function buscar(){
-    if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador'){
+    if(Auth::User()->cargo == 'Administracion'){
       $condominiobusqueda = condominio::with('empresa')->get();
     return view('admin.pago.buscar')->with('condominiobusqueda',$condominiobusqueda);
     }else{
@@ -76,7 +76,7 @@ class PagosController extends Controller
      */
     public function show($id)
     {
-      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+      if(Auth::User()->cargo == "Administracion"){
         $condomine = condominio::find($id);
         return view('admin.pago.show')->with('condomine',$condomine);
       }else{
@@ -92,7 +92,7 @@ class PagosController extends Controller
      */
     public function edit($id)
     {
-      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+      if(Auth::User()->cargo == "Administracion"){
       $condomine = condominio::find($id);
       // dd($estado->all());
        return view('admin.pago.edit')->with('condomine', $condomine);

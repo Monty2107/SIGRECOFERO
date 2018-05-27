@@ -91,6 +91,11 @@
               {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-I]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra I']) !!}
             </div>
             <div class="form-group">
+                <label >Cantidad De Saldo Antiguo: </label>
+                {!! Form::number('antiguo',null,['name'=>'antiguo','id'=>'antiguo','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
+                <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $0 </h6>
+              </div>
+            <div class="form-group">
                 <label >Cantidad a Pagar en Factura Administrativa: </label>
                 {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
                 <h6>Si No Agrega Valor Tomara Como Defecto El valor De : $50 </h6>

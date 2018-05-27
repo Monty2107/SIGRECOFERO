@@ -10,6 +10,8 @@ use PDF;
 use Carbon\Carbon;
 use SIGRECOFERO\AntiguedadSaldo;
 use SIGRECOFERO\condominio;
+use SIGRECOFERO\bitacora;
+use SIGRECOFERO\Http\Requests\saldoAntiguoRequest;
 
 class AntiguedadSaldoController extends Controller
 {
@@ -45,9 +47,22 @@ class AntiguedadSaldoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(saldoAntiguoRequest $request)
     {
-        //
+
+
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+
+        $count = count($request->seleccionar);
+        $arrayCondominio = $request->seleccionar;
+        $fechaInicio = $request->fechaInicial;
+        $fechaFinal = $request->fechaFinal;
+
+        bitacora::bitacoras('Descarga','Saldos Antiguos');
+        $pdf = PDF::loadView('admin/pago/viewReporteSaldoAntiguos',['arrayCondominio' => $arrayCondominio, 'fechaInicio'=>$fechaInicio, 'fechaFinal'=>$fechaFinal]);
+        $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
+        return $pdf->download('Saldo_Antiguo_de:'.$fechaInicio.'_hasta_'.$fechaFinal.'.pdf');
     }
 
     /**

@@ -120,7 +120,7 @@
       </script>
       <script>
       function toggles(source) {
-        checkboxes = document.getElementsByName('dinamico');
+        checkboxes = document.getElementsByName('seleccionar[]');
       
         for(var i=0, n=checkboxes.length;i<n;i++) {
           checkboxes[i].checked = source.checked;
@@ -132,7 +132,7 @@
       function toggle(source) {
         checkboxes = document.getElementsByName('dinamicos');
       
-      if(document.getElementsByName('dinamico').checked = true ){
+      if(document.getElementsByName('seleccionar[]').checked = true ){
         for(var i=0, n=checkboxes.length;i<n;i++) {
           checkboxes[i].checked = false;
         }

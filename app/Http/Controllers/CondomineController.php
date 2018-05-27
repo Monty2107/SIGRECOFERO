@@ -72,7 +72,7 @@ class CondomineController extends Controller
      */
     public function create()
     {
-      if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Administracion'  ){
+      if(Auth::User()->cargo == 'Administracion'  ){
         return view('admin.condominio.create');
       }else{
         return rediderct('/');
@@ -93,6 +93,11 @@ class CondomineController extends Controller
       $carbon = new \Carbon\Carbon();
       $date = $carbon->now();
       $LNum= explode('-',$request->NLocal);
+      $fecha = fecha::create([
+        'dia'=>$date->format('d'),
+        'mes'=>'12',
+        'ano'=>$date->format('Y') - 1,
+      ]);
 
       if($ano > $date->year ){
         Session::flash('error','El Año de Inicio de la Facturacion no Debe Ser Mayor al año: '.$date->year);
@@ -112,13 +117,32 @@ class CondomineController extends Controller
         'telefonoMovil'=>$request->telefonoMovil,
       ]);
 
-      condominio::create([
+      $condomine = condominio::create([
         'codigo'=>$request->codigo,
         'NLocal'=>$request->NLocal,
         'nombre'=>$request->nombreContacto,
         'observaciones'=>$request->observaciones,
         'id_Empresa'=>$empresa->id,
       ]);
+
+      if(empty($request->antiguo)){
+      AntiguedadSaldo::create([
+        'estado'=>'Antiguo',
+        'cantidad' =>'0',
+        'concepto'=>'Todos',
+        'id_Condominio'=>$condomine->id,
+        'id_Fecha'=>$fecha->id,
+      ]);
+      }else{
+        AntiguedadSaldo::create([
+          'estado'=>'Antiguo',
+          'cantidad' =>$request->antiguo,
+          'concepto'=>'Todos',
+          'id_Condominio'=>$condomine->id,
+          'id_Fecha'=>$fecha->id,
+        ]);
+      }
+      
 
       
       $arrayMes = array('1' =>'Enero' , '2'=>'Febrero', '3'=>'Marzo','4'=>'Abril',
@@ -175,7 +199,6 @@ class CondomineController extends Controller
                       'id_Estado'=>$estado->id,
                       'id_Condominio'=>$empresa->id,
                       ]);
-
                       
 
                   }else{
@@ -368,7 +391,7 @@ class CondomineController extends Controller
         $idE = explode('-',$id);
       if ($idE[1]==2) {
         # code...
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion"){
           $condomine = condominio::find($id[0]);
         return view('admin.facturacion.edit')->with('condomine',$condomine);
         }else{
@@ -376,7 +399,7 @@ class CondomineController extends Controller
         }
         
       }else if($idE[1]==1){
-        if(Auth::User()->cargo == 'Programador' || Auth::User()->cargo == 'Administracion'  ){
+        if(Auth::User()->cargo == 'Administracion'  ){
         $condomine = condominio::find($id[0]);
         return view('admin.condominio.edit')->with('condomine',$condomine);
       }else{
@@ -449,7 +472,7 @@ class CondomineController extends Controller
      */
     public function destroy($id)
     {
-      if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+      if(Auth::User()->cargo == "Administracion"){
         $empresa = empresa::findOrFail($id);
         $empresa->delete();
         $condominio = condominio::findOrFail($id);

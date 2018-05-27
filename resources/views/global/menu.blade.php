@@ -18,8 +18,10 @@
     <li class="active treeview">
       <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> <span>Panel Principal</span></a></li>
     </li>
+    <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion"){ ?>
     <li class="treeview">
       <a href="#">
+
         <i class="fa fa-files-o"></i>
         <span>Condominios</span>
         <span class="pull-right-container">
@@ -30,7 +32,7 @@
         </span> -->
       </a>
       <ul class="treeview-menu">
-        <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
+        <?php if(Auth::User()->cargo == "Administracion"){ ?>
         <li><a href="{!! asset('admin/condominio/create') !!}"><i class="fa fa-circle-o"></i>Registrar</a></li>
         <li><a href="{!! asset('admin/buscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
         {{-- <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i>Alquilar</a></li> --}}
@@ -48,7 +50,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-          <?php if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
+          <?php if(Auth::User()->cargo == "Administracion"){ ?>
         <li><a href="{!! asset('admin/buscarCondomine') !!}"><i class="fa fa-circle-o"></i>Lista de Condomines</a></li>
         <?php } ?>
         <li><a href="{!! asset('admin/pagoMes') !!}"><i class="fa fa-circle-o"></i>Ingresos</a></li>
@@ -68,20 +70,22 @@
         </span> -->
       </a>
       <ul class="treeview-menu">
-          <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador" ){ ?>
+          <?php if(Auth::User()->cargo == "Financiero" ){ ?>
         <li><a href="{!! asset('admin/facturacion') !!}"><i class="fa fa-circle-o"></i>Emision</a></li>
         <li><a href="{!! asset('admin/facturacionBuscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
         
         <?php } ?>
-        <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
-          <li><a href="{!! asset('admin/VerFacturacion') !!}"><i class="fa fa-circle-o"></i>Ver Facturacion</a></li>
+        <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" ){ ?>
         <li><a href="{!! asset('admin/cuenta') !!} "><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>
         <li><a href="{!! asset('admin/saldo_Antiguo') !!}"><i class="fa fa-circle-o"></i>Saldos Antiguos</a></li>
+        <?php } ?>
+        <?php if(Auth::User()->cargo == "Administracion" ){ ?>
+          <li><a href="{!! asset('admin/VerFacturacion') !!}"><i class="fa fa-circle-o"></i>Ver Facturacion</a></li>
         <?php } ?>
         
       </ul>
     </li>
-
+    <?php } ?>
     <li class="treeview">
       <a href="#">
         <i class="fa fa-laptop"></i>
@@ -95,7 +99,7 @@
         <li><a href="{!! asset('admin/Bitacora') !!}"><i class="fa fa-circle-o"></i>Bitacora</a></li>
         <?php if(Auth::User()->cargo == "Programador" ){ ?>
         <li><a href="{!! asset('admin/usuario/create') !!}"><i class="fa fa-circle-o"></i>Nuevo Usuario</a></li> 
-        <li><a href="{!! asset('admin/usuario/show') !!}"><i class="fa fa-circle-o"></i>Buscar Usuario</a></li>
+      <!--  <li><a href="{!! asset('admin/usuario/show') !!}"><i class="fa fa-circle-o"></i>Buscar Usuario</a></li> -->
         <?php } ?>
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador" ){ ?>
         <li><a href="{!! asset('admin/backup') !!}"><i class="fa fa-circle-o"></i>Backups de Base</a></li>

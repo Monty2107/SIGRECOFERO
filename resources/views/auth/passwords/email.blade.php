@@ -19,27 +19,19 @@
                         <div class="login-logo">
                             <img src="{!! asset('img/gano4.png') !!}" height="200px">
                         </div>
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Direccion E-Mail</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="form-group">
+                            <label class="label label-warning">Ingrese Con la Contraseña del Programador y Asi
+                                Recuperar Su Contraseña, o Crear un Nuevo Usuario. Informacion Dada A Administracion.
+                            </label>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Enviar Link Para Resetiar la Password
-                                </button>
+                                <div class="col-md-6 col-md-offset-4">
+                                    <a type="submit" class="btn btn-primary" href="{{asset('/login')}}">
+                                        REGRESAR PARA INICIAR
+                                    </a>
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>

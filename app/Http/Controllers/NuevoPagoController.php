@@ -72,7 +72,7 @@ class NuevoPagoController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+        if(Auth::User()->cargo == "Administracion"){
             $condomine = condominio::find($id);
         return view('admin.pago.create')->with('condomine',$condomine);
         }else{

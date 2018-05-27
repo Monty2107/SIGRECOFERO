@@ -4,7 +4,7 @@ namespace SIGRECOFERO\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NuevoPagoRequest extends FormRequest
+class saldoAntiguoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,12 @@ class NuevoPagoRequest extends FormRequest
      */
     public function rules()
     {
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
         return [
-            'descripcion'=> 'required|min:5|max:120',
-            'fechaInicial'=>'required|date|before:mañana',
-            'fechaFinal'=>'required|date|after_or_equal:fechaInicial',
-            'cantidad'=>'required'
+            'fechaInicial'=>'required|date|before:now',
+            'fechaFinal'=>'required|date|after_or_equal:fechaInicial|before:now',
+            'seleccionar'=>'required|array',
         ];
     }
 }

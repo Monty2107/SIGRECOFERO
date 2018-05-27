@@ -88,7 +88,7 @@ class PagoMesController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+        if(Auth::User()->cargo == "Administracion"){
             $estado = estado::find($id);
       // dd($estado->all());
        return view('admin.pago.editMes')->with('estado', $estado);

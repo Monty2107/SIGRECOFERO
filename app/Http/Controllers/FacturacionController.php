@@ -32,7 +32,7 @@ class FacturacionController extends Controller
     }
     public function index()
     {
-        if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){
+        if(Auth::User()->cargo == "Financiero"){
             $condomine = condominio::with('estado')->get();
             return view('admin.facturacion.create')->with('condomine', $condomine);
         }else{
@@ -42,7 +42,7 @@ class FacturacionController extends Controller
     }
     public function index2()
     {
-        if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Programador"){
+        if(Auth::User()->cargo == "Administracion"){
             $condomine = condominio::with('estado')->get();
             return view('admin.facturacion.create2')->with('condomine', $condomine);
         }else{
@@ -65,7 +65,7 @@ class FacturacionController extends Controller
     
     public function create()
     {
-        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Financiero"){
            
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
@@ -139,7 +139,7 @@ class FacturacionController extends Controller
     }
     public function create2()
     {
-        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->addMonth(1);
@@ -210,7 +210,7 @@ class FacturacionController extends Controller
 
     public function create3()
     {
-        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->addMonth(1);
@@ -284,7 +284,7 @@ class FacturacionController extends Controller
 
     public function create4()
     {
-        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Financiero"){
         $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
         $m = $date->addMonth(1);
@@ -325,7 +325,7 @@ class FacturacionController extends Controller
 
     public function create5($id)
     {
-        if(Auth::User()->cargo == "Programador" || Auth::User()->cargo == "Financiero"){
+        if(Auth::User()->cargo == "Financiero"){
             $facturas = facturacion::find($id);
             $facturas->emision = 'Emitido';
             $facturas->save();
