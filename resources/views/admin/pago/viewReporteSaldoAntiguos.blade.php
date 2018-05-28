@@ -49,7 +49,7 @@ table td {
 }
 
 table th {
-  padding: 5px 20px;
+  padding: 5px 10px;
   color: white;
   border-bottom: 1px solid #C1CED9;
   white-space: nowrap;
@@ -62,7 +62,7 @@ th {
 }
 
 th, td {
-    padding: 10px;
+    padding: 8px;
     text-align: left;
     border-bottom: 1px solid #FAFBFB;
 }
@@ -83,22 +83,22 @@ table tr:nth-child(2n-1) td {
   <div class="col-md-12">
     <div class="box-body">
       <div class="box-header with-border">
-        <HR style="position: absolute;left: 270px; top: 30px; z-index: 1; color:black;" width=35%>
-        <div style="position: absolute;left: 300px; top: 20px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>Condominios Feria Rosa</h2></div>
-        <HR style="position: absolute;left: 270px; top: 50px; z-index: 1; color:black;" width=35%>
-        <div style="position: absolute;left: 300px; top: 80px; z-index: 1; font-style: italic; font-weight: bold;">Alameda Manuel Enrique Araujo  </div>
-        <div style="position: absolute;left: 260px; top: 90px; z-index: 1;"><h4>Condominio Feria Rosa Local B-133 San Salvador.</h4></div>
-        <div style="position: absolute;left: 330px; top: 110px; z-index: 1;"><h4>Telefono: 2243-3705 </h4></div>
+        <HR style="position: absolute;left: 270px; top: 30px; z-index: 1; color:black;" width=50%>
+        <div style="position: absolute;left: 440px; top: 20px; z-index: 1; color:#1890a2; font-family: fantasy; font-weight: bold;"><h2>Condominios Feria Rosa</h2></div>
+        <HR style="position: absolute;left: 270px; top: 50px; z-index: 1; color:black;" width=50%>
+        <div style="position: absolute;left: 450px; top: 80px; z-index: 1; font-style: italic; font-weight: bold;">Alameda Manuel Enrique Araujo  </div>
+        <div style="position: absolute;left: 400px; top: 90px; z-index: 1;"><h4>Condominio Feria Rosa Local B-133 San Salvador.</h4></div>
+        <div style="position: absolute;left: 475px; top: 110px; z-index: 1;"><h4>Telefono: 2243-3705 </h4></div>
         
 
 
 
-        <HR style="position: absolute;left: 23px; top: 135px; z-index: 1; color:black;" width=93%>
+        <HR style="position: absolute;left: 23px; top: 135px; z-index: 1; color:black;" width=100%>
             <?php   
             $carbon = new \Carbon\Carbon();
             $dates = $carbon->now();
             ?>
-        <div style="position: absolute;left: 550px; top: 145px; z-index: 1;">Fecha:  {{$dates->format('d-m-Y')}} </div>
+        <div style="position: absolute;left: 900px; top: 145px; z-index: 1;">Fecha:  {{$dates->format('d-m-Y')}} </div>
         <h3 align="right" style="position: absolute;left:40; top:10px; px; z-index: 1;"><img class="al img-responsive" alt="image" width="110px" height="110px" src="img/gano4.png" ></h3>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       </div><!-- /.box-header -->
@@ -107,9 +107,15 @@ table tr:nth-child(2n-1) td {
           $fechaIordenada = explode('-',$fechaInicio);
           $fechaFordenada = explode('-',$fechaFinal);
           $n =1;
+          $sum1 = 0;
+          $sum2 = 0;
+          $sum3 = 0;
+          $sum4 = 0;
+          $sum5 = 0;
             ?>
-      <div style="position: absolute;left: 150px; top: 180px; z-index: 1;"><h3>SALDOS ANTIGUOS DE: {{$fechaIordenada[2].' - ' .$fechaIordenada[1].' - '.
-    $fechaIordenada[0].' '}} HASTA: {{$fechaFordenada[2].' - ' .$fechaFordenada[1].' - '.$fechaFordenada[0]}}</h3></div>
+      <div style="position: absolute;left: 450px; top: 160px; z-index: 1;"><h3>BALANCE DETALLADO DE</h3></div>
+      <div style="position: absolute;left: 350px; top: 180px; z-index: 1;"><h3>SALDOS ANTIGUOS DE: {{$fechaIordenada[2].' - ' .$fechaIordenada[1].' - '.
+    $fechaIordenada[0].' '}} AL: {{$fechaFordenada[2].' - ' .$fechaFordenada[1].' - '.$fechaFordenada[0]}}</h3></div>
 
 <?php 
                     $count = count($arrayCondominio);
@@ -129,10 +135,13 @@ table tr:nth-child(2n-1) td {
             <tr>
               <th style="color: white; font-weight: bold;">N°</th> 
               <th style="color: white; font-weight: bold;">Fecha de Faturacion</th>
-              <th style="color: white; font-weight: bold;">Mes</th>
               <th style="color: white; font-weight: bold;">Concepto</th>
               <th style="color: white; font-weight: bold;">Cantidad</th>
-              <th style="color: white; font-weight: bold;">Saldo</th>
+              <th style="color: white; font-weight: bold;">1 a 30 Dias</th>
+              <th style="color: white; font-weight: bold;">31 a 60 Dias</th>
+              <th style="color: white; font-weight: bold;">60 a 90 Dias</th>
+              <th style="color: white; font-weight: bold;">91 a 120 Dias</th>
+              <th style="color: white; font-weight: bold;">120 a Mas Dias</th>
             </tr>
           </thead>
         <tbody>
@@ -159,11 +168,95 @@ table tr:nth-child(2n-1) td {
           <?php $total = $factura[$j]->cantidad + $total; ?>
           <tr>
                 <td style = "width:10%">{{$nu++}}</td>
-                <td style = "width:20%">{{$fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano}} </td>
-                <td style = "width:20%">{{$factura[$j]->mes}}</td>
-                <td style = "width:20%">{{$factura[$j]->concepto}}</td>
-                <td style = "width:30%">$ {{$factura[$j]->cantidad}}</td>
-                <td style = "width:30%">$ {{$total}}</td>
+                <td style = "width:10%">{{$fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano}} </td>
+                <td style = "width:10%">{{$factura[$j]->concepto}}</td>
+                <td style = "width:10%">$ {{$factura[$j]->cantidad}}</td>
+                <?php 
+                $val30 = ($fechaFordenada[1] - 1) + 1;
+                $valF30 = $val30.$fechaFordenada[2];
+                $d1 = ($fecha->mes - 1) + 1;
+                $d30 = $d1.$fecha->dia;
+                $t1 = $valF30 - $d30;
+                $total1 = 0;
+                ?>
+                @if($t1 >= 100 && $t1 < 200)
+                <?php 
+                $total1 = $factura[$j]->cantidad;
+                $sum1 = $sum1 + $total1;
+                ?>
+                <td style = "width:10%">$ {{$total1}}</td>
+                @else
+                <td style = "width:10%"> $ 0</td>
+                @endif
+                <?php 
+                $val31 = ($fechaFordenada[1] - 2) + 1;
+                $valF31 = $val31.$fechaFordenada[2];
+                $d2 = ($fecha->mes - 2)+1;
+                $d31 = $d2.$fecha->dia;
+                $t2 = $valF31 - $d31;
+                $total2 = 0;
+                ?>
+                @if($t1 >= 200 && $t1 < 300)
+                <?php 
+                $total2 =$factura[$j]->cantidad;
+                $sum2 = $sum2 + $total2;
+                ?>
+                <td style = "width:10%">$ {{$total2}}</td>  
+                @else
+                <td style = "width:10%"> $ 0</td>
+                @endif
+
+                <?php 
+                $val60 = ($fechaFordenada[1] - 3) + 1;
+                $valF60 = $val60.$fechaFordenada[2];
+                $d3 = ($fecha->mes - 3)+1;
+                $d60 = $d3.$fecha->dia;
+                $t3 = $valF60 - $d60;
+                $total3 = 0;
+                ?>
+                @if($t1 >= 300 && $t1 < 400)
+                <?php 
+                $total3 = $factura[$j]->cantidad;
+                $sum3 = $sum3 + $total3;
+                ?>
+                <td style = "width:10%">$ {{$total3}}</td>
+                @else
+                <td style = "width:10%"> $ 0</td>
+                @endif
+                <?php 
+                $val91 = ($fechaFordenada[1] - 4) + 1;
+                $valF91 = $val91.$fechaFordenada[2];
+                $d4 = ($fecha->mes - 4)+1;
+                $d91 = $d4.$fecha->dia;
+                $t4 = $valF91 - $d91;
+                $total4 = 0;
+                ?>
+                @if($t1 >= 400 && $t1 < 500)
+                <?php 
+                $total4 =$factura[$j]->cantidad;
+                $sum4 = $sum4 + $total4;
+                ?>
+                <td style = "width:10%">$ {{$total4}}</td>
+                @else
+                <td style = "width:10%"> $ 0</td>
+                @endif
+                <?php 
+                $val120 = ($fechaFordenada[1] - 5) + 1;
+                $valF120 = $val120.$fechaFordenada[2];
+                $d5 = ($fecha->mes - 5)+1;
+                $d120 = $d5.$fecha->dia;
+                $t5 = $valF120 - $d120;
+                $total5 = 0;
+                ?>
+                @if($t1 >= 500)
+                <?php 
+                $total5 =$factura[$j]->cantidad;
+                $sum5 = $sum5 + $total5;
+                ?>
+                <td style = "width:10%">$ {{$total5}}</td>
+                @else
+                <td style = "width:10%"> $ 0</td>
+                @endif
             </tr>
             @endif
             
@@ -177,20 +270,37 @@ table tr:nth-child(2n-1) td {
                 ?>
             <tr>
                     <td style = "width:10%">{{$nu}}</td>
-                    <td style = "width:20%"> -- </td>
-                    <td style = "width:20%"> -- </td>
-                    <td style = "width:20%">Saldo Antiguo</td>
-                    <td style = "width:20%">$ {{$antiguo}}</td>
-                    <td style = "width:30%">$ {{$antiguo + $deudas}}</td>
+                    <td style = "width:10%"> -- </td>
+                    <td style = "width:10%"> Saldo Antiguo </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%">$ {{$antiguo}}</td>
             </tr>
             <tr>
                     <td style = "width:10%"> </td>
-                    <td style = "width:20%"> </td>
-                    <td style = "width:20%"> </td>
-                    <td style = "width:20%"> </td>
-                    <td style = "width:20%">TOTAL DE SALDO ANTIGUO:</td>
-                    <td style = "width:30%">$ {{$sum}}</td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%"> </td>
+                    <td style = "width:10%">TOTALES GENERALES: </td>
+                    <td style = "width:10%">$ {{$sum1}}</td>
+                    <td style = "width:10%">$ {{$sum2}}</td>
+                    <td style = "width:10%">$ {{$sum3}}</td>
+                    <td style = "width:10%">$ {{$sum4}}</td>
+                    <td style = "width:10%">$ {{$sum5+$antiguo}}</td>
             </tr>
+            <tr>
+              <td style = "width:10%"> </td>
+              <td style = "width:10%"> </td>
+              <td style = "width:10%">SUMA DE</td>
+              <td style = "width:10%">TOTALES:</td>
+              <td style = "width:10%">$ {{$sum1 + $sum2 + $sum3 + $sum4 + $sum5+$antiguo}}</td>
+              <td style = "width:10%"> </td>
+              <td style = "width:10%"> </td>
+              <td style = "width:10%"> </td>
+              <td style = "width:10%"> </td>
+      </tr>
            
         </tbody>
       </table>

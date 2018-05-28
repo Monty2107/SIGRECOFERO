@@ -72,12 +72,14 @@
       <ul class="treeview-menu">
           <?php if(Auth::User()->cargo == "Financiero" ){ ?>
         <li><a href="{!! asset('admin/facturacion') !!}"><i class="fa fa-circle-o"></i>Emision</a></li>
-        <li><a href="{!! asset('admin/facturacionBuscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
+        
         
         <?php } ?>
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Administracion" ){ ?>
+        <li><a href="{!! asset('admin/facturacionBuscar') !!}"><i class="fa fa-circle-o"></i>Buscar</a></li>
         <li><a href="{!! asset('admin/cuenta') !!} "><i class="fa fa-circle-o"></i>Cuentas por Cobrar</a></li>
         <li><a href="{!! asset('admin/saldo_Antiguo') !!}"><i class="fa fa-circle-o"></i>Saldos Antiguos</a></li>
+        
         <?php } ?>
         <?php if(Auth::User()->cargo == "Administracion" ){ ?>
           <li><a href="{!! asset('admin/VerFacturacion') !!}"><i class="fa fa-circle-o"></i>Ver Facturacion</a></li>

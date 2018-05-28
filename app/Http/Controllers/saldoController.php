@@ -58,7 +58,8 @@ class saldoController extends Controller
 
         bitacora::bitacoras('Descarga','Saldos Antiguos');
         $pdf = PDF::loadView('admin/pago/viewReporteSaldoAntiguos',['arrayCondominio' => $arrayCondominio, 'fechaInicio'=>$fechaInicio, 'fechaFinal'=>$fechaFinal]);
-        $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
+        $pdf->setpaper('A4','landscape');// vertical: portrait, horinzontal: landscape
+        // return $pdf->stream();
         return $pdf->download('Saldo_Antiguo_de:'.$fechaInicio.'_hasta_'.$fechaFinal.'.pdf');
     }
 
