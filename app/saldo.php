@@ -4,9 +4,9 @@ namespace SIGRECOFERO;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AntiguedadSaldo extends Model
+class saldo extends Model
 {
-    protected $table = 'AntiguedadSaldo';
+    protected $table = 'saldo';
 
     protected $fillable =[
         'estado','cantidad','concepto','id_Condominio','id_Fecha'

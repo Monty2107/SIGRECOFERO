@@ -14,7 +14,7 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\fecha;
 use SIGRECOFERO\facturacion;
 use SIGRECOFERO\bitacora;
-use SIGRECOFERO\AntiguedadSaldo;
+use SIGRECOFERO\saldo;
 use PDF;
 use Carbon\Carbon;
 use SIGRECOFERO\Http\Requests\CondomineRequest;
@@ -126,7 +126,7 @@ class CondomineController extends Controller
       ]);
 
       if(empty($request->antiguo)){
-      AntiguedadSaldo::create([
+      saldo::create([
         'estado'=>'Antiguo',
         'cantidad' =>'0',
         'concepto'=>'Todos',
@@ -134,7 +134,7 @@ class CondomineController extends Controller
         'id_Fecha'=>$fecha->id,
       ]);
       }else{
-        AntiguedadSaldo::create([
+        saldo::create([
           'estado'=>'Antiguo',
           'cantidad' =>$request->antiguo,
           'concepto'=>'Todos',
@@ -275,7 +275,7 @@ class CondomineController extends Controller
                       'id_Condominio'=>$empresa->id,
                       ]);
 
-                      $antiguedad = AntiguedadSaldo::create([
+                      $antiguedad = saldo::create([
                         'estado'=>'Deudas',
                         'cantidad'=>50,
                         'concepto'=>$request->opciones[$l],
@@ -298,7 +298,7 @@ class CondomineController extends Controller
                       'id_Condominio'=>$empresa->id,
                       ]);
 
-                      $antiguedad = AntiguedadSaldo::create([
+                      $antiguedad = saldo::create([
                         'estado'=>'Deudas',
                         'cantidad'=>$request->cantidadAdmin,
                         'concepto'=>$request->opciones[$l],
@@ -322,7 +322,7 @@ class CondomineController extends Controller
                       'id_Condominio'=>$empresa->id,
                       ]);
 
-                      $antiguedad = AntiguedadSaldo::create([
+                      $antiguedad = saldo::create([
                         'estado'=>'Deudas',
                         'cantidad'=> 15,
                         'concepto'=>$request->opciones[$l],
@@ -344,7 +344,7 @@ class CondomineController extends Controller
                       'id_Condominio'=>$empresa->id,
                       ]);
 
-                      $antiguedad = AntiguedadSaldo::create([
+                      $antiguedad = saldo::create([
                         'estado'=>'Deudas',
                         'cantidad'=>$request->cantidadAdmin,
                         'concepto'=>$request->opciones[$l],
@@ -481,6 +481,8 @@ class CondomineController extends Controller
         $estado->delete();
         $facturacion = facturacion::where('id_Condominio',$empresa->id);
         $facturacion->delete();
+        $antiguo = saldo::where('id_Condominio',$empresa->id);
+        $antiguo->delete();
         // $facturacion = facturacion::where('id_estado','=',$cont);
         bitacora::bitacoras('Eliminacion','Elimino el Condominio: '.$condominio->nombre);
         Session::flash('message','El Condominio: '.$condominio->nombre

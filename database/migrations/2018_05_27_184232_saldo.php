@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AntiguedadSaldo extends Migration
+class Saldo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AntiguedadSaldo extends Migration
      */
     public function up()
     {
-        Schema::create('AntiguedadSaldo', function (Blueprint $table) {
+        Schema::create('saldo', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('estado',['Deudas','Pagos','Antiguo']);// 0-Ingresos , 1- Egresos
             $table->double('cantidad',8,2);
@@ -33,6 +33,6 @@ class AntiguedadSaldo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('AntiguedadSaldo');
+        Schema::dropIfExists('saldo');
     }
 }

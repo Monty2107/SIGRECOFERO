@@ -98,7 +98,7 @@ table tr:nth-child(2n-1) td {
             $carbon = new \Carbon\Carbon();
             $dates = $carbon->now();
             ?>
-        <div style="position: absolute;left: 550px; top: 145px; z-index: 1;">Fecha:  {{$dates->format('d-m-Y')}} </div>
+        <div style="position: absolute;left: 550px; top: 145px; z-index: 1;">Fecha:  <?php echo e($dates->format('d-m-Y')); ?> </div>
         <h3 align="right" style="position: absolute;left:40; top:10px; px; z-index: 1;"><img class="al img-responsive" alt="image" width="110px" height="110px" src="img/gano4.png" ></h3>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       </div><!-- /.box-header -->
@@ -108,8 +108,8 @@ table tr:nth-child(2n-1) td {
           $fechaFordenada = explode('-',$fechaFinal);
           $n =1;
             ?>
-      <div style="position: absolute;left: 150px; top: 180px; z-index: 1;"><h3>SALDOS ANTIGUOS DE: {{$fechaIordenada[2].' - ' .$fechaIordenada[1].' - '.
-    $fechaIordenada[0].' '}} HASTA: {{$fechaFordenada[2].' - ' .$fechaFordenada[1].' - '.$fechaFordenada[0]}}</h3></div>
+      <div style="position: absolute;left: 150px; top: 180px; z-index: 1;"><h3>SALDOS ANTIGUOS DE: <?php echo e($fechaIordenada[2].' - ' .$fechaIordenada[1].' - '.
+    $fechaIordenada[0].' '); ?> HASTA: <?php echo e($fechaFordenada[2].' - ' .$fechaFordenada[1].' - '.$fechaFordenada[0]); ?></h3></div>
 
 <?php 
                     $count = count($arrayCondominio);
@@ -120,7 +120,7 @@ table tr:nth-child(2n-1) td {
                     ?>
                     <div>
                         <span> NOMBRE DEL CONDOMINE:   </span>
-                    <span> {{$condominio->empresa->nombre}} </span>
+                    <span> <?php echo e($condominio->empresa->nombre); ?> </span>
                     </div>
 
         <table class="table-wrapper" >
@@ -155,17 +155,17 @@ table tr:nth-child(2n-1) td {
           
           ?>
 
-          @if($concaval >= $concaI && $concaval <= $concaF)
+          <?php if($concaval >= $concaI && $concaval <= $concaF): ?>
           <?php $total = $factura[$j]->cantidad + $total; ?>
           <tr>
-                <td style = "width:10%">{{$nu++}}</td>
-                <td style = "width:20%">{{$fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano}} </td>
-                <td style = "width:20%">{{$factura[$j]->mes}}</td>
-                <td style = "width:20%">{{$factura[$j]->concepto}}</td>
-                <td style = "width:30%">$ {{$factura[$j]->cantidad}}</td>
-                <td style = "width:30%">$ {{$total}}</td>
+                <td style = "width:10%"><?php echo e($nu++); ?></td>
+                <td style = "width:20%"><?php echo e($fecha->dia.' - '.$fecha->mes.' - '.$fecha->ano); ?> </td>
+                <td style = "width:20%"><?php echo e($factura[$j]->mes); ?></td>
+                <td style = "width:20%"><?php echo e($factura[$j]->concepto); ?></td>
+                <td style = "width:30%">$ <?php echo e($factura[$j]->cantidad); ?></td>
+                <td style = "width:30%">$ <?php echo e($total); ?></td>
             </tr>
-            @endif
+            <?php endif; ?>
             
           <?php } ?>
 
@@ -176,12 +176,12 @@ table tr:nth-child(2n-1) td {
             $sum = ($antiguo + $deudas) - $pagos;
                 ?>
             <tr>
-                    <td style = "width:10%">{{$nu}}</td>
+                    <td style = "width:10%"><?php echo e($nu); ?></td>
                     <td style = "width:20%"> -- </td>
                     <td style = "width:20%"> -- </td>
                     <td style = "width:20%">Saldo Antiguo</td>
-                    <td style = "width:20%">$ {{$antiguo}}</td>
-                    <td style = "width:30%">$ {{$antiguo + $deudas}}</td>
+                    <td style = "width:20%">$ <?php echo e($antiguo); ?></td>
+                    <td style = "width:30%">$ <?php echo e($antiguo + $deudas); ?></td>
             </tr>
             <tr>
                     <td style = "width:10%"> </td>
@@ -189,7 +189,7 @@ table tr:nth-child(2n-1) td {
                     <td style = "width:20%"> </td>
                     <td style = "width:20%"> </td>
                     <td style = "width:20%">TOTAL DE SALDO ANTIGUO:</td>
-                    <td style = "width:30%">$ {{$sum}}</td>
+                    <td style = "width:30%">$ <?php echo e($sum); ?></td>
             </tr>
            
         </tbody>
