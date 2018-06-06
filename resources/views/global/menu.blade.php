@@ -108,7 +108,8 @@
         <?php } ?>
       </ul>
     </li>
-    <li class="header">Contacto</li>
-    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Informacion del sistema</span></a></li>
+    <li class="header">Informacion del Sistema</li>
+    <li><a href="manuales/info-sistema.pdf" target="_blank"><i class="fa fa-circle-o text-aqua"></i> <span>Requisitos</span></a></li>
+    <li><a href="manuales/MANUAL_DE_INSTALACION.pdf" target="_blank"><i class="fa fa-circle-o text-aqua"></i> <span>Manual de Instalacion</span></a></li>
   </ul>
 </section>

@@ -1,9 +1,6 @@
 @extends('welcome')
 
-@section('content')
-    <label class="label-warning">Ultima Actualizacion: 22/Mayo/2018</label><br>
-
-  
+@section('content')  
   <div class="row">
       <div class="col-md-4">
           <div class="box box-primary">
@@ -58,6 +55,11 @@
 
         </div>
   </div>
+
+  <?php 
+  if(Auth::User()->cargo == "Administracion" || Auth::User()->cargo == "Financiero"){
+
+  ?>
 <div class="col-md-12" id="tablaAnulada">
     <div class="box box-primary">
       <div class="box-header with-border">
@@ -131,7 +133,8 @@
 </div>
 </div>
 
-        
+   <?php }
+   ?>     
   </div>
   
 @endsection
