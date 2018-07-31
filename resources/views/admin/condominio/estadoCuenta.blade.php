@@ -141,7 +141,7 @@ table tr:nth-child(2n-1) td {
               <td style = "width:20%">{{$condomine->empresa->nombre}}</td>
               <td style = "width:10%">{{$f->concepto}}</td>
               <td style = "width:7%">{{$f->mes}}</td>
-              <td style = "width:5%">{{$f->cantidad}}</td>
+              <td style = "width:5%">$ {{$f->cantidad}}</td>
               <td style = "width:30%"> </td>
             </tr>
             <?php $n++; ?>

@@ -1,5 +1,5 @@
 jQuery(function($){
-            $("#NLocal").mask("a-999");
+           // $("#NLocal").mask("a-999");
 
             // Definimos las mascaras para cada input
             $("#date").mask("99/99/9999");

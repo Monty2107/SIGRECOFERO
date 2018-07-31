@@ -28,6 +28,7 @@
                   <th width="50px">N°</th>
                   <th>MES</th>
                   <th>AÑO</th>
+                  <th>CONCEPTO</th>
                   <th>FECHA DE CREACION</th>
                   <th>ACCIONES</th>
               </tr>
@@ -42,6 +43,7 @@
                   <td>{{$t4++}}</td>
                   <td>{{$c->mes}}</td>
                   <td>{{$c->ano}}</td>
+                  <td>{{$c->concepto}}</td>
                   <td>{{$fecha->dia.' / '.$fecha->mes.' / '.$fecha->ano}}</td>
                   <td>
                         <a class="btn btn-info btn-rounded" href="{{asset('admin/VerCuenta').'/'.$c->id}}" target="_blank">VER</a>

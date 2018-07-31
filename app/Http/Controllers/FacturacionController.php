@@ -13,7 +13,7 @@ use SIGRECOFERO\estado;
 use SIGRECOFERO\empresa;
 use SIGRECOFERO\bitacora;
 use SIGRECOFERO\fecha;
-use SIGRECOFERO\AntiguedadSaldo;
+use SIGRECOFERO\saldo;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use PDF;
@@ -112,7 +112,7 @@ class FacturacionController extends Controller
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
 
-                $antiguedad = AntiguedadSaldo::create([
+                $antiguedad = saldo::create([
                     'estado'=>'Deudas',
                     'cantidad'=>$facturas[$i]->cantidad,
                     'concepto'=>$facturas[$i]->concepto,
@@ -121,18 +121,18 @@ class FacturacionController extends Controller
                     ]);
 
         }
-        $fati = facturacion::where('emision','=','No Emitido')->get()->last();
+        //$fati = facturacion::where('emision','=','No Emitido')->get();
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
             'concepto'=>'Todas',
-            'id_Fecha'=>$fati->id_Fecha,
+            'id_Fecha'=>$fecha->id,
         ]);
 
         bitacora::bitacoras('Emision','Emision de Facturas  de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasAll',['facturas' => $facturas]);
         $pdf->setpaper('A4','portrait');// vertical: portrait, horinzontal: landscape
-        return $pdf->stream();
+        return $pdf->stream('Factura_Todas');
     }else{
         return redirect('/');
     }
@@ -183,7 +183,7 @@ class FacturacionController extends Controller
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
 
-                $antiguedad = AntiguedadSaldo::create([
+                $antiguedad = saldo::create([
                     'estado'=>'Deudas',
                     'cantidad'=>$facturas[$i]->cantidad,
                     'concepto'=>$facturas[$i]->concepto,
@@ -192,17 +192,17 @@ class FacturacionController extends Controller
                     ]);
 
         }
-        $fati = facturacion::last();
+        //$fati = facturacion::all()->last();
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
-            'concepto'=>'Administracion',
-            'id_Fecha'=>$fati->id_Fecha,
+            'concepto'=>'Administrativo',
+            'id_Fecha'=>$fecha->id,
         ]);
         bitacora::bitacoras('Emision','Emision de Facturas  de Administracion de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
-        return $pdf->stream();
+        return $pdf->stream('Factura_Administrativo');
     }else{
         return redirect('/');
     }
@@ -254,7 +254,7 @@ class FacturacionController extends Controller
                 'id_Condominio'=>$facturas[$i]->id_Condominio,
                 ]);
 
-                $antiguedad = AntiguedadSaldo::create([
+                $antiguedad = saldo::create([
                     'estado'=>'Deudas',
                     'cantidad'=>$facturas[$i]->cantidad,
                     'concepto'=>$facturas[$i]->concepto,
@@ -263,20 +263,20 @@ class FacturacionController extends Controller
                     ]);
                 
         }
-        $fati = facturacion::last();
+        //$fati = facturacion::last();
         
         cuenta_por_cobrar::create([
             'mes'=>$arrayMes[$m->month],
             'ano'=>$date->format('Y'),
             'concepto'=>'Parqueo',
-            'id_Fecha'=>$fati->id_Fecha,
+            'id_Fecha'=>$fecha->id,
         ]); 
 
         
         bitacora::bitacoras('Emision','Emision de Facturas  de Parqueo de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasParqueo',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
-        return $pdf->stream();
+        return $pdf->stream('Factura_Parqueo');
     }else{
         return redirect('/');
     }
@@ -317,7 +317,7 @@ class FacturacionController extends Controller
         bitacora::bitacoras('Emision','Emision de Facturas  de Otros Pagos');
         $pdf = PDF::loadView('admin/facturacion/facturasOtros',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
-        return $pdf->stream();
+        return $pdf->stream('Factura_Otros_Pagos');
     }else{
         return redirect('/');
     }
@@ -335,7 +335,7 @@ class FacturacionController extends Controller
             bitacora::bitacoras('Emision','Emision de Factura  Anulada');
             $pdf = PDF::loadView('admin/facturacion/facturaIndividual',['facturas' => $facturas]);
             $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
-            return $pdf->stream();
+            return $pdf->stream('Factura_Anuladas');
 
         }else{
             return redirect('/');

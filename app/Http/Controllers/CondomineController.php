@@ -128,7 +128,7 @@ class CondomineController extends Controller
       if(empty($request->antiguo)){
       saldo::create([
         'estado'=>'Antiguo',
-        'cantidad' =>'0',
+        'cantidad' => 0,
         'concepto'=>'Todos',
         'id_Condominio'=>$condomine->id,
         'id_Fecha'=>$fecha->id,
@@ -346,7 +346,7 @@ class CondomineController extends Controller
 
                       $antiguedad = saldo::create([
                         'estado'=>'Deudas',
-                        'cantidad'=>$request->cantidadAdmin,
+                        'cantidad'=>$request->cantidadParqueo,
                         'concepto'=>$request->opciones[$l],
                         'id_Condominio'=>$empresa->id,
                         'id_Fecha'=>$fecha->id,
@@ -432,6 +432,12 @@ class CondomineController extends Controller
       $condominio->nombre = $request->nombreContacto;
       $condominio->observaciones = $request->observaciones;
       $condominio->save();
+
+      if(!empty($request->saldoAntiguo)){
+        $saldo = saldo::where('estado','=','Antiguo')->where('id_Condominio','=',$emp->id)->get()->first();
+        $saldo->cantidad = $request->saldoAntiguo;
+        $saldo->save();
+        }
 
       if(!empty($request->cantidadAdmin)){
       $estadoAdmin= estado::where('id_Condominio','=',$id)->where('concepto','=','Administrativo')->get()->last();

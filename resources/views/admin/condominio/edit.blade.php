@@ -37,6 +37,7 @@
         <?php
         $emp = \SIGRECOFERO\condominio::where('id_Empresa','=', $condomine->id)->get()->first();
         $estado = \SIGRECOFERO\estado::where('concepto','=','Administrativo')->where('id_Condominio','=',$emp->id)->get()->first();
+        $saldo = \SIGRECOFERO\saldo::where('id_Condominio','=',$emp->id)->where('estado','=','Antiguo')->get()->first();
         // dd($estado);
         
         // $cont = SIGRECOFERO\empresa::where('id',$condomine->id)->get()->first();
@@ -82,6 +83,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">Modiciaciones Opcionales</h3>
             </div>
+            
             <div class="form-group">
           <label >Cantidad a Pagar en Factura Administracion: </label>
           {!! Form::number('cantidadAdmin',null,['name'=>'cantidadAdmin','id'=>'cantidadAdmin','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
@@ -112,6 +114,20 @@
               <label >N° de Local: </label>
               {!! Form::text('NLocal',null,['name'=>'NLocal','id'=>'NLocal','class'=>'form-control','placeholder'=>'X-999','pattern'=>'([A-F]{1})-[0-9]{3}','title'=>'Solo letras mayuscula de la letra A hasta la letra F']) !!}
             </div>
+            @if($saldo->cantidad == 0)
+            <div class="form-group">
+              <label >Cantidad de saldo Antiguo: </label>
+              {!! Form::number('saldoAntiguo',null,['name'=>'saldoAntiguo','id'=>'saldoAntiguo','class'=>'form-control','placeholder'=>'$$$','step'=>'any']) !!}
+              <h6>Este Cambio Se Vera Afectado En El Siguiente Reporte Que Emita</h6>
+            </div>
+            @endif
+            @if($saldo->cantidad > 0)
+            <div class="form-group">
+              <label >Cantidad de saldo Antiguo: </label>
+              {!! Form::number('saldoAntiguo',$saldo->cantidad,['class'=>'form-control','disabled']) !!}
+              <h6>Ya no Puede Cambiar el Saldo Antiguo, A Solo si elimina el Condominio del Sistema</h6>
+            </div>
+            @endif
             
               <!-- /.input group -->
               <!-- /.input group -->

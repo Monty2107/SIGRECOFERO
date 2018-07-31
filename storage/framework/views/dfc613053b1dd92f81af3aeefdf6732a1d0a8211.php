@@ -5,7 +5,7 @@
  </h1>
  <ol class="breadcrumb">
    <li><a href="<?php echo asset('/'); ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
-   <li class="active">Busqueda de Condominios</li>
+   <li class="active">Estado de Cuenta por Condominios</li>
  </ol>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
@@ -26,13 +26,12 @@
           <tr>
               <td><?php echo e($r++); ?></td>
               <td><?php echo e($cb->codigo); ?></td>
-              <td><?php echo e($cb->nombre); ?></td>
+              <td><?php echo e($cb->empresa->nombre); ?></td>
               <td><?php echo e($cb->NLocal); ?></td>
-              <td width="250px">
-                <a class="btn btn-success btn-rounded" href="<?php echo e(route('condominio.show',$cb->id)); ?>">Ver</a>
+              <td width="380px">
                 <?php if(Auth::User()->cargo == 'Administracion' || Auth::User()->cargo == 'Programador' ){?>
-                <a class="btn btn-info btn-rounded" href="<?php echo e(route('condominio.edit',$cb->id.'-'.'1')); ?>">Modificar</a>
-                <a class="btn btn-warning btn-rounded" href="<?php echo e(route('nuevopago.edit',$cb->id)); ?>">Nuevo Pago</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(asset('admin/estadoCuenta/'.$cb->id.'-'.'3')); ?>" target="_blank">Ver Estado de Cuenta</a>
+                <a class="btn btn-success btn-rounded" href="<?php echo e(asset('admin/estadoCuenta/'.$cb->id.'-'.'4')); ?>" target="_blank">Descargar Estado de Cuenta</a>
                 <?php } ?>
               </td>
           </tr>

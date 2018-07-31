@@ -82,7 +82,7 @@
               <th>CONDOMINE</th>
               <th>N° LOCAL</th>
               <th>
-                <input type="checkbox" name="dinamicos" id="dinamico" onClick="toggles(this)" />  SELECCIONAR TODOS
+                 SELECCIONE EL/LOS CONDOMINIO
               </th>
           </tr>
       </thead>

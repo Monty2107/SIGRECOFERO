@@ -12,6 +12,7 @@
  </ol>
 @endsection
 @section('content')
+
 @if(count($errors) > 0)
       <div class="alert alert-danger" role="alert">
         <ul>

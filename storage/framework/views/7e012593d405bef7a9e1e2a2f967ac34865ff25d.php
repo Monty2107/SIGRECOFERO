@@ -1,17 +1,14 @@
-@extends('welcome')
-
-
-@section('posicion')
+<?php $__env->startSection('posicion'); ?>
   <h1>
    Dashboard
    <small>Panel de Control</small>
  </h1>
  <ol class="breadcrumb">
-   <li><a href="{!! asset('/') !!}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+   <li><a href="<?php echo asset('/'); ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
    <li class="active">Emision de Facturas.</li>
  </ol>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
 <div class="col-md-6">
@@ -40,20 +37,23 @@
 
       <div class="box-body">
         <label>Selecione el Concepto Para Ver Su Historial: </label><br>
-        @if(!is_null($estadoAdmin))
-        {{ Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        <?php if(!is_null($estadoAdmin)): ?>
+        <?php echo e(Form::radio('radioConcepto','Administrativo',false,['onchange'=>'mostrarTabla2(this.value);'])); ?>
+
         <label>Factura en Cuotas Administrativa </label> &nbsp;&nbsp;&nbsp;
-        @endif
+        <?php endif; ?>
         <br>
-        @if(!is_null($estadoParqueo))
-        {{ Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        <?php if(!is_null($estadoParqueo)): ?>
+        <?php echo e(Form::radio('radioConcepto','Parqueo',false,['onchange'=>'mostrarTabla2(this.value);'])); ?>
+
         <label>Factura en Cuotas de Parqueo </label>
-        @endif
+        <?php endif; ?>
         <br>
-        @if(!is_null($estadoOtros))
-        {{ Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla2(this.value);'])}}
+        <?php if(!is_null($estadoOtros)): ?>
+        <?php echo e(Form::radio('radioConcepto','Otros',false,['onchange'=>'mostrarTabla2(this.value);'])); ?>
+
         <label>Factura de Otras Cuotas </label>
-        @endif
+        <?php endif; ?>
         </div>
   </div>
 </div>
@@ -65,8 +65,8 @@
     </div>
       <div class="box-body">
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){?>
-          @if(!is_null($val1) && !is_null($val2))
-          @if($val1->mes == $arrayMes[($m->month+1)-1] || $val2->mes == $arrayMes[($m->month+1)-1] )
+          <?php if(!is_null($val1) && !is_null($val2)): ?>
+          <?php if($val1->mes == $arrayMes[($m->month+1)-1] || $val2->mes == $arrayMes[($m->month+1)-1] ): ?>
         <div class="form-group">
             
             <button type="button" class="form-control btn btn-success" data-toggle="modal" data-target="#modal-infoAll">
@@ -77,47 +77,47 @@
             facturas no emitidas con los datos que contengan la base en estos momentos.
             (solo imprimira Administrativa y de Parqueo) </h6>
          </div>
-         @endif
+         <?php endif; ?>
         
          
-         @if($val1->mes == $arrayMes[$me->month] || $val2->mes == $arrayMes[$me->month] )
+         <?php if($val1->mes == $arrayMes[$me->month] || $val2->mes == $arrayMes[$me->month] ): ?>
          <span>Espere Hasta el Siguiente mes Para Volver a Emitir las Facturas.</span>
-         @endif
-         @endif
+         <?php endif; ?>
+         <?php endif; ?>
          <div class="form-group" id="btnAdmin" style="display:none;">
-           @if(!is_null($val1))
-            @if($val1->mes == $arrayMes[$m->month])
+           <?php if(!is_null($val1)): ?>
+            <?php if($val1->mes == $arrayMes[$m->month]): ?>
             <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoAdmin">
                 Imprimir Todas las Facturas Administrativas
               </button>
             <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
               facturas no emitidas con los datos que contengan la base en estos momentos. </h6>        
-           @endif
-           @if($val1->mes == $arrayMes[$me->month] )
+           <?php endif; ?>
+           <?php if($val1->mes == $arrayMes[$me->month] ): ?>
            <span>-------------------------------------------------------------------------------
               -----------------</span>
               <br>
          <span>Espere Hasta el Siguiente mes Para Volver a Emitir la Factura Administrativa.</span>
-         @endif
-         @endif
+         <?php endif; ?>
+         <?php endif; ?>
          
         </div>
            
            <div class="form-group" id="btnParqueo" style="display:none;">
-             @if(!is_null($val2))
-              @if($val2->mes == $arrayMes[$m->month])
+             <?php if(!is_null($val2)): ?>
+              <?php if($val2->mes == $arrayMes[$m->month]): ?>
               <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#modal-infoParqueo">
                   Imprimir Todas las Facturas de Parqueo
                 </button>
               <h6 style="color:blue">OJO: Antes de imprimir verifique la informacion ya que imprimira todas las 
                 facturas no emitidas con los datos que contengan la base en estos momentos. </h6>
-                @endif
-                @if($val2->mes == $arrayMes[$me->month] )
+                <?php endif; ?>
+                <?php if($val2->mes == $arrayMes[$me->month] ): ?>
                 <span>-------------------------------------------------------------------------------
                 -----------------</span>
                 <br><span>Espere Hasta el Siguiente mes Para Volver a Emitir la Factura de Parqueo.</span>
-                @endif
-                @endif
+                <?php endif; ?>
+                <?php endif; ?>
                 
             </div>
              <div class="form-group" id="btnOtros" style="display:none;">
@@ -149,23 +149,23 @@
       </thead>
       <tbody class="busqueda">
         <?php $r=1; ?>
-        @foreach($condomine as $c)
+        <?php $__currentLoopData = $condomine; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 
               $facturacion = SIGRECOFERO\facturacion::where('id_Condominio','=',$c->id)->where('emision','=','No Emitido')->where('concepto','=','Administrativo')->first();
               ?>
           <tr>
-              @if(!is_null($facturacion))
-              <td>{{$r++}}</td>
-              <td>{{$c->codigo}}</td>
-              <td>{{$c->empresa->nombre}}</td>
-              <td>{{$facturacion->concepto}}</td>
-              <td align="center">$ {{$facturacion->cantidad}}</td>
+              <?php if(!is_null($facturacion)): ?>
+              <td><?php echo e($r++); ?></td>
+              <td><?php echo e($c->codigo); ?></td>
+              <td><?php echo e($c->empresa->nombre); ?></td>
+              <td><?php echo e($facturacion->concepto); ?></td>
+              <td align="center">$ <?php echo e($facturacion->cantidad); ?></td>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(route('condominio.edit',$c->id.'-'.'2')); ?>">Modificar</a>
               </td>
-              @endif
+              <?php endif; ?>
           </tr>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
       </tbody>
   </table>
 </div>
@@ -184,23 +184,23 @@
       </thead>
       <tbody class="busqueda">
         <?php $r=1; ?>
-        @foreach($condomine as $c)
+        <?php $__currentLoopData = $condomine; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 
               $facturacion = SIGRECOFERO\facturacion::where('id_Condominio','=',$c->id)->where('emision','=','No Emitido')->where('concepto','=','Otros')->first();
               ?>
           <tr>
-              @if(!is_null($facturacion))
-              <td>{{$r++}}</td>
-              <td>{{$c->codigo}}</td>
-              <td>{{$c->empresa->nombre}}</td>
-              <td>{{$facturacion->concepto}}</td>
-              <td align="center">$ {{$facturacion->cantidad}}</td>
+              <?php if(!is_null($facturacion)): ?>
+              <td><?php echo e($r++); ?></td>
+              <td><?php echo e($c->codigo); ?></td>
+              <td><?php echo e($c->empresa->nombre); ?></td>
+              <td><?php echo e($facturacion->concepto); ?></td>
+              <td align="center">$ <?php echo e($facturacion->cantidad); ?></td>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(route('condominio.edit',$c->id.'-'.'2')); ?>">Modificar</a>
               </td>
-              @endif
+              <?php endif; ?>
           </tr>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
       </tbody>
   </table>
 </div>
@@ -219,23 +219,23 @@
       </thead>
       <tbody class="busqueda">
         <?php $r=1; ?>
-        @foreach($condomine as $c)
+        <?php $__currentLoopData = $condomine; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
         <?php 
               $facturacion = SIGRECOFERO\facturacion::where('id_Condominio','=',$c->id)->where('emision','=','No Emitido')->where('concepto','=','Parqueo')->first();
               ?>
           <tr>
-              @if(!is_null($facturacion))
-              <td>{{$r++}}</td>
-              <td>{{$c->codigo}}</td>
-              <td>{{$c->empresa->nombre}}</td>
-              <td>{{$facturacion->concepto}}</td>
-              <td align="center">$ {{$facturacion->cantidad}}</td>
+              <?php if(!is_null($facturacion)): ?>
+              <td><?php echo e($r++); ?></td>
+              <td><?php echo e($c->codigo); ?></td>
+              <td><?php echo e($c->empresa->nombre); ?></td>
+              <td><?php echo e($facturacion->concepto); ?></td>
+              <td align="center">$ <?php echo e($facturacion->cantidad); ?></td>
               <td width="250px">
-                <a class="btn btn-info btn-rounded" href="{{route('condominio.edit',$c->id.'-'.'2')}}">Modificar</a>
+                <a class="btn btn-info btn-rounded" href="<?php echo e(route('condominio.edit',$c->id.'-'.'2')); ?>">Modificar</a>
               </td>
-              @endif
+              <?php endif; ?>
           </tr>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
       </tbody>
   </table>
 </div>
@@ -267,7 +267,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
             
-            <a class="btn btn-outline" href="{{asset('admin/facturacionAdmin')}}" onclick="javascript:window.location.reload();" target="_blank" >Si Acepto.</a>
+            <a class="btn btn-outline" href="<?php echo e(asset('admin/facturacionAdmin')); ?>" onclick="javascript:window.location.reload();" target="_blank" >Si Acepto.</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -304,7 +304,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionParqueo')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="<?php echo e(asset('admin/facturacionParqueo')); ?>" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -341,7 +341,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacionOtros')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="<?php echo e(asset('admin/facturacionOtros')); ?>" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -378,7 +378,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <a class="btn btn-outline" href="{{asset('admin/facturacion/create')}}" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
+            <a class="btn btn-outline" href="<?php echo e(asset('admin/facturacion/create')); ?>" onclick="javascript:window.location.reload();" target="_blank">Si Acepto</a>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -388,4 +388,5 @@
     <!-- /.modal -->
 </section>
 <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('welcome', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

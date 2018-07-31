@@ -25,6 +25,7 @@
                   <th width="50px">N°</th>
                   <th>MES</th>
                   <th>AÑO</th>
+                  <th>CONCEPTO</th>
                   <th>FECHA DE CREACION</th>
                   <th>ACCIONES</th>
               </tr>
@@ -39,6 +40,7 @@
                   <td><?php echo e($t4++); ?></td>
                   <td><?php echo e($c->mes); ?></td>
                   <td><?php echo e($c->ano); ?></td>
+                  <td><?php echo e($c->concepto); ?></td>
                   <td><?php echo e($fecha->dia.' / '.$fecha->mes.' / '.$fecha->ano); ?></td>
                   <td>
                         <a class="btn btn-info btn-rounded" href="<?php echo e(asset('admin/VerCuenta').'/'.$c->id); ?>" target="_blank">VER</a>

@@ -12,6 +12,7 @@
  </ol>
 @endsection
 @section('content')
+<?php dd('hola') ?>
 <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
