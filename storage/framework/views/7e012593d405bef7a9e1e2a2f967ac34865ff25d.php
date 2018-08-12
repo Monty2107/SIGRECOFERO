@@ -66,6 +66,7 @@
       <div class="box-body">
         <?php if(Auth::User()->cargo == "Financiero" || Auth::User()->cargo == "Programador"){?>
           <?php if(!is_null($val1) && !is_null($val2)): ?>
+          
           <?php if($val1->mes == $arrayMes[($m->month+1)-1] || $val2->mes == $arrayMes[($m->month+1)-1] ): ?>
         <div class="form-group">
             

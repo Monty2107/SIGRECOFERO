@@ -40,6 +40,7 @@
             @foreach($cuenta as $c)
             <?php $fecha = \SIGRECOFERO\fecha::find($c->id_Fecha);  ?>
               <tr>
+                  <?php if($c->concepto == 'Todas'){?>
                   <td>{{$t4++}}</td>
                   <td>{{$c->mes}}</td>
                   <td>{{$c->ano}}</td>
@@ -49,6 +50,7 @@
                         <a class="btn btn-info btn-rounded" href="{{asset('admin/VerCuenta').'/'.$c->id}}" target="_blank">VER</a>
                         <a class="btn btn-info btn-rounded" href="{{asset('admin/DescargarCuenta').'/'.$c->id}}" target="_blank">DESCARGAR</a>
                   </td>
+                  <?php }?>
               </tr>
               @endforeach
           </tbody>

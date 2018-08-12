@@ -37,6 +37,7 @@
             <?php $__currentLoopData = $cuenta; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <?php $fecha = \SIGRECOFERO\fecha::find($c->id_Fecha);  ?>
               <tr>
+                  <?php if($c->concepto == 'Todas'){?>
                   <td><?php echo e($t4++); ?></td>
                   <td><?php echo e($c->mes); ?></td>
                   <td><?php echo e($c->ano); ?></td>
@@ -46,6 +47,7 @@
                         <a class="btn btn-info btn-rounded" href="<?php echo e(asset('admin/VerCuenta').'/'.$c->id); ?>" target="_blank">VER</a>
                         <a class="btn btn-info btn-rounded" href="<?php echo e(asset('admin/DescargarCuenta').'/'.$c->id); ?>" target="_blank">DESCARGAR</a>
                   </td>
+                  <?php }?>
               </tr>
               <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
           </tbody>

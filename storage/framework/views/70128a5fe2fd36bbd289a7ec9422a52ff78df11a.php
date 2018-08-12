@@ -81,7 +81,7 @@ position:absolute;
         <body> 
             <div class="col-md-12">
                     <div class="box-header with-border">
-        <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:18; " class="customFont"><?php echo e($f->cantidad); ?></div>
+        <div style="position: absolute;left: 650px; top: 127px; z-index: 1; font-size:20; " class="customFont"><?php echo e($f->cantidad); ?></div>
         <div style="position: absolute;left: 175px; top: 100px; z-index: 1; text-transform: uppercase; " class="customFont"><?php echo e('CODIGO: '.$local->codigo); ?>.</div>
         <div style="position: absolute;left: 175px; top: 170px; z-index: 1; font-size:17; text-transform: uppercase;" class="customFont"><?php echo e($nombre->nombre); ?>.</div>
        

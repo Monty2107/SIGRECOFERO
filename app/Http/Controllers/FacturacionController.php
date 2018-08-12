@@ -85,6 +85,7 @@ class FacturacionController extends Controller
             'mes'=>$date->format('m'),
             'ano'=>$date->format('Y'),
           ]);
+          //dd($arrayMes[$jDate]);
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
@@ -157,6 +158,7 @@ class FacturacionController extends Controller
             'mes'=>$date->format('m'),
             'ano'=>$date->format('Y'),
           ]);
+          
         for ($i=0; $i < $countF ; $i++) { 
             $facturas[$i]->emision = 'Emitido';
             $facturas[$i]->save();
@@ -193,12 +195,23 @@ class FacturacionController extends Controller
 
         }
         //$fati = facturacion::all()->last();
-        cuenta_por_cobrar::create([
-            'mes'=>$arrayMes[$m->month],
-            'ano'=>$date->format('Y'),
-            'concepto'=>'Administrativo',
-            'id_Fecha'=>$fecha->id,
-        ]);
+       
+            $find = cuenta_por_cobrar::all()->last();
+            if($find->concepto == 'Parqueo'){
+                cuenta_por_cobrar::create([
+                    'mes'=>$arrayMes[$m->month],
+                    'ano'=>$date->format('Y'),
+                    'concepto'=>'Todas',
+                    'id_Fecha'=>$fecha->id,
+                ]);
+            }else{
+                $cuenta= cuenta_por_cobrar::create([
+                    'mes'=>$arrayMes[$m->month],
+                    'ano'=>$date->format('Y'),
+                    'concepto'=>'Administrativo',
+                    'id_Fecha'=>$fecha->id,
+                ]);
+            }
         bitacora::bitacoras('Emision','Emision de Facturas  de Administracion de Todos los Condominio');
         $pdf = PDF::loadView('admin/facturacion/facturasAdmin',['facturas' => $facturas]);
         $pdf->setpaper("A4", "portrait");// vertical: portrait, horinzontal: landscape
@@ -263,14 +276,23 @@ class FacturacionController extends Controller
                     ]);
                 
         }
-        //$fati = facturacion::last();
-        
-        cuenta_por_cobrar::create([
-            'mes'=>$arrayMes[$m->month],
-            'ano'=>$date->format('Y'),
-            'concepto'=>'Parqueo',
-            'id_Fecha'=>$fecha->id,
-        ]); 
+        //$fati = facturacion::last();  
+        $find = cuenta_por_cobrar::all()->last();
+        if($find->concepto == 'Administrativo'){
+            cuenta_por_cobrar::create([
+                'mes'=>$arrayMes[$m->month],
+                'ano'=>$date->format('Y'),
+                'concepto'=>'Todas',
+                'id_Fecha'=>$fecha->id,
+            ]);
+        }else{
+            $cuenta= cuenta_por_cobrar::create([
+                'mes'=>$arrayMes[$m->month],
+                'ano'=>$date->format('Y'),
+                'concepto'=>'Parqueo',
+                'id_Fecha'=>$fecha->id,
+            ]);
+        }
 
         
         bitacora::bitacoras('Emision','Emision de Facturas  de Parqueo de Todos los Condominio');
